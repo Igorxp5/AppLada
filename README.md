@@ -1,14 +1,7 @@
-# AppLada 
+﻿| [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano de Desenvolvimento](#plano-de-desenvolvimento) | [Entregas](/docs/Iteracoes.md) | [Mockups](/docs/mockups.md) |
+|----|----|----|----|----|
 
 O AppLada é uma plataforma online para organizar jogos de futebol, a **_pelada_**, e encontrar jogos organizados por outros jogadores, que estejam acontecendo próximos de você.
-
-## Sumário
-- [Iniciativa](#iniciativa)
-- [A Equipe](#a-equipe)
-- [Plano de Desenvolvimento](#plano-de-desenvolvimento)
-    - [Processo de Desenvolvimento](#processo-de-desenvolvimento)
-    - [Divisão do Trabalho](#divisão-do-trabalho)
-    - [Controle de Versionamento](#controle-de-versionamento)
 
 ## Iniciativa
 
