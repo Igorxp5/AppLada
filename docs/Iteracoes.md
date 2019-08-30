@@ -8,13 +8,13 @@
 ## Projeto da disciplina de Engenharia de Software - IF977
 
 
- Documentos de entregas e artefatos entregues durante o período da cadeira encontram-se aqui.
+ Documentos e artefatos entregues durante o período encontram-se aqui.
 
 
 ### Iterações
 
 | Iteração | Data |
- |----------|----------|
+|----------|----------|
 |[Iteração 0](/docs/iteracao#0/iteracao0.md) | 05/08 - 02/09 |
 
 |[Iteração 1](/docs/iteracao#1/iteracao1.md) | 02/09 - 02/10 |
