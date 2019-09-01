@@ -1,14 +1,11 @@
-[Home](https://github.com/Igorxp5/AppLada) |
-
-
-
+[Home](/README.md) | [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano de Desenvolvimento](#plano-de-desenvolvimento) | [Entregas](/docs/iteracoes.md) | [Mockups](/docs/mockups.md) |
+|----|----|----|----|----|----|
 
 # Entregas
 
 ## Projeto da disciplina de Engenharia de Software - IF977
 
-
- Documentos e artefatos entregues durante o período encontram-se aqui.
+Documentos e artefatos entregues durante o período encontram-se aqui.
 
 
 ### Iterações
