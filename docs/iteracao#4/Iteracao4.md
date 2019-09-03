@@ -1,2 +1,0 @@
-[Home](/README.md) | [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano de Desenvolvimento](#plano-de-desenvolvimento) | [Entregas](/docs/iteracoes.md) | [Mockups](/docs/mockups.md) |
-|----|----|----|----|----|----|
