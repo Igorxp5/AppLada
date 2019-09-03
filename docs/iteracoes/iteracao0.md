@@ -70,3 +70,9 @@ Na Iteração 0, a equipe decidiu não utilizar as issues para designar as taref
 **Tópico Discutido:** Discussão sobre tarefas das iterações 0
 
 **Ações Tomadas:** Criação da Retrospectiva da Iteração 0.
+
+
+## Aretefatos da Iteração
+
+- [User Stories](/docs/user_stories.md)
+- [Mockups](/docs/mockups.md)
