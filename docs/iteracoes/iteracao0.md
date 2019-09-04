@@ -1,6 +1,6 @@
 # Iteração 0
 
-Na Iteração 0, a equipe decidiu não utilizar as issues para designar as tarefas. Como parte inicial do projeto, fizemos 4 reuniões e todas as tarefas foram feitas em conjunto.
+Na Iteração 0, a equipe decidiu não utilizar as issues para designar as tarefas. Como parte inicial do projeto, fizemos 7 reuniões e todas as tarefas foram feitas em conjunto.
 
 ## Reunião 1
 **Data:** 12/08/2019
@@ -70,6 +70,48 @@ Na Iteração 0, a equipe decidiu não utilizar as issues para designar as taref
 **Tópico Discutido:** Discussão sobre tarefas das iterações 0
 
 **Ações Tomadas:** Criação da Retrospectiva da Iteração 0.
+
+
+## Postmortem
+
+Início da Iteração | Término da iteração
+------------ | -------------
+13/08/2019 | 02/09/2019
+
+
+### O que estava planejado
+| Atividade | Atribuição |
+| --- | --- |
+| Criar o User Stories | Time |
+| Definir divisão de trabalho | Time |
+| Criar os Mockups do projeto | Lucas Burgos |
+| Dividir tarefas relacionadas ao user stories | Time |
+| Definir padronização de trabalho nas branches do git | Time |
+
+### O que foi feito
+| Atividade | Atribuição |
+| --- | --- |
+| Criar o User Stories | Time |
+| Definir divisão de trabalho | Time |
+| Criar os Mockups do projeto | Lucas Burgos |
+| Definir padronização de trabalho nas branches do git | Time |
+
+### O que não foi feito
+* Dividir tarefas relacionadas ao user stories
+> **Nota:** A equipe não conseguiu se unir para realizar a tarefa
+
+### Planejado para próxima iteração
+* Dividir tarefas relacionadas ao user stories
+* Criar esquema Entidade Relacional
+* Criar banco de dados em PostgreSQL
+* Definir rotas das API
+* Conectar API ao Banco de Dados
+* Testar API no servidor da AWS
+* Iniciar desenvolvimento do Front-End
+* Página Inicial da plataforma funcional
+
+### Lições aprendidas
+* A equipe precisa se comunicar mais, contornar o obstáculo de falta de tempo
 
 
 ## Aretefatos da Iteração
