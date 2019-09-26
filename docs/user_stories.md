@@ -162,7 +162,7 @@ de mim,gostaria de definir o raio de distância de mim ou de um ponto específic
 
 **Para** Organizar os jogos de maneira mais específicas no meu estabelecimento.
 
-## [DS6]
+## [DS06]
 **Como** Dono de Society
 
 **Quero** Gerenciar vitórias e derrotas das chaves do torneio.
