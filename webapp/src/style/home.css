@@ -1,0 +1,33 @@
+.home-container {
+    height: 100vh;
+}
+
+.home-left {
+    background: url('./../images/home-pic.png');
+    width:50%;
+    float:left;
+    height: 100vh
+}
+
+.home-right {
+    background:url('./../images/home-form-pic.png');
+    float: right;
+    width: 50%;
+    height: 100vh;
+}
+
+.home-navbar {
+    color: white;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.5em;
+}
+
+.home-navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.form-container {
+}
