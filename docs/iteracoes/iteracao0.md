@@ -114,7 +114,7 @@ Início da Iteração | Término da iteração
 * A equipe precisa se comunicar mais, contornar o obstáculo de falta de tempo
 
 
-## Aretefatos da Iteração
+## Artefatos da Iteração
 
 - [User Stories](/docs/user_stories.md)
 - [Mockups](/docs/mockups.md)
