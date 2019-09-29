@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - ./tmp/app:/var/lib/postgresql/data
+    ports:
+      - '8001:5432'
+  api:
+    build: 
+      context: './api'
+      args:
+        API_IP: '0.0.0.0'
+        API_PORT: 8000
+    environment:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - ./api:/api:cached
+    ports:
+      - '80:8000'
+    depends_on:
+      - db
