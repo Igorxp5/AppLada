@@ -17,4 +17,9 @@ class User < ApplicationRecord
       record.errors.add(attr, "must be 'M', 'F', or 'O'") unless ['M', 'F', 'O'].include? value
     end
 
+    after_initialize  :downcase_fields
+
+    def downcase_fields
+    	self.login.downcase!
+    end
 end

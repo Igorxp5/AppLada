@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration[6.0]
-  def self.up
+  def change
     create_table :users, id: false do |t|
-      t.string :login, primary_key: true
+      t.string :login, primary_key: true, uniqueness: {case_sensitive: false}
       t.string :password_digest
       t.string :name
       t.string :email, unique: true
@@ -10,9 +10,5 @@ class CreateUsers < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-  end
-
-  def self.down
-  	drop_table :users
   end
 end

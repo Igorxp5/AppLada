@@ -14,16 +14,32 @@ class ErrorCodes
 		"Birthday can't be in the past" => 12,
 		"Gender is invalid" => 13,
 		"Gender must be 'M', 'F', or 'O'" => 14,
-		"Name can have only letters" => 15
+		"Name can have only letters" => 15,
+		"Unauthorized access" => 16,
+		"Invalid parameters" => 17,
+		"Login or password incorrect" => 18,
+		"Resource not found" => 19,
+		"Empty or Invalid Token" => 20,
+		"Expired Token" => 21
 	}
 
-	def self.get_error_code(error_message)
+	def self.get_error_by_message(error_message)
 		return {code: @@errors[error_message], message: error_message} if @@errors.key?(error_message)
 		# FIXME: Remove when map all errors from model validation
 		puts "Not mapped error message: #{error_message}"
 	end
 
-	def self.get_error_codes(error_messages)
-		error_messages.collect { |message| ErrorCodes.get_error_code(message) }
+	def self.get_errors_by_messages(error_messages)
+		return error_messages.collect { |message| get_error_by_message(message) }
+	end
+
+	def self.get_error_message(error_code)
+		return @@errors.key(error_code) unless @@errors.key(error_code).nil?
+		# FIXME: Remove when map all errors from model validation
+		puts "Not mapped error code: #{error_code}"
+	end
+
+	def self.get_error_messages(error_codes)
+		return error_codes.collect { |code| ErrorCodes.get_error_message(code) }
 	end
 end
