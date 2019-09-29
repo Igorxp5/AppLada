@@ -20,4 +20,4 @@ RUN gem install bundler -v '2.0.2' && bundle install
 
 EXPOSE ${API_PORT}
 
-CMD rake db:prepare && rails server --binding=$API_IP --port=$API_PORT
+CMD rake db:setup && rake db:migrate || rake db:migrate && rails server --binding=$API_IP --port=$API_PORT
