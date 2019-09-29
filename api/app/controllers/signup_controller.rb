@@ -7,7 +7,7 @@ class SignupController < ApplicationController
 				result = {login: @user.login, password: params[:password]}
 				render json: format_response(payload: result), status: :created
 			else
-				render json: format_response(errors: @user.errors.full_messages), status: :unprocessable_entity
+				render json: format_response(errors: @user.errors.full_messages), status: :bad_request
 			end
 		end
 	end

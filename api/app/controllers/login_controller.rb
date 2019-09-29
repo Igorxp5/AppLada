@@ -18,14 +18,17 @@ class LoginController < ApplicationController
 	end
 
 	def validate_params
+		# Conditions to test and error code if not pass
 		conditions = [
-			params[:login].present?,
-			params[:password].present?,
-			params[:login].instance_of?(String),
-			params[:password].instance_of?(String)
+			[params[:login].present?, 4],
+			[params[:password].present?, 8],
+			[params[:login].instance_of?(String), 17],
+			[params[:password].instance_of?(String), 17]
 		]
-		unless conditions.all?
-			render json: format_response(errors: ErrorCodes.get_error_message(17)), status: :bad_request 
+		errors = conditions.collect { |condition| ErrorCodes.get_error_message(condition[1]) unless condition[0] }
+		errors = errors.uniq.compact
+		unless errors.empty?
+			render json: format_response(errors: errors), status: :bad_request
 		end
 	end
 end
