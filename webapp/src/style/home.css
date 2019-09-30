@@ -22,6 +22,9 @@
     display: flex;
     justify-content: space-evenly;
     font-size: 1.5em;
+    margin: 0;
+    height: 7vh;
+    align-items: center;
 }
 
 .home-navbar a {
@@ -30,4 +33,8 @@
 }
 
 .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 93%;
 }
