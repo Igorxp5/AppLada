@@ -18,6 +18,9 @@ WORKDIR /api
 # Install API dependencies
 RUN gem install bundler -v '2.0.2' && bundle install
 
+# Install cucumber dependencies
+RUN rails g cucumber:install
+
 EXPOSE ${API_PORT}
 
 CMD (rake db:setup && rake db:migrate || rake db:migrate) && rails server --binding=$API_IP --port=$API_PORT
