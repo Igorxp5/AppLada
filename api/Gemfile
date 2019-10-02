@@ -35,6 +35,7 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'rspec', '~> 3.7.0'
+  gem 'httparty'
 end
 
 group :development do
