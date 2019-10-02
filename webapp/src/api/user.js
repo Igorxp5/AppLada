@@ -12,6 +12,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 export default {
     auth: {
         userLogin(payload) {
+            console.log(payload)
             return userApi.post('/login', payload)
         }
     }

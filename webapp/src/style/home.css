@@ -4,6 +4,8 @@
 
 .home-left {
     background: url('./../images/home-pic.png');
+    background-size: cover;
+    background-repeat: no-repeat;
     width:50%;
     float:left;
     height: 100vh
@@ -11,6 +13,8 @@
 
 .home-right {
     background:url('./../images/home-form-pic.png');
+    background-size: cover;
+    background-repeat: no-repeat;
     float: right;
     width: 50%;
     height: 100vh;

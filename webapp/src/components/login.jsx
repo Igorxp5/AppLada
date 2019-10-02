@@ -11,17 +11,14 @@ class Login extends React.Component {
 
     submitForm = event => {
         event.preventDefault()
-        console.log('aaa')
         api.auth.userLogin({
             email: this.state.email,
             password: this.state.password
         }).then(resp => {
             console.log('RESPONSE LOGIN > ', resp.data)
         }).catch(err => {
-            // window.alert(err)
             animate.warning.showErrorPopup(err)        
         })
-        // fetch('http://api.applada.com.br')
     }
 
     addEmailToState = event => {
