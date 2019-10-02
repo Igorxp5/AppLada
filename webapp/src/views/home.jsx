@@ -19,11 +19,9 @@ class Home extends React.Component {
                                 <Link to='/cadastro'>Cadastro</Link>
                             </li>
                         </ul>
-                        <div className='form-container'>
-                            
+                        <div className='form-container'>                            
                                 <Route  exact path='/login' component={ Login }/>
-                                <Route exact path='/cadastro' component={ Cadastro }/>
-                            
+                                <Route exact path='/cadastro' component={ Cadastro }/>                            
                         </div>
                     </Router>
                 </div>
