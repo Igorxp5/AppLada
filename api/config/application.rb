@@ -35,6 +35,7 @@ module Api
     config.api_only = true
 
     # Domain Host
+    config.hosts << "applada.com.br"
     config.hosts << "api.applada.com.br"
   end
 end
