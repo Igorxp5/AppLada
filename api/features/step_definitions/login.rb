@@ -1,13 +1,19 @@
 Before do
+    DatabaseCleaner.clean_with(:deletion)
     user_teste = User.create!(login: "username_teste", email: "username_teste@teste.com",
-                     password: "senha_teste", name: "TestadorDoTime",
-                     birthday: "30/01/2000", gender: "M")
+                        password: "senha_teste", name: "TestadorDoTime",
+                        birthday: "30/01/2000", gender: "M")
     header 'Host', 'api.applada.com.br'
 end
 
+After do
+    DatabaseCleaner.clean_with(:deletion)
+end
+
+
+
 Dado("que uma chamada POST seja feita no endpoint de login") do
     @url_login = 'login'
-    
 end
 
 Quando("o campo login estiver preenchido com {string} e o campo password com {string}") do |string, string2|
