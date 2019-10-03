@@ -15,5 +15,11 @@ export default {
             console.log(payload)
             return userApi.post('/login', payload)
         }
+    },
+    signUp: {
+        userSignUp(payload) {
+            console.log(payload)
+            return userApi.post('/signup', payload)
+        }
     }
 } 
