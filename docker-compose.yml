@@ -1,22 +1,59 @@
 version: '3.7'
 services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d/
+    depends_on:
+      - api
+      - dev
   db:
     image: postgres
+    container_name: db
     environment:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     volumes:
-      - ./tmp/app:/var/lib/postgresql/data
+      - ./tmp/database:/var/lib/postgresql/data
     ports:
-      - '8001:5432'
+      - '8000:5432'
+  webapp:
+    container_name: webapp
+    build:
+      context: './webapp'
+    expose:
+      - 5000
   api:
+    container_name: api
+    image: applada
     build: 
       context: './api'
-      args:
-        API_IP: '0.0.0.0'
-        API_PORT: 8000
+    command: bash -c "rm -f tmp/pids/server.pid && (rake db:setup && rake db:migrate || rake db:migrate) && rails server --binding=0.0.0.0 --port=80 -e production"
     environment:
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-    ports:
-      - '80:8000'
+        RAILS_ENV: production
+    volumes:
+      - ./tmp/api:/tmp
+    expose:
+       - 80
     depends_on:
       - db
+  dev:
+    container_name: dev
+    image: applada
+    build: 
+      context: './api'
+    command: bash -c "rm -f tmp/pids/server.pid && (rake db:setup && rake db:migrate || rake db:migrate) && rails server --binding=0.0.0.0 --port=80 -e development"
+    environment:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+        RAILS_ENV: development
+    volumes:
+      - ./api:/api
+      - ./tmp/dev:/api/tmp
+    expose:
+       - 80
+    depends_on:
+      - db
+      - api

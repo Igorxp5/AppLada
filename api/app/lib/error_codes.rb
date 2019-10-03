@@ -11,7 +11,7 @@ class ErrorCodes
 		"Gender can't be blank" => 9,
 		"Email has already been taken" => 10,
 		"Login has already been taken" => 11,
-		"Birthday can't be in the past" => 12,
+		"Birthday can't be in the future" => 12,
 		"Gender is invalid" => 13,
 		"Gender must be 'M', 'F', or 'O'" => 14,
 		"Name can have only letters" => 15,
