@@ -72,6 +72,7 @@ Inicio do desenvolvimento do projeto e aprender a usar as ferramentas que serão
 | Criação de testes | Marcos/Sheldon |
 | Criar Mock API | Igor |
 | Deploy na AWS | Igor |
+| Mockup das Telas de Dashboard | Lucas |
 
 ## Lições Aprendidas
 * A equipe soube se organizar mais quanto às demandas;
