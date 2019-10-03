@@ -1,0 +1,15 @@
+#popup-fail-component {
+    padding: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    position: absolute;
+    z-index: 3;
+    border: 1px solid red;
+    border-radius: 10px;
+    background: #F6CED8;
+    right: 20px;
+    top: 20px;
+    transition-duration: 1s;
+}
