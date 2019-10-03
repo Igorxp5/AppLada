@@ -1,11 +1,8 @@
 FROM ruby:2.6.3
 
-# Arguments
-ARG API_IP=0.0.0.0
-ARG API_PORT=8000
-
-ENV API_IP=${API_IP}
-ENV API_PORT=${API_PORT}
+# Enviroments variables
+ENV API_IP=0.0.0.0
+ENV API_PORT=3000
 
 # Installing system dependecies
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
@@ -20,6 +17,9 @@ RUN gem install bundler -v '2.0.2' && bundle install
 
 # Install cucumber dependencies
 RUN rails g cucumber:install
+
+# Generate a key for Rails
+RUN rm -f config/master.key && rm -f config/credentials.yml.enc && EDITOR="echo" rails credentials:edit
 
 EXPOSE ${API_PORT}
 
