@@ -7,7 +7,7 @@ Foram realizadas 3 reuniões, sendo elas duas presenciais e uma remota.
 
 ## Reunião 1
 
-*Data:*/09/2019
+*Data:* 11/09/2019
 
 *Local:* Discord.
 
@@ -17,20 +17,20 @@ Foram realizadas 3 reuniões, sendo elas duas presenciais e uma remota.
 
 
 ## Reunião 2
-*Data:* 14/08/2019
+*Data:* 18/09/2019
 
 *Local:* 1° andar - Bloco E.
 
-*Tópico Discutido:* Atribuição de tarefas .
+*Tópico Discutido:* Tarefas a serem feitas, End-points.
 
-*Ações Tomadas:* Início da criação do design e end-points da tela de cadastro e login da aplicação.  
+*Ações Tomadas:* Definição do início da criação do design e end-points da tela de cadastro e login da aplicação.  
 
 
 ## Reunião 3
-*Data:* 19/08/2019
+*Data:* 25/09/2019
 
 *Local:* Mesanino - Bloco E.
 
-*Tópico Discutido:*  .
+*Tópico Discutido:* Analise e revisão do Esquemma Entidade Relacional, quais features iriam ser desenvolvidas.
 
-*Ações Tomadas:* Definição de tarefas de cada membro do grupo, criação das telas e end-points de login e cadastro assim como seus testes, 
+*Ações Tomadas:* Definição de tarefas de cada membro do grupo, como criação das telas e end-points de login e cadastro assim como seus testes.
