@@ -78,3 +78,7 @@ Sempre que um merge entre as branch citadas for realizada uma nova tag será cri
 * **Fix** é acrescido em 1 sempre que um bug for corrigido.
 
 Promoções de versões (código de desenvolvimento tornar-se de produção) ocorrerá no fim das sprints. A última versão de desenvolvimento será testada por completo e somente liberada caso passe no teste. Caso contrário, o _fix_ deverá ser realizado durante a próxima sprint, e a promoção de versão é colocada como uma das tarefas da sprint a ser realizado após o _fix_. 
+
+### URL das aplicações
+**API:** http://api.applada.com.br
+**Aplicação web** http://applada.com.br
