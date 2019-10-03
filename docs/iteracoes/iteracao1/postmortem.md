@@ -52,17 +52,16 @@ Inicio do desenvolvimento do projeto e aprender a usar as ferramentas que serão
 | Estudar React/Javascript | Kayque/Talyta |
 | Criar Esquema Relacional do diagrama ER | Kayque |
 | Estudar Rails/Ruby | Marcos/Igor/Sheldon |
+| Deploy da aplicação na AWS | Igor |
 
 ## Não realizadas na Iteração 1
-| Ação | Responsável(eis) |
-|------|------------------|
-| Criar SQL de Criação das Tabelas do Banco de Dados | Sheldon |
-| Criar Mock API | Igor |
+* Criar SQL de Criação das Tabelas do Banco de Dados
+> **Nota:** A tarefa se tornou obsoleta, pois o Ruby on Rails disponibiliza ferramentas para  automatização da criação do Banco de Dados.
+* Criar Mock API
+> **Nota:** Essa tarefa não foi cumprida pois priorizamos outras tarefas mais importantes para entrega da iteração 1.
 
 ## Em andamento 
-| Ação | Responsável(eis) |
-|------|------------------|
-| Deploy na AWS | Igor |
+* Nenhuma Atividade
 
 
 ## Planejamento para Iteração 2
@@ -71,11 +70,12 @@ Inicio do desenvolvimento do projeto e aprender a usar as ferramentas que serão
 | Mockup tela de login | Lucas |
 | Criação de testes | Marcos/Sheldon |
 | Criar Mock API | Igor |
-| Deploy na AWS | Igor |
 | Mockup das Telas de Dashboard | Lucas |
 
 ## Lições Aprendidas
 * A equipe soube se organizar mais quanto às demandas;
-* Aprendemos sobre React;
+* Aprendemos sobre React e Ruby on Rails;
 * Melhoramos habilidades no git;
 * Aprendemos a lidar melhor com imprevistos.
+* Aprendemos a utilizar Docker no nosso projeto.
+* Obtemos experiencia em Cucumber e Rspec.
