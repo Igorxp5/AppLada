@@ -2,10 +2,12 @@
   "name": "webapp",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://applada.com.br/",
   "dependencies": {
+    "axios": "^0.19.0",
+    "react-router-dom": "^5.1.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-router-dom": "^5.1.1",
     "react-scripts": "0.9.5"
   },
   "devDependencies": {
