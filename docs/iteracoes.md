@@ -12,8 +12,8 @@ Documentos e artefatos entregues durante o período encontram-se aqui.
 
 | Iteração | Data |
 |----------|----------|
-|[Iteração 0](/docs/iteracoes/iteracao0.md) | 05/08 - 02/09 |
-|[Iteração 1](/docs/iteracoes/iteracao1.md) | 02/09 - 02/10 |
+|[Iteração 0](/docs/iteracoes/iteracao0/iteracao0.md) | 05/08 - 02/09 |
+|[Iteração 1](/docs/iteracoes/iteracao1/iteracao1.md) | 02/09 - 02/10 |
 |[Iteração 2](/docs/iteracoes/iteracao2.md) | 02/10 - 16/10 |
 |[Iteração 3](/docs/iteracoes/iteracao3.md) | 16/10 - 30/10 |
 |[Iteração 4](/docs/iteracoes/iteracao4.md) | 30/10 - 20/11 |
