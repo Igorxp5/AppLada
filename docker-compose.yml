@@ -10,6 +10,7 @@ services:
     depends_on:
       - api
       - dev
+      - test
   db:
     image: postgres
     container_name: db
@@ -52,6 +53,23 @@ services:
     volumes:
       - ./api:/api
       - ./tmp/dev:/api/tmp
+    expose:
+       - 80
+    depends_on:
+      - db
+      - api
+  test:
+    container_name: test
+    image: applada
+    build: 
+      context: './api'
+    command: bash -c "rm -f tmp/pids/server.pid && (rake db:setup && rake db:migrate || rake db:migrate) && rails server --binding=0.0.0.0 --port=80 -e test"
+    environment:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+        RAILS_ENV: test
+    volumes:
+      - ./api:/api
+      - ./tmp/test:/api/tmp
     expose:
        - 80
     depends_on:
