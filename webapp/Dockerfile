@@ -8,7 +8,7 @@ WORKDIR /webapp
 # Installing system dependecies
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 5000
 
 RUN npm run build && npm install -g serve
 
