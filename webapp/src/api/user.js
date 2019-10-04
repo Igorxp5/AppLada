@@ -7,8 +7,6 @@ const userApi = axios.create({
     }
 })
 
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-
 export default {
     auth: {
         userLogin(payload) {

@@ -37,13 +37,14 @@ class Login extends React.Component {
         return (
             <div className='login-container'>
                 <form className='login-form' onSubmit={this.submitForm}>
-                    <label>E-MAIL:</label>
-                    <input type='text' className='login-form-inputs' onChange={this.addEmailToState}/>
-                    <label>SENHA:</label>
+                    <label>E-mail:</label>                    
+                    <input type='email' className='login-form-inputs' onChange={this.addEmailToState}/>
+                    <label>Senha:</label>
                     <input type='password' className='login-form-inputs' onChange={this.addPasswordToState}/>
-                    <input type='submit' value='ENTRAR' id='submit-login-form'/>
+                    <input type='submit' value='Entrar' id='submit-login-form'/>
                 </form>
             </div>
+                
         )
     }
 }
