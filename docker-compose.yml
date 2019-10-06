@@ -8,6 +8,8 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d/
     depends_on:
+      - webapp
+      - dev-webapp
       - api
       - dev
       - test
@@ -22,10 +24,23 @@ services:
       - '8000:5432'
   webapp:
     container_name: webapp
+    image: applada_webapp
     build:
       context: './webapp'
     expose:
-      - 5000
+      - 3000
+  dev-webapp:
+    container_name: dev-webapp
+    image: applada_webapp
+    build:
+      context: './webapp'
+    command: npm start
+    volumes:
+      - ./webapp:/webapp
+    expose:
+      - 3000
+    depends_on:
+      - webapp
   api:
     container_name: api
     image: applada
@@ -39,7 +54,7 @@ services:
       - ./tmp/api:/tmp
     expose:
        - 80
-    depends_on:
+    depends_on:  
       - db
   dev:
     container_name: dev
