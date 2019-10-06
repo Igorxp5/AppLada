@@ -1,54 +1,40 @@
 .cadastro-container {
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 30px;
-    width: 60%;
-    height: 90%;
-    color: white;
-    /* justify-content: center; */
-    /* align-items: center; */
-    text-align: center;
-    overflow-y: auto;
-    padding-bottom: 35px;
+  display: flex;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 60%;
+  height: 90%;  
+  justify-content: center;
+  border-radius: 30px;
+  font-size: 1em;
+  padding: 30px;
 }
 
-.label {
-    margin-top: 35px;
-    font-size: 14px;
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;  
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
-input[type=text] {
-    display:inline-block;
-    background: transparent;
-    border: none;
-    border-bottom: 0.1px solid white;
-    width: 250px;
-    font-size: 14px;
-    box-sizing: border-box;
-    color: aliceblue;
+.cadastro-form-inputs {
+  border: none;
+  border-bottom: 0.5px solid white;
+  width: 80%;
+  height: 7%;
+  padding-left: 10px;
+  font-size: 1em;
+  background: rgba(0, 0, 0, 0);
+  color: white;
   }
 
-  [type=password] {
-    display:inline-block;
-    background: transparent;
-    border: none;
-    border-bottom: 0.1px solid white;
-    width: 250px;
-    font-size: 14px;
-    box-sizing: border-box;
-    color: aliceblue;
-  }
-  input[type=submit] {
-    margin-top: 35px;
-    font-size: 14px;
-    padding: 10px;
-    border-color: rgba(17, 17, 17);
-    border: 8px;
-    background-color: white;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    color: rgba(0, 0, 0);     
+.cadastro-label { 
+  margin-top: 50px;   
+  color: 'white';
 }
 
-  input[type=submit]:hover {
-    color: rgba(36, 31, 31); 
+.iconStyle {
+  color: 'white'
 }
