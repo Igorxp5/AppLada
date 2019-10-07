@@ -1,0 +1,42 @@
+.notification-region {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  pointer-events: none;
+  position: fixed;
+  top: 0; right: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.notification-region > * {
+  pointer-events: auto;
+}
+
+.error-notification {
+    background-color: #E42C2C;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2);   
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-bottom: 15px;
+    min-width: 350px;
+    opacity: 0;
+    padding: 7px 15px;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.error-notification.show {
+    opacity: 1;
+}
+
+.error-notification-icon, .error-notification-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.error-notification-icon {
+    margin-right: 10px;
+}
