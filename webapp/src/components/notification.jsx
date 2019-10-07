@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import './../style/error_notification.css'
+import './../style/notification.css'
 
-class ErrorNotification extends React.Component {
+class Notification extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
 			showing: '',
+			type: props.type || '',
 			timeout: props.timeout || 10000,
 			closingTimeout: null
 		}
@@ -37,13 +38,13 @@ class ErrorNotification extends React.Component {
 
 	render() {
 		return(
-	        <div className={'error-notification ' + this.state.showing} 
+	        <div className={'notification ' + this.state.showing + ' ' + this.state.type} 
 	        	 onClick={this.close.bind(this)} ref={(element) => { this.element = element }}>
-	            <i className="error-notification-icon fas fa-exclamation-circle"></i> 
-	            <span className='error-notification-text'>{this.props.text}</span>
+	            <i className="notification-icon fas fa-exclamation-circle"></i> 
+	            <span className='notification-text'>{this.props.text}</span>
 	        </div>
 	    )
 	}
 }
 
-export default ErrorNotification;
+export default Notification;
