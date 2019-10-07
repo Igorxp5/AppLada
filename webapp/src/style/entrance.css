@@ -1,0 +1,128 @@
+.entrance-container {
+    align-items: start;
+    background-color: rgba(235, 232, 233, 0.85);
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    min-width: 420px;
+    padding: 25px;
+}
+
+.entrance-title {
+    color: #212125;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.entrance-title:after {
+    content: "";
+    background-color: #212125;
+    display: block;
+    height: 3px;
+    position: relative;
+    left: 0; bottom: 0;
+    width: 150%;
+}
+
+.entrance-alternatives {
+    margin: 20px auto;
+}
+
+.entrance-alternatives-seperator {
+    align-items: center;
+    color: #707070;
+    display: flex;
+    flex-grow: 1;
+    text-transform: uppercase;
+    width: 100%
+}
+
+.entrance-alternatives-seperator:before, .entrance-alternatives-seperator:after {
+    content: '';
+    display: block;
+    flex-grow: 3;
+    background-color: #707070;
+    height: 1px;
+}
+
+.entrance-alternatives-seperator:before {
+    margin-right: 10px;
+}
+
+.entrance-alternatives-seperator:after {
+    margin-left: 10px;
+}
+
+.entrance-button {
+    align-items: center;
+    background-color: #212125;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    font-size: 1em;
+    font-weight: 700;
+    justify-content: center;
+    min-width: 185px;
+    outline: none;
+    padding: 8px 45px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.entrance-button:hover {
+    color: #212125;
+    background-color: #FFFFFF;
+}
+
+.entrance-button.google:before {
+    content: '';
+    background-image: url('/images/icons/icon-google.png');
+    background-size: cover;
+    display: block;
+    height: 19px;
+    margin-right: 10px;
+    position: relative;
+    left: 0;
+    width: 19px;
+}
+
+.entrance-button.white {
+    background-color: #FFFFFF;
+    color: #212125;
+}
+
+.entrance-button.white:hover {
+    background-color: #212125;
+    color: #FFFFFF;
+}
+
+.entrance-content {
+    padding: 10px 0;
+    width: 100%;
+}
+
+.entrance-input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #212125;
+    font-size: 1em;
+    outline: none;
+    padding: 10px 5px;
+    margin-bottom: 25px;
+}
+
+.entrance-logo {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 250px;
+}

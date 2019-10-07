@@ -1,23 +1,21 @@
 import axios from 'axios'
 
 const userApi = axios.create({
-    baseURL: 'http://api.applada.com.br',
-    headers: {
-        'Access-Control-Allow-Origin': '*'
+    baseURL: 'http://dev.applada.com.br',
+    validateStatus: function (status) {
+        return status < 500; // Reject only if the status code is greater than or equal to 500
     }
 })
 
 export default {
     auth: {
         userLogin(payload) {
-            console.log(payload)
-            return userApi.post('/login', payload)
+            return userApi.post('/login', payload);
         }
     },
     signUp: {
         userSignUp(payload) {
-            console.log(payload)
-            return userApi.post('/signup', payload)
+            return userApi.post('/signup', payload);
         }
     }
 } 
