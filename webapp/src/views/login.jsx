@@ -31,14 +31,14 @@ class Login extends Page {
             if (errors.length > 0) {
 				errors.map((error) => {
 					let message = getErrorMessage(error.code)
-        			this.getNotificationCenter().newAlert(message);
+        			this.getNotificationCenter().errorAlert(message);
 				});
             } else {
                 document.location = '/dashboard';
             }
         }).catch(err => {
         	let message = getErrorMessage(0);
-        	this.getNotificationCenter().newAlert(message);
+        	this.getNotificationCenter().errorAlert(message);
         });
     }
 

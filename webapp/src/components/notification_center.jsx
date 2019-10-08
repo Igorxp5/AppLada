@@ -1,5 +1,5 @@
 import React from 'react'
-import ErrorNotification from './error_notification'
+import Notification from './notification'
 
 class NotificationCenter extends React.Component {
 	
@@ -10,9 +10,15 @@ class NotificationCenter extends React.Component {
 		}
 	}
 
-	newAlert(text, timeout) {
+	errorAlert(text, timeout) {
 		this.setState((state) => ({
-			notifications: [...state.notifications, {text: text, timeout: timeout}]
+			notifications: [...state.notifications, {text: text, timeout: timeout, type: 'error'}]
+		}));
+	}
+
+	successAlert(text, timeout) {
+		this.setState((state) => ({
+			notifications: [...state.notifications, {text: text, timeout: timeout, type: 'success'}]
 		}));
 	}
 
@@ -21,7 +27,7 @@ class NotificationCenter extends React.Component {
 	        <div className='notification-region'>
 	        	{
                     this.state.notifications.map((notification) => (
-                        <ErrorNotification key={notification.text} text={notification.text} timeout={notification.timeout}/>
+                        <Notification key={notification.text} text={notification.text} timeout={notification.timeout} type={notification.type}/>
                     ))
                 }
 	        </div>
