@@ -103,7 +103,7 @@ class Signup extends Page {
 
     render() {
         return (
-        	<div>
+        	<div style={{padding: '50px'}}>
         		<img src='/images/logo-applada.png' className='entrance-logo'/>
 	            <EntranceBlock title='Registrar-se'>
 	            	<form style={{display: 'flex', flexDirection: 'column'}} onSubmit={this.submitForm}>
