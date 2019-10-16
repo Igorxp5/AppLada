@@ -1,7 +1,7 @@
 Funcionalidade: Realizar login
-	Como usuário
-	Quero digitar minhas credenciais e ter meu login autorizado
-	Para ter acesso a plataforma
+    Como usuário
+    Quero digitar minhas credenciais e ter meu login autorizado
+    Para ter acesso a plataforma
 
 Cenário: Login realizado com sucesso usando nickname
     Ao realizar o login, é feito o redirecionamento para o perfil do usuário.
