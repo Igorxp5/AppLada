@@ -54,9 +54,8 @@ Então("recebo um JSON contendo as informações do usuário") do
     expect(@response_contend['data']['gender']).to  eq("M")
 end
 
-Então("recebo um erro informando que o usuário não existe") do
-    pending
-    # ERRO DESCONHECIDO AINDA
+Então("recebo o erro: {string}") do string
+    expect(@response_contend['errors'][0]['message']).to  eq(string)
 end
 
 Então("recebo um JSON contendo as informações dos societies daquele usuário") do

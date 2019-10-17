@@ -19,7 +19,7 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando eu efetuar a requisição
-        Então recebo um erro informando que o usuário não existe
+        Então recebo o erro: "User not founded"
         
         
     # /users/:login/societies
@@ -36,7 +36,7 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando a rota "societies " for chamada
-        Então recebo um erro informando que o usuário não existe
+        Então recebo o erro: "User not founded"
     
     
     # /users/:login/statistics
@@ -52,7 +52,7 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando a rota "statistics" for chamada
-        Então recebo um erro informando que o usuário não existe
+        Então recebo o erro: "User not founded"
     
     
     # /users/:login/matches
@@ -71,5 +71,5 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando a rota "matches" for chamada com os parâmetros de busca no modo padrão
-        Então recebo um erro informando que o usuário não existe
+        Então recebo o erro: "User not founded"
     
