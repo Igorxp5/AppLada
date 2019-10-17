@@ -1,10 +1,16 @@
 [Home](/README.md) |  [Entregas](/docs/iteracoes.md) | 
 |----|----|
 
+
 # Iteração 2
 * Data: 16/10/19
 * Local: Remoto
 * Intervalo: 02/10/2019 - 16/10/2019
+
+|    Artefatos | 
+|----------|
+| [Testes BDD](/docs/features/) ||
+
 ## Participantes
   * Igor Nascimento;
   * Talyta Pacheco;
@@ -61,3 +67,4 @@ Aprendizado e desenvolvimento de testes para o projeto, e dar continuidade de de
 * Aprender melhor o funcionamento da função state do React;
 * Estimar melhor as entregas, e suas complexidades;
 * Notar a necessidade do grupo em utilizar Redux.
+
