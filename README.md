@@ -1,9 +1,12 @@
-[Home](/README.md) | [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano de Desenvolvimento](#plano-de-desenvolvimento) | [Entregas](/docs/iteracoes.md) | [Mockups](/docs/mockups.md) | [Scrum Planning](https://docs.google.com/spreadsheets/d/1IM-rr2NfbDLIVCjXCaKXF7hhWi1qT7XSH_i9--tT9F8/) |
-|----|----|----|----|----|----|----|
+[Home](/README.md) | [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano](#plano-de-desenvolvimento) | [Como executar](#como-executar) | [Entregas](/docs/iteracoes.md) | [Mockups](/docs/mockups.md) | [Scrum Planning](https://docs.google.com/spreadsheets/d/1IM-rr2NfbDLIVCjXCaKXF7hhWi1qT7XSH_i9--tT9F8/) |
+|----|----|----|----|----|----|----|----|
 
 # AppLada
 
 O AppLada é uma plataforma online para organizar jogos de futebol, a **_pelada_**, e encontrar jogos organizados por outros jogadores, que estejam acontecendo próximos de você.
+
+**API:** http://api.applada.com.br 
+**Aplicação web** http://applada.com.br 
 
 ## Iniciativa
 
@@ -79,7 +82,50 @@ Sempre que um merge entre as branch citadas for realizada uma nova tag será cri
 
 Promoções de versões (código de desenvolvimento tornar-se de produção) ocorrerá no fim das sprints. A última versão de desenvolvimento será testada por completo e somente liberada caso passe no teste. Caso contrário, o _fix_ deverá ser realizado durante a próxima sprint, e a promoção de versão é colocada como uma das tarefas da sprint a ser realizado após o _fix_. 
 
-### URL das aplicações
 
-**API:** http://api.applada.com.br 
-**Aplicação web** http://applada.com.br 
+## Como executar
+
+A plataforma é composta por 3 serviços principais:
+- Banco de Dados
+- API (http://api.applada.com.br)
+- Aplicação Web (http://applada.com.br)
+
+E mais 3 serviços para realizar testes:
+- API (Modo Desenvolvimento, http://dev.applada.com.br)
+- API (Modo Teste, http://test.applada.com.br)
+- Aplicação Web (Modo Desenvolvimento: http://web.applada.com.br)
+
+Há mais uma para gerenciar redirecionamento dentro do domínio, o **NGINX**. Ao er requisitado um subdomínio o NGINX redireciona para o serviço requirido.
+
+### Pré-requisitos
+
+Para executar o projeto, a máquina deve conter:
+- docker
+- docker-compose
+
+### Execução
+
+Seguindo os passos abaixo para iniciar todos os serviço:
+
+1. **Declarar variáveis de ambiente:** 
+    - Senha para o banco de dados: ```export POSTGRES_PASSWORD=senha```.
+2. **Criação das imagens Docker**: ```docker-compose build``` (necessário somente executar uma vez)
+3. **Iniciar serviços**: ```docker-compose up```
+
+Se tudo ocorrer bem, ao executar ```docker container ls```, será possível visualizar os 6 serviços executando.
+
+Para acessar será necessário fazer alterações no arquivo ```hosts``` do computador. Este arquivo é responsável pelo DNS da máquina.
+
+No ubuntu ele se encontra em: ```/etc/hosts/```.
+No Windows ele se encontra em: ```C:/Windows/System32/drivers/etc/hosts```
+
+Adicione no arquivo os seguintes domínios apontando para a própria máquina:
+- applada.com.br
+- api.applada.com.br
+- dev.applada.com.br
+- test.applada.com.br
+- web.applada.com.br
+
+Com tudo configurado, acesse a plataforma por meio de http://applada.com.br.
+
+**Obs.:** Enquanto no arquivo ```hosts``` estiver os domínios não será possível acessar o servidor remoto real (oficial).
