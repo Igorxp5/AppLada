@@ -20,7 +20,15 @@ class ErrorCodes
 		"Login or password incorrect" => 18,
 		"Resource not found" => 19,
 		"Empty or Invalid Token" => 20,
-		"Expired Token" => 21
+		"Expired Token" => 21,
+		"Impossible longitude" => 22,
+		"Impossible latitude" => 23,
+		"Longitude can't be blank" => 24,
+		"Latitude can't be blank" => 24,
+		"MatchID is invalid" => 25,
+		"Permission denied" => 26,
+		"User not founded" => 27
+		
 	}
 
 	def self.get_error_by_message(error_message)
