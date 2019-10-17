@@ -61,3 +61,8 @@ Aprendizado e desenvolvimento de testes para o projeto, e dar continuidade de de
 * Aprender melhor o funcionamento da função state do React;
 * Estimar melhor as entregas, e suas complexidades;
 * Notar a necessidade do grupo em utilizar Redux.
+
+## Artefatos da Iteração
+
+* [Testes BDD](/docs/features/)
+
