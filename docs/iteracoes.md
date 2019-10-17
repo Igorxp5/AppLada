@@ -1,5 +1,5 @@
-[Home](/README.md) | [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano de Desenvolvimento](#plano-de-desenvolvimento) | [Entregas](/docs/iteracoes.md) | [Mockups](/docs/mockups.md) | [Scrum Planning](https://docs.google.com/spreadsheets/d/1IM-rr2NfbDLIVCjXCaKXF7hhWi1qT7XSH_i9--tT9F8/) |
-|----|----|----|----|----|----|----|
+[Home](/README.md) | [Iniciativa](#iniciativa) | [A Equipe](#a-equipe)| [Plano](#plano-de-desenvolvimento) | [Como executar](#como-executar) | [Entregas](/docs/iteracoes.md) | [Mockups](/docs/mockups.md) | [Scrum Planning](https://docs.google.com/spreadsheets/d/1IM-rr2NfbDLIVCjXCaKXF7hhWi1qT7XSH_i9--tT9F8/) |
+|----|----|----|----|----|----|----|----|
 
 # Entregas
 
