@@ -5,12 +5,14 @@
   "homepage": "http://applada.com.br/",
   "dependencies": {
     "@material-ui/core": "^4.5.0",
-    "bulma": "^0.7.5",
     "axios": "^0.19.0",
-    "react-router-dom": "^5.1.2",
+    "bulma": "^0.7.5",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-scripts": "0.9.5"
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "0.9.5",
+    "redux": "^4.0.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.8"

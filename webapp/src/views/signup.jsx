@@ -1,15 +1,13 @@
 import React from 'react'
-import Page from './page'
-
+import display from './../display'
 import api from './../api/user'
-import getErrorMessage from './../api/errors'
 import { EntranceBlock, EntranceInput, EntranceButton } from '../components/EntranceBlock'
 
-class Signup extends Page {
+class Signup extends React.Component {
 
 	constructor(props) {
     	super(props);
-    	Object.assign(this.state, {
+    	this.state = {
     		login: '',
 	        password: '',
 	        confirmPassword: '',
@@ -17,7 +15,7 @@ class Signup extends Page {
 	        email: '',
 	        birthday: '',
 	        gender: ''
-    	});
+    	};
     }
 
 	componentDidMount() {
@@ -33,26 +31,17 @@ class Signup extends Page {
             birthday: this.state.birthday,
             gender: this.state.gender
         }).then(response => {
-            let errors = response.data.errors;
-            if (errors.length > 0) {
-				errors.map((error) => {
-					let message = getErrorMessage(error.code)
-        			this.getNotificationCenter().errorAlert(message);
-				});
-            } else {
-                this.getNotificationCenter().successAlert('Usuário criado com sucesso');
-                setTimeout(() => {
-					document.location = '/';
-				}, 1500, this);
-                
-            }
+            display.notification.success('Usuário criado com sucesso')
+            document.location = '/';
         }).catch(err => {
+            let message = err.response.data.errors[0].message;
+            display.notification.error(message)
         });
     }
 
     submitForm = event => {
         event.preventDefault()
-        if (this.state.password != this.state.confirmPassword) {
+        if (this.state.password !== this.state.confirmPassword) {
         	this.getNotificationCenter().errorAlert('As senhas não coincidem');
         } else {
         	this._submit();
@@ -104,7 +93,7 @@ class Signup extends Page {
     render() {
         return (
         	<div style={{padding: '50px'}}>
-        		<img src='/images/logo-applada.png' className='entrance-logo'/>
+        		<img src='/images/logo-applada.png' className='entrance-logo' alt='logo'/>
 	            <EntranceBlock title='Registrar-se'>
 	            	<form style={{display: 'flex', flexDirection: 'column'}} onSubmit={this.submitForm}>
 	            		<EntranceInput name='name' placeholder='Nome' style={{width: '100%'}} 
