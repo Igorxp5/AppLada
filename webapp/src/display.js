@@ -7,7 +7,7 @@ function styleNotification(color, message) {
     let iconId = document.getElementById('notification-icon');
     
     let icon = ''
-    if (color === 'red') {
+    if (color === '#E42C2C') {
         icon = '<i class="fas fa-exclamation-triangle"></i>'
     } else {
         icon = '<i class="far fa-check-circle"></i>'
@@ -28,7 +28,7 @@ function styleNotification(color, message) {
 export default {
     notification: {
         error(message) {
-            styleNotification('red', message)
+            styleNotification('#E42C2C', message)
         },
         success(message) {
             styleNotification('green', message)

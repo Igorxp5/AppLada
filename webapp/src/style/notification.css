@@ -1,11 +1,14 @@
 #notification-component {
+  background-color: #E42C2C;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2);   
+  border-radius: 5px;
   color: white;
   z-index: 100;
   position: absolute;
   top: 50px;
   right: 50px;
-  padding: 15px;
-  border-radius: 15px;
+  min-width: 350px;
+  padding: 7px 15px;
   transition-duration: 0.7s;
   display: none;
 }
