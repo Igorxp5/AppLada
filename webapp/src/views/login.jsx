@@ -26,7 +26,9 @@ class Login extends React.Component {
         api.auth.userLogin({
             login: this.state.login,
             password: this.state.password
-        }).then(response => {            
+        }).then(response => { 
+            console.log('aaaaaaaa')    
+            console.log(response.data)       
             document.location = '/dashboard';
         }).catch(err => {
         	let message = err.response.data.errors[0].message;
