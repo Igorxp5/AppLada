@@ -1,0 +1,13 @@
+.peladas-proximas-menu {    
+    font-size: 1.1em;
+    color: white;
+    text-align: center;
+}
+
+#peladas-proximas-container {
+    width: 100%; 
+    height: 100%; 
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-auto-rows: 7%;
+}

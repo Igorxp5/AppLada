@@ -1,20 +1,26 @@
 import React from 'react'
-import Page from './page'
+import NavBar from './../components/navbar'
+import Jogar from './../components/Jogar'
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import './../style/dashboard/dashboard.css'
 
 
-class Dashboard extends Page {
+class Dashboard extends React.Component {
     componentDidMount() {
-        document.title = 'Login - AppLada'
+        document.title = 'Dashboard - AppLada'
     }
     
     render() {
-    	let style = {
-			color: '#FFFFFF',
-			fontSize: '4em',
-			textShadow: '0 0 5px rgba(0, 0, 0, 0.3)'
-		}
         return(
-            <h1 style={style}>VOCÊ ENTROU</h1>
+            <div>
+                <Router>     
+                    <NavBar />        
+                    <div id='dashboard-body'> 
+                        <Route path="/dashboard" component={ Jogar }/>
+                    </div>
+                </Router>
+                
+            </div>
         )
     }
 }

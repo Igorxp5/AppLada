@@ -1,20 +1,17 @@
 import React from 'react'
-import Page from './page'
 import { Link } from "react-router-dom"
-import { withRouter } from "react-router"
-
 import api from './../api/user'
-import getErrorMessage from './../api/errors'
 import { EntranceBlock, EntranceInput, EntranceButton } from '../components/EntranceBlock'
+import display from './../display'
 
-class Login extends Page {
+class Login extends React.Component {
 	
     constructor(props) {
     	super(props);
-    	Object.assign(this.state, {
+    	this.state = {
     		login: '',
         	password: ''
-    	});
+    	};
     }
 
     componentDidMount() {
@@ -23,22 +20,19 @@ class Login extends Page {
 
 	submitForm = event => {
         event.preventDefault();
+        if (!this.state.login || !this.state.password) {
+            return display.notification.error('Preencha todos os campos')
+        }
         api.auth.userLogin({
             login: this.state.login,
             password: this.state.password
-        }).then(response => {
-            let errors = response.data.errors;
-            if (errors.length > 0) {
-				errors.map((error) => {
-					let message = getErrorMessage(error.code)
-        			this.getNotificationCenter().errorAlert(message);
-				});
-            } else {
-                document.location = '/dashboard';
-            }
+        }).then(response => { 
+            console.log('aaaaaaaa')    
+            console.log(response.data)       
+            document.location = '/dashboard';
         }).catch(err => {
-        	let message = getErrorMessage(0);
-        	this.getNotificationCenter().errorAlert(message);
+        	let message = err.response.data.errors[0].message;
+            display.notification.error(message)
         });
     }
 
@@ -57,7 +51,7 @@ class Login extends Page {
     render() {
         return (
         	<div>
-        		<img src='/images/logo-applada.png' className='entrance-logo'/>
+        		<img src='/images/logo-applada.png' className='entrance-logo' alt='applada logo'/>
 	            <EntranceBlock title='Entrar'>
 	            	<form style={{display: 'flex', flexDirection: 'column'}} onSubmit={this.submitForm}>
 	            		<EntranceInput name='login' placeholder='Usuário ou Email' style={{width: '100%'}} 
