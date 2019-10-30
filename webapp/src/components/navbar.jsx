@@ -5,7 +5,11 @@ class NavBar extends React.Component {
 
     state = {
         current: 'jogar',
-        allPages: ['jogar', 'perfil', 'feed', 'times', 'torneios']
+        allPages: ['jogar', 'perfil', 'feed', 'times', 'torneios'],
+        user: {
+            name: 'Igor',
+            level: '45'
+        }
     }
 
     setCurrentPage = page => {
@@ -40,8 +44,8 @@ class NavBar extends React.Component {
                 <div id='dashboard-navbar-perfil'>
                     <img src='./../../images/user_Avatar.png' alt='user' />
                     <span>
-                        <label>Igor<br></br>
-                        <i className="fas fa-star" style={{color: 'yellow', marginTop: '10px'}}></i>
+                        <label>{this.state.user.name}<br></br>
+                        <i className="fas fa-star" style={{color: 'yellow', marginTop: '10px'}}></i> {this.state.user.level}
                         </label>
                     </span>
                 </div>

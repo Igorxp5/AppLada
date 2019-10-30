@@ -3,6 +3,7 @@
     left: 0; top: 0;
     width: 100%;
     height: 18vh;
+    background:rgba(0,0,0,0.3);
 }
 
 #dashboard-navbar-perfil {
@@ -53,7 +54,7 @@
 #dashboard-navbar-simbolos {
     width: 15%;
     height: 100%;
-    color: white;
+    color: grey;
     float: left;
     font-size: 2em;
     display:flex;
