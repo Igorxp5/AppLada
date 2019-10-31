@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import api from './../api/user'
+import getErrorMessage from './../api/errors'
 import { EntranceBlock, EntranceInput, EntranceButton } from '../components/EntranceBlock'
 import display from './../display'
 
@@ -15,7 +16,18 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        document.title = 'Login - AppLada'
+        document.title = 'Login - AppLada';
+    }
+
+    getLoginPayload(credentials) {
+        let payload = {};
+        if (credentials.login.includes('@')) {
+            payload['email'] = credentials.login;
+        } else {
+            payload['login'] = credentials.login;
+        }
+        payload['password'] = credentials.password;
+        return payload;
     }
 
 	submitForm = event => {
@@ -23,16 +35,25 @@ class Login extends React.Component {
         if (!this.state.login || !this.state.password) {
             return display.notification.error('Preencha todos os campos')
         }
-        api.auth.userLogin({
+        let loginPayload = this.getLoginPayload({
             login: this.state.login,
             password: this.state.password
-        }).then(response => { 
-            console.log('aaaaaaaa')    
-            console.log(response.data)       
+        });
+        api.auth.userLogin(loginPayload).then(response => {
+            let errors = response.data.errors;
+            if (errors.length > 0) {
+                errors.map((error) => {
+                    let message = getErrorMessage(error.code)
+                    return display.notification.error(message);
+                });
+            } else {
+                document.location = '/dashboard';
+            }
             document.location = '/dashboard';
         }).catch(err => {
-        	let message = err.response.data.errors[0].message;
-            display.notification.error(message)
+            let error = err.response.data.errors[0];
+            let message = getErrorMessage(error.code);
+            display.notification.error(message);
         });
     }
 
