@@ -48,4 +48,6 @@ Rails.application.configure do
 
   # Domain Host
   config.hosts << "test.applada.com.br"
+  config.active_record.maintain_test_schema = false
+  
 end
