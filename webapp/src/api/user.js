@@ -11,6 +11,9 @@ export default {
     auth: {
         userLogin(payload) {
             return userApi.post('/login', payload);
+        },
+        userPassword(payload) {
+            return  userApi.post('/')
         }
     },
     signUp: {
