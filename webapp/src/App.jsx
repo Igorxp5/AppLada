@@ -4,6 +4,7 @@ import Login from './views/login'
 import Signup from './views/signup'
 import Dashboard from './views/dashboard'
 import Notification from './components/notification'
+import RecuperarSenha from './views/recuperarSenha'
 
 class App extends Component {
   getNotificationCenter() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/" component={ Login } />
           <Route path="/signup" component={ Signup } />
           <Route path="/dashboard" component={ Dashboard }/>
+          <Route path="/forgot-password" component={ RecuperarSenha }/>
         </Router>
       </div>
     );
