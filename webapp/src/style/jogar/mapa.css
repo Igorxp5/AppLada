@@ -1,0 +1,12 @@
+#jogar-mapa-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    float: left;
+}
+
+#jogar-mapa-input {
+    /* height: 10vh; */
+}

@@ -27,13 +27,24 @@ class ErrorCodes
 		"Latitude can't be blank" => 24,
 		"MatchID is invalid" => 25,
 		"Permission denied" => 26,
-		"User not founded" => 27
-		
+		"User not founded" => 27,
+		"Login or E-mail is required" => 28
+	}
+
+	@@errors_translation = {
+		"Signature verification raised" => 20,
+		"nil user" => 20,
+		"revoked token" => 21
 	}
 
 	def self.get_error_by_message(error_message)
-		return {code: @@errors[error_message], message: error_message} if @@errors.key?(error_message)
-		# FIXME: Remove when map all errors from model validation
+		if @@errors.key?(error_message)
+			return {code: @@errors[error_message], message: error_message}
+		elsif @@errors_translation.key?(error_message)
+			code = @@errors_translation[error_message]
+			return {code: code, message: ErrorCodes.get_error_message(code)}
+		end
+		# TODO: Remove it when map all errors from model validation
 		puts "Not mapped error message: #{error_message}"
 	end
 
@@ -43,7 +54,8 @@ class ErrorCodes
 
 	def self.get_error_message(error_code)
 		return @@errors.key(error_code) unless @@errors.key(error_code).nil?
-		# FIXME: Remove when map all errors from model validation
+		return @@errors_translation.key(error_code) unless @@errors_translation.key(error_code).nil?
+		# TODO: Remove it when map all errors from model validation
 		puts "Not mapped error code: #{error_code}"
 	end
 
