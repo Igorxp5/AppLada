@@ -1,6 +1,7 @@
 import React from 'react'
 import { EntranceBlock, EntranceInput, EntranceButton } from '../components/EntranceBlock'
 
+
 class RecuperarSenha extends React.Component {
 
     state = {
