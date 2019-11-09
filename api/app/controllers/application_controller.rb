@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 	respond_to :json
 
 	def not_found
-		render json: format_response(errors: ErrorCodes.get_error_message(19))
+		render json: format_response(errors: 19)
 	end
 
 	protected
@@ -15,9 +15,9 @@ class ApplicationController < ActionController::API
 
 	def unauthorized_request(error_code=nil)
 		if error_code.nil?
-			render json: format_response(errors: ErrorCodes.get_error_message(16)), status: :unauthorized
+			render json: format_response(errors: 16), status: :unauthorized
 		else
-			render json: format_response(errors: ErrorCodes.get_error_message(error_code)), status: :unauthorized
+			render json: format_response(errors: error_code), status: :unauthorized
 		end
 	end
 

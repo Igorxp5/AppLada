@@ -28,13 +28,17 @@ class ErrorCodes
 		"MatchID is invalid" => 25,
 		"Permission denied" => 26,
 		"User not founded" => 27,
-		"Login or E-mail is required" => 28
+		"Login or E-mail is required" => 28,
+		"You are already a follower of this user" => 29,
+		"You are not follower of this user" => 30,
+		"You can't follow yourself" => 31
 	}
 
 	@@errors_translation = {
 		"Signature verification raised" => 20,
 		"nil user" => 20,
-		"revoked token" => 21
+		"revoked token" => 21,
+		"You need to sign in or sign up before continuing" => 16
 	}
 
 	def self.get_error_by_message(error_message)

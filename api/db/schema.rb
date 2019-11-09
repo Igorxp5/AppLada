@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_193719) do
+ActiveRecord::Schema.define(version: 2019_11_09_141906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 2019_10_27_193719) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
+  end
+
+  create_table "user_followers", primary_key: ["user_login", "follower_user_login"], force: :cascade do |t|
+    t.string "user_login", null: false
+    t.string "follower_user_login", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", primary_key: "login", id: :string, force: :cascade do |t|
@@ -33,9 +40,13 @@ ActiveRecord::Schema.define(version: 2019_10_27_193719) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "jti", null: false
+    t.string "avatar"
+    t.integer "level", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "user_followers", "users", column: "follower_user_login", primary_key: "login"
+  add_foreign_key "user_followers", "users", column: "user_login", primary_key: "login"
 end
