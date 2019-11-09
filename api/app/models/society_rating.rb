@@ -1,0 +1,2 @@
+class SocietyRating < ApplicationRecord
+end

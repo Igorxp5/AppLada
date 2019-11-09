@@ -38,7 +38,7 @@ class ErrorCodes
 		"Signature verification raised" => 20,
 		"nil user" => 20,
 		"revoked token" => 21,
-		"You need to sign in or sign up before continuing" => 16
+		"You need to sign in or sign up before continuing." => 16
 	}
 
 	def self.get_error_by_message(error_message)

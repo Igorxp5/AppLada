@@ -24,4 +24,12 @@ class ApplicationController < ActionController::API
 	def restrict_to_development
 		head(:not_found) unless Rails.env.development?
 	end
+
+	def validate_conditions(conditions)
+		errors = conditions.collect { |condition| ErrorCodes.get_error_message(condition[1]) unless condition[0] }
+		errors = errors.uniq.compact
+		unless errors.empty?
+			render json: format_response(errors: errors), status: :bad_request
+		end
+	end
 end

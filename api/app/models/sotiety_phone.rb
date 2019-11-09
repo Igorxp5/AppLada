@@ -1,0 +1,2 @@
+class SocietyPhone < ApplicationRecord
+end

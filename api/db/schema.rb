@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_141906) do
+ActiveRecord::Schema.define(version: 2019_11_09_190936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,27 @@ ActiveRecord::Schema.define(version: 2019_11_09_141906) do
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
+  end
+
+  create_table "societies", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.string "owner_user_login", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "society_phones", primary_key: ["society_id", "phone"], force: :cascade do |t|
+    t.integer "society_id", null: false
+    t.string "phone", null: false
+  end
+
+  create_table "society_ratings", primary_key: ["society_id", "user_login"], force: :cascade do |t|
+    t.integer "society_id", null: false
+    t.string "user_login", null: false
+    t.text "comment"
   end
 
   create_table "user_followers", primary_key: ["user_login", "follower_user_login"], force: :cascade do |t|
@@ -47,6 +68,9 @@ ActiveRecord::Schema.define(version: 2019_11_09_141906) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login"
+  add_foreign_key "society_phones", "societies"
+  add_foreign_key "society_ratings", "societies"
   add_foreign_key "user_followers", "users", column: "follower_user_login", primary_key: "login"
   add_foreign_key "user_followers", "users", column: "user_login", primary_key: "login"
 end
