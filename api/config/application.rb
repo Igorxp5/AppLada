@@ -36,5 +36,6 @@ module Api
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.time_zone = 'Brasilia'
+    config.autoload_paths << "#{Rails.root}/lib"
   end
 end

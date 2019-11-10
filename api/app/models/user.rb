@@ -8,9 +8,9 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
 	# has_secure_password
-	validates :email, presence: true, uniqueness: true
+	validates :email, presence: true, uniqueness: {case_sensitive: false}
 	validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-	validates :login, presence: true, uniqueness: true
+	validates :login, presence: true, uniqueness: {case_sensitive: false}
 	validates :name, presence: true, format: {with: /\A[\p{L} ]+\z/, message: 'can have only letters'}
 	validates :birthday, presence: true
 	validates :gender, presence: true

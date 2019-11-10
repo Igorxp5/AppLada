@@ -1,5 +1,6 @@
 class ErrorCodes
 	@@errors = { 
+		"Unknown error" => 0,
 		"Password is too short (minimum is 8 characters)" => 1,
 		"Password is too long (maximum is 16 characters)" => 2,
 		"Email is invalid" => 3,
@@ -31,7 +32,12 @@ class ErrorCodes
 		"Login or E-mail is required" => 28,
 		"You are already a follower of this user" => 29,
 		"You are not follower of this user" => 30,
-		"You can't follow yourself" => 31
+		"You can't follow yourself" => 31,
+		"You don't have permission to do this" => 32,
+		"Initials can't be blank" => 33,
+		"Initials has already been taken" => 34,
+		"Name has already been taken" => 35,
+		"Limit must be less or equals then 20" => 36
 	}
 
 	@@errors_translation = {

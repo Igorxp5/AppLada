@@ -51,7 +51,7 @@ class UserFollowersController < ApplicationController
     @user_follower.destroy
     render json: format_response, status: :ok
     rescue ActiveRecord::RecordNotFound
-      render json: format_response(errors: 30), status: :bad_request
+      render json: format_response(errors: 30), status: :not_found
   end
 
 end

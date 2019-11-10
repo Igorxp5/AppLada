@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_190936) do
+ActiveRecord::Schema.define(version: 2019_11_09_211413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,24 @@ ActiveRecord::Schema.define(version: 2019_11_09_190936) do
     t.text "comment"
   end
 
+  create_table "team_subscriptions", primary_key: ["team_initials", "user_login"], force: :cascade do |t|
+    t.string "team_initials", null: false
+    t.string "user_login", null: false
+    t.string "role"
+    t.boolean "accepted"
+    t.boolean "banned", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teams", primary_key: "initials", id: :string, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "avatar"
+    t.string "owner_user_login", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "user_followers", primary_key: ["user_login", "follower_user_login"], force: :cascade do |t|
     t.string "user_login", null: false
     t.string "follower_user_login", null: false
@@ -71,6 +89,9 @@ ActiveRecord::Schema.define(version: 2019_11_09_190936) do
   add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login"
   add_foreign_key "society_phones", "societies"
   add_foreign_key "society_ratings", "societies"
+  add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials"
+  add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login"
+  add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login"
   add_foreign_key "user_followers", "users", column: "follower_user_login", primary_key: "login"
   add_foreign_key "user_followers", "users", column: "user_login", primary_key: "login"
 end
