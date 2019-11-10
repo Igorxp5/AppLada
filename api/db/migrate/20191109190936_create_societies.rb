@@ -3,8 +3,8 @@ class CreateSocieties < ActiveRecord::Migration[6.0]
     create_table :societies do |t|
       t.string :name, null: false
       t.text :description
-      t.float :latitude, null: false
-      t.float :longitude, null: false
+      t.string :latitude, null: false
+      t.string :longitude, null: false
       t.string :owner_user_login, null: false
 
       t.timestamps
@@ -14,6 +14,8 @@ class CreateSocieties < ActiveRecord::Migration[6.0]
     create_table :society_phones, primary_key: [:society_id, :phone] do |t|
       t.integer :society_id
       t.string :phone
+      
+      t.timestamps
     end
     add_foreign_key :society_phones, :societies, column: :society_id, primary_key: "id"
 
@@ -21,6 +23,8 @@ class CreateSocieties < ActiveRecord::Migration[6.0]
       t.integer :society_id
       t.string :user_login
       t.text :comment
+
+      t.timestamps
     end
     add_foreign_key :society_ratings, :societies, column: :society_id, primary_key: "id"
   end

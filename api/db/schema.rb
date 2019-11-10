@@ -34,12 +34,16 @@ ActiveRecord::Schema.define(version: 2019_11_09_211413) do
   create_table "society_phones", primary_key: ["society_id", "phone"], force: :cascade do |t|
     t.integer "society_id", null: false
     t.string "phone", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "society_ratings", primary_key: ["society_id", "user_login"], force: :cascade do |t|
     t.integer "society_id", null: false
     t.string "user_login", null: false
     t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "team_subscriptions", primary_key: ["team_initials", "user_login"], force: :cascade do |t|
