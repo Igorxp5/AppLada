@@ -16,7 +16,10 @@ class User < ApplicationRecord
 	validates :gender, presence: true
 
   validates_each :birthday do |record, attr, value|
-    record.errors.add(attr, "can't be in the future") if not value.nil? and value >= Time.now.to_date
+    unless value.nil?
+      date = Date.strptime(value, '%d/%m/%Y')
+      record.errors.add(attr, "can't be in the future") if date >= Time.now.to_date
+    end
   end
   validates_each :gender do |record, attr, value|
     record.errors.add(attr, "must be 'M', 'F', or 'O'") unless ['M', 'F', 'O'].include? value
@@ -25,10 +28,14 @@ class User < ApplicationRecord
   def as_json(*)
     {
      login: login, name: name, avatar: avatar, 
-     email: email, birthday: birthday.strftime("%d/%m/%Y"), level: level,
+     email: email, birthday: birthday, level: level,
      gender: gender, registred_date: registred_date,
      followers: followers, following: following
     }
+  end
+
+  def birthday
+    super.strftime("%d/%m/%Y")
   end
 
   def registred_date

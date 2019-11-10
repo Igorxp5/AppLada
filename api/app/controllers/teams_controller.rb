@@ -20,25 +20,24 @@ class TeamsController < ApplicationController
     render json: format_response(payload: @teams), status: :ok
   end
 
-  # GET /teams/1
+  # GET /teams/:initials
   def show
     render json: format_response(payload: @team), status: :ok
   end
 
-  # POST /teams/1
+  # POST /teams/:initials
   def create
-    
     @team = Team.new(create_params)
     @team.owner = current_user.login
 
     if @team.save
-      render json: format_response, status: :created
+      render json: format_response(payload: @team), status: :created
     else
       render json: format_response(errors: @team.errors.full_messages), status: :bad_request
     end
   end
 
-  # PATCH/PUT /teams/1
+  # PATCH/PUT /teams/:initials
   def update
     if current_user.login != @team.owner
       return forbidden_request
@@ -51,7 +50,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  # DELETE /teams/1
+  # DELETE /teams/:initials
   def destroy
     if current_user.login != @team.owner
       return forbidden_request
@@ -60,7 +59,7 @@ class TeamsController < ApplicationController
     @team.destroy
     render json: format_response, status: :ok
   end
-  # GET /teams/1/members
+  # GET /teams/:initials/members
   def get_members
     @members = @team.members
     users = @members.collect do |member|
@@ -79,7 +78,7 @@ class TeamsController < ApplicationController
   end 
     
 
-  # DELETE /teams/1/members
+  # DELETE /teams/:initials/members
   def delete_members
     if current_user.login != @team.owner
       return forbidden_request

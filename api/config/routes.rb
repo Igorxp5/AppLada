@@ -14,7 +14,12 @@ Rails.application.routes.draw do
     get 'members', to: 'teams#get_members'
     delete 'members', to: 'teams#delete_members'
   end
-    
+  
+  resources :games do
+    get 'participants', to: 'games#get_participants'
+    post 'participants', to: 'games#create_participants'
+    delete 'participants', to: 'games#delete_participants'
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :users,

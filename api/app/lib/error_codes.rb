@@ -25,7 +25,6 @@ class ErrorCodes
 		"Impossible longitude" => 22,
 		"Impossible latitude" => 23,
 		"Longitude can't be blank" => 24,
-		"Latitude can't be blank" => 24,
 		"MatchID is invalid" => 25,
 		"Permission denied" => 26,
 		"User not founded" => 27,
@@ -33,12 +32,26 @@ class ErrorCodes
 		"You are already a follower of this user" => 29,
 		"You are not follower of this user" => 30,
 		"You can't follow yourself" => 31,
-		"You don't have permission to do this" => 32,
+		"You don't have permission to do this action" => 32,
 		"Initials can't be blank" => 33,
 		"Initials has already been taken" => 34,
 		"Name has already been taken" => 35,
 		"Limit must be less or equals then 20" => 36,
-		"This member is not on the team" => 37
+		"This member is not on the team" => 37,
+		"Start date can't be blank" => 38,
+		"End date can't be blank" => 39,
+		"Latitude is invalid" => 40,
+		"Longitude is invalid" => 41,
+		"Latitude can't be blank" => 42,
+		"Start date can't be in the past" => 43,
+		"End date can't be in the past" => 44,
+		"End date can't be before than start date" => 45,
+		"End date must be at least one hour longer than start date" => 46,
+		"Radius must be less or equals then 10" => 47,
+		"You can't leave from a game that you don't participate" => 48,
+		"You are already participating in this game" => 49,
+		"The game was removed because didn't have more participants" => 50,
+		"Title can't be blank" => 51
 	}
 
 	@@errors_translation = {

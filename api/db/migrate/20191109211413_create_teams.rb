@@ -8,7 +8,7 @@ class CreateTeams < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_foreign_key :teams, :users, column: :owner_user_login, primary_key: "login"
+    add_foreign_key :teams, :users, column: :owner_user_login, primary_key: "login", on_delete: :cascade
 
     create_table :team_subscriptions, primary_key: [:team_initials, :user_login] do |t|
       t.string :team_initials
@@ -21,8 +21,8 @@ class CreateTeams < ActiveRecord::Migration[6.0]
       t.timestamps
 
     end
-    add_foreign_key :team_subscriptions, :teams, column: :team_initials, primary_key: "initials"
-    add_foreign_key :team_subscriptions, :users, column: :user_login, primary_key: "login"
+    add_foreign_key :team_subscriptions, :teams, column: :team_initials, primary_key: "initials", on_delete: :cascade
+    add_foreign_key :team_subscriptions, :users, column: :user_login, primary_key: "login", on_delete: :cascade
 
   end
 end

@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_211413) do
+ActiveRecord::Schema.define(version: 2019_11_10_124803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_participants", primary_key: ["game_id", "user_login"], force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.string "user_login", null: false
+    t.boolean "will_go", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "latitude", null: false
+    t.string "longitude", null: false
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
+    t.integer "limit_participants"
+    t.string "state", default: "on_hold", null: false
+    t.string "owner_user_login", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "jwt_blacklist", force: :cascade do |t|
     t.string "jti", null: false
@@ -91,12 +113,15 @@ ActiveRecord::Schema.define(version: 2019_11_09_211413) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login"
-  add_foreign_key "society_phones", "societies"
-  add_foreign_key "society_ratings", "societies"
-  add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials"
-  add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login"
-  add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login"
-  add_foreign_key "user_followers", "users", column: "follower_user_login", primary_key: "login"
-  add_foreign_key "user_followers", "users", column: "user_login", primary_key: "login"
+  add_foreign_key "game_participants", "games", on_delete: :cascade
+  add_foreign_key "game_participants", "users", column: "user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "games", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "society_phones", "societies", on_delete: :cascade
+  add_foreign_key "society_ratings", "societies", on_delete: :cascade
+  add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials", on_delete: :cascade
+  add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "user_followers", "users", column: "follower_user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "user_followers", "users", column: "user_login", primary_key: "login", on_delete: :cascade
 end

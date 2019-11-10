@@ -1,5 +1,4 @@
 class Team < ApplicationRecord
-
     validates :initials, allow_blank: false,allow_nil: false, presence: true,  uniqueness: {case_sensitive: false}
     validates :name, allow_blank: false, allow_nil: false, presence: true,  uniqueness: {case_sensitive: false}
     before_save { self.name.downcase!}

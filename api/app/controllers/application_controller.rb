@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 	respond_to :json
 
 	def not_found
-		render json: format_response(errors: 19)
+		render json: format_response(errors: 19), status: :not_found
 	end
 
 	protected
