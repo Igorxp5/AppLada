@@ -14,6 +14,7 @@ class CreateTeams < ActiveRecord::Migration[6.0]
       t.string :team_initials
       t.string :user_login
       t.string :role
+      t.timestamp :joined_date
       t.boolean :accepted
       t.boolean :banned, null: false, default: false
 

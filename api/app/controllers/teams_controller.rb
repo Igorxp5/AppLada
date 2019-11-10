@@ -1,7 +1,8 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy]
+  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members]
   before_action :authenticate_user!
   before_action :validate_limit, only: [:index]
+
  
 
   # GET /teams
@@ -24,7 +25,7 @@ class TeamsController < ApplicationController
     render json: format_response(payload: @team), status: :ok
   end
 
-  # POST /teams
+  # POST /teams/1
   def create
     
     @team = Team.new(create_params)
@@ -35,12 +36,14 @@ class TeamsController < ApplicationController
     else
       render json: format_response(errors: @team.errors.full_messages), status: :bad_request
     end
-
-
   end
 
   # PATCH/PUT /teams/1
   def update
+    if current_user.login != @team.owner
+      return forbidden_request
+    end
+      
     if @team.update(team_params)
       render json: @team
     else
@@ -57,11 +60,50 @@ class TeamsController < ApplicationController
     @team.destroy
     render json: format_response, status: :ok
   end
+  # GET /teams/1/members
+  def get_members
+    @members = @team.members
+    users = @members.collect do |member|
+      if member == @team.owner
+        joined_date = @team.created_date
+      
+      else 
+        subscription = TeamSubscription.find_by(team_initials: @team.initials, user_login: member)
+        joined_date = subscription.joined_date
+
+      end
+      user = User.find_by_login(member)
+      {login: user.login, name: user.name, avatar: user.avatar, joined_date: joined_date}
+    end
+    render json: format_response(payload: users), status: :ok
+  end 
+    
+
+  # DELETE /teams/1/members
+  def delete_members
+    if current_user.login != @team.owner
+      return forbidden_request
+    end
+    
+    subscription = TeamSubscription.find_by!(team_initials: @team.initials, user_login: params[:login])
+
+    subscription.destroy
+    render json: format_response, status: :ok
+    rescue ActiveRecord::RecordNotFound
+      render json: format_response(errors: 37), status: :bad_request
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
-      @team = Team.find_by!("lower(initials) = ?", params[:initials].downcase)
+      if params[:initials] 
+        @team = Team.find_by!("lower(initials) = ?", params[:initials].downcase)
+      else
+        @team = Team.find_by!("lower(initials) = ?", params[:team_initials].downcase)
+
+      end
+      
       rescue ActiveRecord::RecordNotFound
         return not_found_request
     end
@@ -74,6 +116,4 @@ class TeamsController < ApplicationController
     def create_params
       params.require(:team).permit(:initials, :name, :avatar)
     end
-
-
 end

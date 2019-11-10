@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2019_11_09_211413) do
   create_table "societies", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.float "latitude", null: false
-    t.float "longitude", null: false
+    t.string "latitude", null: false
+    t.string "longitude", null: false
     t.string "owner_user_login", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_11_09_211413) do
     t.string "team_initials", null: false
     t.string "user_login", null: false
     t.string "role"
+    t.datetime "joined_date"
     t.boolean "accepted"
     t.boolean "banned", default: false, null: false
     t.datetime "created_at", precision: 6, null: false

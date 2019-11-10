@@ -2,7 +2,7 @@ class Team < ApplicationRecord
 
     validates :initials, allow_blank: false,allow_nil: false, presence: true,  uniqueness: {case_sensitive: false}
     validates :name, allow_blank: false, allow_nil: false, presence: true,  uniqueness: {case_sensitive: false}
-    
+    before_save { self.name.downcase!}
 
     def as_json(*)
         {
@@ -20,6 +20,7 @@ class Team < ApplicationRecord
         subscriptions.push owner
         subscriptions
     end
+
     
     def created_date
         self.created_at.to_time.to_i

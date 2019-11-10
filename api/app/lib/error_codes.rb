@@ -37,7 +37,8 @@ class ErrorCodes
 		"Initials can't be blank" => 33,
 		"Initials has already been taken" => 34,
 		"Name has already been taken" => 35,
-		"Limit must be less or equals then 20" => 36
+		"Limit must be less or equals then 20" => 36,
+		"This member is not on the team" => 37
 	}
 
 	@@errors_translation = {
