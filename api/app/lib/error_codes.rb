@@ -51,7 +51,8 @@ class ErrorCodes
 		"You can't leave from a game that you don't participate" => 48,
 		"You are already participating in this game" => 49,
 		"The game was removed because didn't have more participants" => 50,
-		"Title can't be blank" => 51
+		"Title can't be blank" => 51,
+		"This member is not on the team" => 52
 	}
 
 	@@errors_translation = {

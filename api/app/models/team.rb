@@ -2,6 +2,8 @@ class Team < ApplicationRecord
     validates :initials, allow_blank: false,allow_nil: false, presence: true,  uniqueness: {case_sensitive: false}
     validates :name, allow_blank: false, allow_nil: false, presence: true,  uniqueness: {case_sensitive: false}
     before_save { self.name.downcase!}
+    before_save {self.initials.upcase!}
+    after_create :owner_subscription
 
     def as_json(*)
         {
@@ -16,7 +18,6 @@ class Team < ApplicationRecord
         subscriptions = subscriptions.collect do |subscription|
             subscription.user_login
         end
-        subscriptions.push owner
         subscriptions
     end
 
@@ -31,5 +32,11 @@ class Team < ApplicationRecord
 
     def owner=(value)
         self.owner_user_login = value
+    end
+
+    def owner_subscription
+        puts(self.initials)
+        @subscription = TeamSubscription.new(team_initials: self.initials, user_login: self.owner, accepted: true)
+        @subscription.save
     end
 end

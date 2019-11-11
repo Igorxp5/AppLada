@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members]
+  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members, :get_roles, :update_roles]
   before_action :authenticate_user!
   before_action :validate_limit, only: [:index]
 
@@ -91,6 +91,36 @@ class TeamsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       render json: format_response(errors: 37), status: :bad_request
 
+  end
+
+  # GET /teams/1/roles
+  def get_roles
+    @members = @team.members
+    users = @members.collect do |member|
+    subscription = TeamSubscription.find_by(team_initials: @team.initials, user_login: member)
+    {login: subscription.user_login, role: subscription.role}
+    end
+
+    render json: format_response(payload: users), status: :ok
+
+  end
+
+  # PUT /teams/1/roles
+  def update_roles
+    if current_user.login != @team.owner
+      return forbidden_request
+    end
+
+    members = JSON.parse(request.body.read)
+    members.collect do |member, value|
+      subscription = TeamSubscription.find_by(team_initials: @team.initials, user_login: member)
+      if not subscription
+        return render json: format_response(errors: 39), status: :bad_request
+      end
+      subscription.update(role: value)
+    end
+   
+    render json: format_response, status: :ok
   end
 
   private

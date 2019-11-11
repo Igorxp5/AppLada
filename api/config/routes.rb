@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :teams, param: :initials do
     get 'members', to: 'teams#get_members'
     delete 'members', to: 'teams#delete_members'
+    get 'roles', to: 'teams#get_roles'
+    put 'roles', to: 'teams#update_roles'
   end
   
   resources :games do
