@@ -6,12 +6,17 @@ Rails.application.routes.draw do
     get 'following', to: 'user_followers#following'
     post 'followers', to: 'user_followers#create'
     delete 'followers', to: 'user_followers#destroy'
-    get 'feeds', to: 'feeds#user_feed'
+    get 'feeds', to: 'feeds#user_feeds'
+    get 'societies', to: 'societies#user_societies'
   end
 
-  resources :societies
-
-  
+  resources :societies, except: [:create] do
+    get 'ratings', to: 'society_ratings#index'
+    post 'ratings', to: 'society_ratings#create'
+    put 'ratings', to: 'society_ratings#update'
+    patch 'ratings', to: 'society_ratings#update'
+    delete 'ratings', to: 'society_ratings#destroy'
+  end
 
   resources :teams, param: :initials do
     get 'members', to: 'teams#get_members'

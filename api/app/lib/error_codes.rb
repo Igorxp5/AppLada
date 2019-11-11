@@ -54,7 +54,12 @@ class ErrorCodes
 		"Title can't be blank" => 51,
 		"This member is not on the team or not exist" => 52,
 		"You don't have a pending invitation from this time" => 53,
-		"This user is already a team member" => 54
+		"This user is already a team member" => 54,
+		"Phones must be a array of phones" => 55,
+		"Phones is invalid. Phone format is: +5500111111111" => 56,
+		"Rating must be between 0 and 5" => 57,
+		"Society owner can't rating own society" => 58,
+		"You already rated this society" => 59
 	}
 
 	@@errors_translation = {

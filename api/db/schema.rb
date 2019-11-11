@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2019_11_10_233636) do
   create_table "society_ratings", primary_key: ["society_id", "user_login"], force: :cascade do |t|
     t.integer "society_id", null: false
     t.string "user_login", null: false
+    t.float "rating", null: false
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -153,6 +154,7 @@ ActiveRecord::Schema.define(version: 2019_11_10_233636) do
   add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "society_phones", "societies", on_delete: :cascade
   add_foreign_key "society_ratings", "societies", on_delete: :cascade
+  add_foreign_key "society_ratings", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials", on_delete: :cascade
   add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade

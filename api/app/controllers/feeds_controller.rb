@@ -13,7 +13,7 @@ class FeedsController < ApplicationController
         render json: format_response(payload: @feeds), status: :ok
     end
 
-    def user_feed
+    def user_feeds
         @feeds = Feed.where(user_login: params[:user_login])
                     .offset(params[:offset]).limit(params[:limit])
                     .order(created_at: :desc)        

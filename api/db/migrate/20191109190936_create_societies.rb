@@ -22,10 +22,12 @@ class CreateSocieties < ActiveRecord::Migration[6.0]
     create_table :society_ratings, primary_key: [:society_id, :user_login] do |t|
       t.integer :society_id
       t.string :user_login
+      t.float :rating, null: false
       t.text :comment
 
       t.timestamps
     end
     add_foreign_key :society_ratings, :societies, column: :society_id, primary_key: "id", on_delete: :cascade
+    add_foreign_key :society_ratings, :users, column: :user_login, primary_key: "login", on_delete: :cascade
   end
 end
