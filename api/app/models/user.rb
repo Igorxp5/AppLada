@@ -30,7 +30,7 @@ class User < ApplicationRecord
      login: login, name: name, avatar: avatar, 
      email: email, birthday: birthday, level: level,
      gender: gender, registred_date: registred_date,
-     followers: followers, following: following
+     followers: followers.length, following: following.length
     }
   end
 
@@ -43,11 +43,11 @@ class User < ApplicationRecord
   end
 
   def followers
-    UserFollower.where(user_login: login).length
+    UserFollower.where(user_login: login)
   end
 
   def following
-    UserFollower.where(follower_user_login: login).length
+    UserFollower.where(follower_user_login: login)
   end
 
   def jwt_payload

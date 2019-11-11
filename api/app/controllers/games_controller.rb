@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_game, only: [:show, :update, :destroy, :get_participants, 
                                   :create_participants, :delete_participants]
-  before_action :authenticate_user!
 
   # GET /games
   def index
@@ -28,6 +28,7 @@ class GamesController < ApplicationController
     @game.owner_user_login = current_user.login
 
     if @game.save
+      Feed.new_feed(:create_game, current_user.login, {game_id: @game.id})
       render json: format_response(payload: @game), status: :created
     else
       render json: format_response(errors: @game.errors.full_messages), status: :bad_request
@@ -74,6 +75,7 @@ class GamesController < ApplicationController
     
     participant = GameParticipant.new(game_id: @game.id, user_login: current_user.login, will_go: true)
     participant.save!
+    Feed.new_feed(:join_game, current_user.login, {game_id: @game.id})
     get_participants
     rescue ActiveRecord::RecordNotUnique
       render json: format_response(errors: 49), status: :bad_request
