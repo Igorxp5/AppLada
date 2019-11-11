@@ -124,19 +124,19 @@ class TeamsController < ApplicationController
   end
 
   # GET /invites
-  def get_invites #falta ajeitar o status
+  def get_invites # TODO: falta ajeitar o status
     invites = TeamSubscription.where(user_login: current_user.login, accepted: nil)
                                       .offset(params[:offset]).limit(params[:limit])
-    render json: format_response(payload: invites), status: :ok  
+    render json: format_response(payload: invites), status: :ok
   end                            
 
   # PUT /invites/1
-  def accept_invite #falta o joined_data
+  def accept_invite # TODO: falta o joined_data
     invite = TeamSubscription.find_by(team_initials: @team.initials, user_login: current_user.login, accepted: nil)
     unless invite
       return render json: format_response(errors: 53), status: :bad_request
     end
-    invite.update(accepted: true)
+    invite.update(joined_date: Time.now.to_i, accepted: true)
     render json: format_response(payload: invite), status: :ok
     
 
@@ -171,8 +171,8 @@ class TeamsController < ApplicationController
     if current_request.accepted 
       return render json: format_response(errors: 54), status: :bad_request
     else
-      current_request.update(accepted: nil) #Ve se precisa da necessidade de trocar a request_date
-      return render json: format_response(payload: current_request), status: :updated #não sei o que botar
+      current_request.update(accepted: nil) # TODO: Ve se precisa da necessidade de trocar a request_date
+      return render json: format_response(payload: current_request), status: :ok
     end
 
     request = TeamSubscription.new(team_initials: @team.initials, user_login: params[:login])
@@ -194,8 +194,8 @@ class TeamsController < ApplicationController
       return render json: format_response(errors: 54), status: :bad_request
     end
 
-    current_request.update(accepted: false) #ajustar a updated_date 
-    render json: format_response(payload: current_request), status: :updated #não sei o que botar
+    current_request.update(accepted: false) # TODO: ajustar a updated_date 
+    render json: format_response(payload: current_request), status: :ok
 
   end
   private
