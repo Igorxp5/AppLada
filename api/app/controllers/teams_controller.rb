@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members, :get_roles, :update_roles]
+  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members, :get_roles, :update_roles, :accept_invite, :refuse_invite, :get_requests, :create_requests, :delete_requests]
   before_action :authenticate_user!
   before_action :validate_limit, only: [:index]
 
@@ -114,8 +114,8 @@ class TeamsController < ApplicationController
     members = JSON.parse(request.body.read)
     members.collect do |member, value|
       subscription = TeamSubscription.find_by(team_initials: @team.initials, user_login: member)
-      if not subscription
-        return render json: format_response(errors: 39), status: :bad_request
+      unless subscription
+        return render json: format_response(errors: 52), status: :bad_request
       end
       subscription.update(role: value)
     end
@@ -123,6 +123,81 @@ class TeamsController < ApplicationController
     render json: format_response, status: :ok
   end
 
+  # GET /invites
+  def get_invites #falta ajeitar o status
+    invites = TeamSubscription.where(user_login: current_user.login, accepted: nil)
+                                      .offset(params[:offset]).limit(params[:limit])
+    render json: format_response(payload: invites), status: :ok  
+  end                            
+
+  # PUT /invites/1
+  def accept_invite #falta o joined_data
+    invite = TeamSubscription.find_by(team_initials: @team.initials, user_login: current_user.login, accepted: nil)
+    unless invite
+      return render json: format_response(errors: 53), status: :bad_request
+    end
+    invite.update(accepted: true)
+    render json: format_response(payload: invite), status: :ok
+    
+
+  end
+
+  # DELETE /invites/1
+  def refuse_invite 
+    invite = TeamSubscription.find_by(team_initials: @team.initials, user_login: current_user.login, accepted: nil)
+    unless invite
+      return render json: format_response(errors: 53), status: :bad_request
+    end
+    invite.update(accepted: false)
+    render json: format_response(payload: invite), status: :ok
+    
+  end
+
+  # GET /teams/1/requests
+  def get_requests
+    invites = TeamSubscription.where(team_initials: @team.initials)
+                                      .offset(params[:offset]).limit(params[:limit])
+
+    render json: format_response(payload: invites), status: :ok 
+  end
+
+  # POST /teams/1/requests
+  def create_requests
+    if current_user.login != @team.owner
+      return forbidden_request
+    end
+
+    current_request = TeamSubscription.find_by(team_initials: @team.initials, user_login: params[:login])
+    if current_request.accepted 
+      return render json: format_response(errors: 54), status: :bad_request
+    else
+      current_request.update(accepted: nil) #Ve se precisa da necessidade de trocar a request_date
+      return render json: format_response(payload: current_request), status: :updated #não sei o que botar
+    end
+
+    request = TeamSubscription.new(team_initials: @team.initials, user_login: params[:login])
+    if request.save
+      render json: format_response(payload: request), status: :created
+    else
+      render json: format_response(errors: 0), status: :bad_request
+    end
+  end
+
+  # DELETE /teams/1/requests
+  def delete_requests
+    if current_user.login != @team.owner
+      return forbidden_request
+    end
+
+    current_request = TeamSubscription.find_by(team_initials: @team.initials, user_login: params[:login])
+    if current_request.accepted 
+      return render json: format_response(errors: 54), status: :bad_request
+    end
+
+    current_request.update(accepted: false) #ajustar a updated_date 
+    render json: format_response(payload: current_request), status: :updated #não sei o que botar
+
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team

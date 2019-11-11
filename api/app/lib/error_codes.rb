@@ -52,7 +52,9 @@ class ErrorCodes
 		"You are already participating in this game" => 49,
 		"The game was removed because didn't have more participants" => 50,
 		"Title can't be blank" => 51,
-		"This member is not on the team" => 52
+		"This member is not on the team or not exist" => 52,
+		"You don't have a pending invitation from this time" => 53,
+		"This user is already a team member" => 54
 	}
 
 	@@errors_translation = {

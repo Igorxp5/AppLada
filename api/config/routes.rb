@@ -10,12 +10,23 @@ Rails.application.routes.draw do
 
   resources :societies
 
+  
+
   resources :teams, param: :initials do
     get 'members', to: 'teams#get_members'
     delete 'members', to: 'teams#delete_members'
     get 'roles', to: 'teams#get_roles'
     put 'roles', to: 'teams#update_roles'
+    get 'requests', to: 'teams#get_requests'
+    post 'requests', to: 'teams#create_requests'
+    delete 'requests', to: 'teams#delete_requests'
   end
+
+  get 'invites', to: 'teams#get_invites'
+  put 'invites/:initials', to: 'teams#accept_invite'
+  delete 'invites/:initials', to: 'teams#refuse_invite'
+  
+  
   
   resources :games do
     get 'participants', to: 'games#get_participants'
