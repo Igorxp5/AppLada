@@ -55,8 +55,8 @@ class Society < ApplicationRecord
     end
 
     def current_tournament
-        # TODO: Precisa implementar Torneios
-        nil
+        tournament = Tournament.find_by(society_id: id, finished: false)
+        tournament.id unless tournament.nil?
     end
     
     def owner
@@ -69,6 +69,10 @@ class Society < ApplicationRecord
         ratings = society_ratings.collect {|society_rating| society_rating.rating}
         average = ratings.sum / total_votes rescue 0
         {average: average, total_votes: total_votes}
+    end
+
+    def tournaments
+        Tournament.where(society_id: id).order(created_at: :desc)
     end
 
     def self.search_by_distance(center_latitude, center_longitude, radius=10)

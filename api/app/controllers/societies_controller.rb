@@ -1,7 +1,7 @@
 class SocietiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_society, only: [:show, :update, :destroy, 
-                                     :get_ratings, :create_ratings]
+                                     :get_ratings, :create_ratings,:get_tournaments]
 
   # GET /societies
   def index
@@ -22,8 +22,12 @@ class SocietiesController < ApplicationController
     render json: format_response(payload: @society), status: :ok
   end
 
-  # PATCH/PUT /games/:id
+  # PATCH/PUT /societies/:id
   def update
+    if current_user.login != @society.owner
+      return forbidden_request
+    end
+
     @society.phones = params[:phones] if params[:phones].present?
     if @society.update(society_params)
       render json: format_response(payload: @society), status: :ok
@@ -32,9 +36,15 @@ class SocietiesController < ApplicationController
     end
   end
 
+  # GET /societies/:society_id/tournaments
+  def get_tournaments
+    @tournaments = @society.tournaments
+    render json: format_response(payload: @tournaments), status: :ok
+  end
+
   # GET /users/:login/societies
   def user_societies
-    @societies = Society.where(owner_user_login: current_user.login)
+    @societies = Society.where(owner_user_login: params[:user_login])
     render json: format_response(payload: @societies), status: :ok
   end
   

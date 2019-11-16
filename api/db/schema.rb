@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_10_233636) do
+ActiveRecord::Schema.define(version: 2019_11_16_184607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,34 @@ ActiveRecord::Schema.define(version: 2019_11_10_233636) do
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
+  create_table "match_participants", force: :cascade do |t|
+    t.integer "match_id", null: false
+    t.integer "tournament_subscription_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["match_id", "tournament_subscription_id"], name: "match_participants_unique", unique: true
+  end
+
+  create_table "match_results", primary_key: "match_id", id: :integer, default: nil, force: :cascade do |t|
+    t.integer "winner_tournament_subscription"
+    t.integer "looser_tournament_subscription"
+    t.integer "winner_score", default: 0, null: false
+    t.integer "looser_score", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.integer "tournament_id"
+    t.integer "match_order"
+    t.datetime "start_date", null: false
+    t.integer "game_time", default: 5400, null: false
+    t.string "status", default: "on_hold", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tournament_id", "match_order"], name: "index_matches_on_tournament_id_and_match_order", unique: true
+  end
+
   create_table "societies", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -117,6 +145,39 @@ ActiveRecord::Schema.define(version: 2019_11_10_233636) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tournament_rankings", primary_key: ["tournament_id", "ranking_position"], force: :cascade do |t|
+    t.integer "tournament_id", null: false
+    t.integer "ranking_position", null: false
+    t.string "team_initials", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tournament_subscriptions", force: :cascade do |t|
+    t.integer "tournament_id"
+    t.string "team_initials"
+    t.boolean "accepted"
+    t.boolean "banned", default: false, null: false
+    t.datetime "joined_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.integer "society_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "start_date", null: false
+    t.datetime "end_date"
+    t.datetime "end_subscription_date", null: false
+    t.float "price"
+    t.integer "teams_limit", null: false
+    t.boolean "finished", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["society_id", "finished"], name: "index_tournaments_on_society_id_and_finished", unique: true, where: "(finished = false)"
+  end
+
   create_table "user_followers", primary_key: ["user_login", "follower_user_login"], force: :cascade do |t|
     t.string "user_login", null: false
     t.string "follower_user_login", null: false
@@ -151,6 +212,12 @@ ActiveRecord::Schema.define(version: 2019_11_10_233636) do
   add_foreign_key "game_participants", "games", on_delete: :cascade
   add_foreign_key "game_participants", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "games", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "match_participants", "matches"
+  add_foreign_key "match_participants", "tournament_subscriptions"
+  add_foreign_key "match_results", "matches"
+  add_foreign_key "match_results", "tournament_subscriptions", column: "looser_tournament_subscription"
+  add_foreign_key "match_results", "tournament_subscriptions", column: "winner_tournament_subscription"
+  add_foreign_key "matches", "tournaments"
   add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "society_phones", "societies", on_delete: :cascade
   add_foreign_key "society_ratings", "societies", on_delete: :cascade
@@ -158,6 +225,11 @@ ActiveRecord::Schema.define(version: 2019_11_10_233636) do
   add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials", on_delete: :cascade
   add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
+  add_foreign_key "tournament_rankings", "teams", column: "team_initials", primary_key: "initials"
+  add_foreign_key "tournament_rankings", "tournaments", on_delete: :cascade
+  add_foreign_key "tournament_subscriptions", "teams", column: "team_initials", primary_key: "initials"
+  add_foreign_key "tournament_subscriptions", "tournaments"
+  add_foreign_key "tournaments", "societies", on_delete: :cascade
   add_foreign_key "user_followers", "users", column: "follower_user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "user_followers", "users", column: "user_login", primary_key: "login", on_delete: :cascade
 end

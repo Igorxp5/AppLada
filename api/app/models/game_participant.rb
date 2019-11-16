@@ -8,4 +8,8 @@ class GameParticipant < ApplicationRecord
         time = will_go ? updated_at : created_at
         time.to_time.to_i
     end
+
+    def game
+        Game.find_by_id(game_id)
+    end
 end

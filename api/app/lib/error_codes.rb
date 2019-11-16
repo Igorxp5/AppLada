@@ -59,7 +59,17 @@ class ErrorCodes
 		"Phones is invalid. Phone format is: +5500111111111" => 56,
 		"Rating must be between 0 and 5" => 57,
 		"Society owner can't rating own society" => 58,
-		"You already rated this society" => 59
+		"You already rated this society" => 59,
+		"Society can't be blank" => 60,
+		"Society don't exist" => 61,
+		"End subscription date can't be blank" => 62,
+		"End date must be at least one day longer than start date" => 63,
+		"End subscription date must be before start date" => 64,
+		"Start date must be at least one hour longer than end subscription date" => 65,
+		"Teams limit can't be blank" => 66,
+		"Teams limit is not a number" => 67,
+		"Price is not a number" => 68,
+		"Society can have only tournament active" => 69
 	}
 
 	@@errors_translation = {

@@ -37,6 +37,10 @@ class GamesController < ApplicationController
 
   # PATCH/PUT /games/:id
   def update
+    if current_user.login != @game.owner
+      return forbidden_request
+    end
+    
     if @game.update(game_params)
       render json: format_response(payload: @game), status: :ok
     else
@@ -99,6 +103,16 @@ class GamesController < ApplicationController
     get_participants
     rescue ActiveRecord::RecordNotFound
       render json: format_response(errors: 48), status: :not_found
+  end
+
+  # GET /users/:login/games
+  def user_games
+    @partipations = GameParticipant.where(user_login: params[:user_login]
+                                          will_go: true).order(updated_at: :desc)
+    @games = @partipations.collect do |participation|
+      participation.game
+    end
+    render json: format_response(payload: @games), status: :ok
   end
 
   private
