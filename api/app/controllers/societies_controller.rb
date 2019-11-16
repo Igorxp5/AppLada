@@ -1,5 +1,6 @@
 class SocietiesController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_user, only: [:user_societies]
   before_action :set_society, only: [:show, :update, :destroy, 
                                      :get_ratings, :create_ratings,:get_tournaments]
 

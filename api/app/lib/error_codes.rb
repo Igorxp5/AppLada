@@ -27,7 +27,7 @@ class ErrorCodes
 		"Longitude can't be blank" => 24,
 		"MatchID is invalid" => 25,
 		"Permission denied" => 26,
-		"User not founded" => 27,
+		"User not found" => 27,
 		"Login or E-mail is required" => 28,
 		"You are already a follower of this user" => 29,
 		"You are not follower of this user" => 30,

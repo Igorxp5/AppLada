@@ -1,5 +1,6 @@
 class UserFollowersController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_user
 
   # GET /users/:login/followers
   def followers

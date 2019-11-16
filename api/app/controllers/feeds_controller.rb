@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
     before_action :authenticate_user!
+    before_action :find_user, only: [:user_feed]
     before_action :validate_limit, only: [:index, :user_feed]
 
     def index

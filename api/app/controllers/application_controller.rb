@@ -37,6 +37,12 @@ class ApplicationController < ActionController::API
 		end
 	end
 
+	def find_user
+		@user = User.find_by_login!(params[:login])
+		render json: format_response(payload: @user), status: :ok
+		rescue ActiveRecord::RecordNotFound
+			render json: format_response(errors: 27), status: :not_found
+	end
 
 	def restrict_to_development
 		head(:not_found) unless Rails.env.development?

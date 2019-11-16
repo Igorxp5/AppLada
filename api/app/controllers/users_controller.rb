@@ -6,13 +6,4 @@ class UsersController < ApplicationController
 	def show
 		render json: format_response(payload: @user), status: :ok
 	end
-
-	private
-
-	def find_user
-		@user = User.find_by_login!(params[:login])
-		render json: format_response(payload: @user), status: :ok
-		rescue ActiveRecord::RecordNotFound
-			render json: format_response, status: :not_found
-	end
 end
