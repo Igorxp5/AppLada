@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     delete 'requests/:team_initials', to: 'tournament_subscriptions#refuse'
     
     get 'teams', to: 'tournament_teams#index'
-    delete 'teams', to: 'tournament_teams#destroy'
+    delete 'teams/:team_initials', to: 'tournament_teams#destroy'
 
     resources :matches
   end
