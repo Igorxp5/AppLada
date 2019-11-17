@@ -157,7 +157,7 @@ class TeamsController < ApplicationController
   def get_requests
     invites = TeamSubscription.where(team_initials: @team.initials)
                                       .offset(params[:offset]).limit(params[:limit])
-
+    
     render json: format_response(payload: invites), status: :ok 
   end
 
@@ -167,12 +167,18 @@ class TeamsController < ApplicationController
       return forbidden_request
     end
 
+    user = User.find_by(login: params[:login])
+    if user.nil?
+      return render json: format_response(errors: 27), status: :bad_request
+    end
+
     current_request = TeamSubscription.find_by(team_initials: @team.initials, user_login: params[:login])
-    if current_request.accepted 
-      return render json: format_response(errors: 54), status: :bad_request
-    else
-      current_request.update(accepted: nil) # TODO: Ve se precisa da necessidade de trocar a request_date
-      return render json: format_response(payload: current_request), status: :ok
+    if current_request
+      if current_request.accepted
+        return render json: format_response(errors: 54), status: :bad_request
+      else
+        current_request.destroy
+      end
     end
 
     request = TeamSubscription.new(team_initials: @team.initials, user_login: params[:login])
@@ -194,7 +200,7 @@ class TeamsController < ApplicationController
       return render json: format_response(errors: 54), status: :bad_request
     end
 
-    current_request.update(accepted: false) # TODO: ajustar a updated_date 
+    current_request.update(accepted: false)
     render json: format_response(payload: current_request), status: :ok
 
   end

@@ -15,6 +15,13 @@ class TeamSubscription < ApplicationRecord
     end
 
     def status
-        "pending"
+        if self.accepted.nil?
+            return "pending"
+        elsif self.accepted 
+            return "accepted"
+        else
+            return "refused"
+        end
+
     end
 end
