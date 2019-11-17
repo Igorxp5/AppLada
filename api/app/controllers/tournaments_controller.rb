@@ -46,6 +46,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(create_params)
 
     if @tournament.save
+      Feed.new_feed(:create_tournament, current_user.login, {tournament_id: @tournament.id})
       render json: format_response(payload: @tournament), status: :created
     else
       render json: format_response(errors: @tournament.errors.full_messages), status: :bad_request

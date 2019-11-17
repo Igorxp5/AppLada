@@ -1,7 +1,6 @@
 class FeedsController < ApplicationController
     before_action :authenticate_user!
-    before_action :find_user, only: [:user_feed]
-    before_action :validate_limit, only: [:index, :user_feed]
+    before_action :validate_limit, only: [:index]
 
     def index
         following = current_user.following
@@ -9,13 +8,6 @@ class FeedsController < ApplicationController
             user.user_login
         end
         @feeds = Feed.where(user_login: following_logins)
-                    .offset(params[:offset]).limit(params[:limit])
-                    .order(created_at: :desc)        
-        render json: format_response(payload: @feeds), status: :ok
-    end
-
-    def user_feeds
-        @feeds = Feed.where(user_login: params[:user_login])
                     .offset(params[:offset]).limit(params[:limit])
                     .order(created_at: :desc)        
         render json: format_response(payload: @feeds), status: :ok

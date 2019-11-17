@@ -1,6 +1,5 @@
 class SocietiesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_user, only: [:user_societies]
   before_action :set_society, only: [:show, :update, :destroy, 
                                      :get_ratings, :create_ratings,:get_tournaments]
 
@@ -41,12 +40,6 @@ class SocietiesController < ApplicationController
   def get_tournaments
     @tournaments = @society.tournaments
     render json: format_response(payload: @tournaments), status: :ok
-  end
-
-  # GET /users/:login/societies
-  def user_societies
-    @societies = Society.where(owner_user_login: params[:user_login])
-    render json: format_response(payload: @societies), status: :ok
   end
   
   private

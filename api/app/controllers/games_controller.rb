@@ -105,16 +105,6 @@ class GamesController < ApplicationController
       render json: format_response(errors: 48), status: :not_found
   end
 
-  # GET /users/:login/games
-  def user_games
-    @partipations = GameParticipant.where(user_login: params[:user_login]
-                                          will_go: true).order(updated_at: :desc)
-    @games = @partipations.collect do |participation|
-      participation.game
-    end
-    render json: format_response(payload: @games), status: :ok
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game

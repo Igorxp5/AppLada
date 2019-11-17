@@ -38,8 +38,8 @@ class ApplicationController < ActionController::API
 	end
 
 	def find_user
-		@user = User.find_by_login!(params[:login])
-		render json: format_response(payload: @user), status: :ok
+		user_login = params[:login].present? ? params[:login] : params[:user_login]
+		@user = User.find_by_login!(user_login)
 		rescue ActiveRecord::RecordNotFound
 			render json: format_response(errors: 27), status: :not_found
 	end

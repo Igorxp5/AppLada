@@ -84,7 +84,10 @@ class ErrorCodes
 		"Winner not found in tournament subscription" => 81,
 		"Looser not found in tournament subscription" => 82,
 		"Winner and Looser can only be set if match has been finished" => 83,
-		"Winner and Looser must be set if match has been finished" => 84
+		"Winner and Looser must be set if match has been finished" => 84,
+		"Ranking must be a team initials list" => 85,
+		"Ranking must contain all and only tournament teams" => 86,
+		"Start date match must be during tournament" => 87
 	}
 
 	@@errors_translation = {

@@ -15,9 +15,15 @@ class Match < ApplicationRecord
     after_save :add_result
 
     def validate_start_date
-        if start_date.present? and start_date < Time.now.to_i
-            errors.add(:start_date, "can't be in the past")
+        if start_date.present?
+            if start_date < Time.now.to_i
+                errors.add(:start_date, "can't be in the past")
+            end
+            if start_date < tournament.start_date or start_date > tournament.end_date
+                errors.add(:start_date, "match must be during tournament")
+            end
         end
+        
     end
 
     def as_json(*)
@@ -139,11 +145,15 @@ class Match < ApplicationRecord
         Match.where(args)
     end
 
+    def tournament
+        Tournament.find_by_id(tournament_id) if tournament_id
+    end
+
     private
 
     def set_match_order
         if self.match_order.nil?
-            self.match_order = Match.where(tournament_id: tournament_id).order(created_at: :asc).last.id + 1
+            self.match_order = Match.where(tournament_id: tournament_id).order(created_at: :asc).last.id + 1 rescue 1
         end
     end
 

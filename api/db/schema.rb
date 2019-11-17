@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   create_table "tournament_rankings", primary_key: ["tournament_id", "ranking_position"], force: :cascade do |t|
     t.integer "tournament_id", null: false
     t.integer "ranking_position", null: false
-    t.string "team_initials", null: false
+    t.integer "tournament_subscription_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials", on_delete: :cascade
   add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
-  add_foreign_key "tournament_rankings", "teams", column: "team_initials", primary_key: "initials"
+  add_foreign_key "tournament_rankings", "tournament_subscriptions", on_delete: :cascade
   add_foreign_key "tournament_rankings", "tournaments", on_delete: :cascade
   add_foreign_key "tournament_subscriptions", "teams", column: "team_initials", primary_key: "initials"
   add_foreign_key "tournament_subscriptions", "tournaments"

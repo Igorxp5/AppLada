@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   # Users
   resources :users, only: [:show], param: :login do
     get 'followers', to: 'user_followers#followers'
-    get 'following', to: 'user_followers#following'
+    get 'followings', to: 'user_followers#followings'
     post 'followers', to: 'user_followers#create'
     delete 'followers', to: 'user_followers#destroy'
-    get 'feeds', to: 'feeds#user_feeds'
-    get 'societies', to: 'societies#user_societies'
-    get 'games', to: 'games#user_games'
+    get 'statistics', to: 'users#statistics'
+    get 'games', to: 'users#games'
+    get 'feeds', to: 'users#feeds'
+    get 'societies', to: 'users#societies'
   end
 
   resources :societies, except: [:create] do
@@ -54,6 +55,11 @@ Rails.application.routes.draw do
     
     get 'teams', to: 'tournament_teams#index'
     delete 'teams/:team_initials', to: 'tournament_teams#destroy'
+
+    get 'rankings', to: 'tournament_rankings#index'
+    post 'rankings', to: 'tournament_rankings#create'
+    put 'rankings', to: 'tournament_rankings#update'
+    delete 'rankings', to: 'tournament_rankings#destroy'
 
     resources :matches, param: :order
   end
