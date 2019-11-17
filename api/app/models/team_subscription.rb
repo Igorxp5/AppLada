@@ -4,7 +4,7 @@ class TeamSubscription < ApplicationRecord
     self.primary_keys = :team_initials, :user_login
 
     def as_json(*)
-        result = {login: user_login, request_date: request_date, status: status, }
+        result = {initials: team_initials, request_date: request_date, status: status, }
         result.merge!({joined_date: joined_date}) unless joined_date.nil?
         return result
     end
