@@ -31,6 +31,7 @@ class TeamsController < ApplicationController
     @team.owner = current_user.login
 
     if @team.save
+      Feed.new_feed(:create_team, current_user.login, {team_initials: @team.initials})
       render json: format_response(payload: @team), status: :created
     else
       render json: format_response(errors: @team.errors.full_messages), status: :bad_request
@@ -87,6 +88,7 @@ class TeamsController < ApplicationController
     subscription = TeamSubscription.find_by!(team_initials: @team.initials, user_login: params[:login])
 
     subscription.destroy
+    Feed.new_feed(:leave_team, current_user.login, {team_initials: @team.initials})
     render json: format_response, status: :ok
     rescue ActiveRecord::RecordNotFound
       render json: format_response(errors: 37), status: :bad_request
@@ -124,19 +126,20 @@ class TeamsController < ApplicationController
   end
 
   # GET /invites
-  def get_invites # TODO: falta ajeitar o status
+  def get_invites
     invites = TeamSubscription.where(user_login: current_user.login, accepted: nil)
                                       .offset(params[:offset]).limit(params[:limit])
     render json: format_response(payload: invites), status: :ok
   end                            
 
   # PUT /invites/1
-  def accept_invite # TODO: falta o joined_data
+  def accept_invite 
     invite = TeamSubscription.find_by(team_initials: @team.initials, user_login: current_user.login, accepted: nil)
     unless invite
       return render json: format_response(errors: 53), status: :bad_request
     end
-    invite.update(joined_date: Time.now.to_i, accepted: true)
+    invite.update(accepted: true)
+    Feed.new_feed(:join_team, current_user.login, {team_initials: @team.initials})
     render json: format_response(payload: invite), status: :ok
     
 
@@ -157,6 +160,11 @@ class TeamsController < ApplicationController
   def get_requests
     invites = TeamSubscription.where(team_initials: @team.initials)
                                       .offset(params[:offset]).limit(params[:limit])
+    
+    invites = invites.select do |subscription|
+      @team.owner != subscription.user_login
+
+    end
     
     render json: format_response(payload: invites), status: :ok 
   end

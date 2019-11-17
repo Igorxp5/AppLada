@@ -36,7 +36,7 @@ class Team < ApplicationRecord
 
     def owner_subscription
         puts(self.initials)
-        @subscription = TeamSubscription.new(team_initials: self.initials, user_login: self.owner, accepted: true)
+        @subscription = TeamSubscription.new(team_initials: self.initials, user_login: self.owner, accepted: true, joined_date: Time.now)
         @subscription.save
     end
 end
