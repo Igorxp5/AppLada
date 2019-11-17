@@ -54,6 +54,46 @@ class User < ApplicationRecord
     {login: login}
   end
 
+  def total_played_tournaments
+    subscriptions = TeamSubscription.where(user_login: login, accepted: true, banned: false)
+    played_tournaments = subscriptions.collect do |subscription|
+      tournament_sub = TournamentSubscription.find_by(team_initials: subscription.team_initials)
+      if tournament_sub
+        tournament_sub.tournament_id
+      end
+    end
+    # Remover torneios nulos
+    played_tournaments = played_tournaments.select {|tournament| tournament}
+    played_tournaments.uniq.size
+  end
+
+  def total_win_tournaments
+    # TODO
+    nil
+  end
+
+  def last_played_tournament
+    teams = TeamSubscription.where(user_login: login, accepted: true, banned: false).collect do |team|
+      team.team_initials
+    end
+    subs = TournamentSubscription.where(team_initials: teams, accepted: true).order(updated_at: :desc)
+    subs.first.tournament_id if subs.first
+  end
+
+  def games
+    GameParticipant.where(user_login: login, will_go: true).order(updated_at: :desc).collect do |subs|
+      subs.game
+    end
+  end
+
+  def feeds(offset=0, limit=20)
+    Feed.where(user_login: login).offset(offset).limit(limit).order(created_at: :desc)
+  end
+
+  def societies
+    Society.where(owner_user_login: login)
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = (conditions.delete(:login) || '').strip.downcase

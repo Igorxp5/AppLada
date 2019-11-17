@@ -105,6 +105,12 @@ class Tournament < ApplicationRecord
         end
     end
 
+    def teams
+        TournamentSubscription.where(tournament_id: id, accepted: true, banned: false).collect do |subs|
+            Team.find_by_initials(subs.team_initials)
+        end
+    end
+
     def self.search_by_distance(center_latitude, center_longitude, radius=10)
         nearby_societies = Society.search_by_distance(center_latitude, center_longitude, radius)
         nearby_societies.select {|society| society.current_tournament}

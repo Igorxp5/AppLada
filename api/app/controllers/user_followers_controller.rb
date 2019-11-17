@@ -14,7 +14,7 @@ class UserFollowersController < ApplicationController
   end
 
   # GET /users/:login/following
-  def following
+  def followings
     @followings = UserFollower.where(follower_user_login: params[:user_login])
                             .order(user_login: :asc)
     users = @followings.collect do |following|

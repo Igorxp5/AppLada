@@ -1,8 +1,14 @@
 class FeedArgument < ApplicationRecord
-    self.primary_keys = :feed_id, :key
+    def parameter
+        FeedParameter.find_by_id(feed_parameter_id)
+    end
 
     def value_type
-        FeedParameter.find_by(feed_type: feed_type, key: key).value_type.to_sym
+        parameter.value_type.to_sym
+    end
+
+    def key
+        parameter.key
     end
 
     def value
