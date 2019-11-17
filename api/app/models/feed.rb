@@ -33,10 +33,9 @@ class Feed < ApplicationRecord
         Feed.transaction do
             feed = Feed.create!(user_login: user_login, feed_type: type.to_s)
             arguments = []
-            parameters.select do |key, value_type|
+            parameters.select do |id, key, value_type|
                 argument = FeedArgument.new(feed_id: feed.id, 
-                                            feed_type: type.to_s,
-                                            key: key,
+                                            feed_parameter_id: id,
                                             value: args[key.to_sym])
                 arguments.push(argument)
             end
@@ -49,7 +48,7 @@ class Feed < ApplicationRecord
     def self.feed_type_parameters(type)
         parameters = FeedParameter.where(feed_type: type)
         parameters.collect do |parameter|
-            [parameter.key, parameter.value_type]
+            [parameter.id, parameter.key, parameter.value_type]
         end
     end
 end

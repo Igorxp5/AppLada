@@ -15,21 +15,21 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "feed_arguments", primary_key: ["feed_id", "key"], force: :cascade do |t|
-    t.integer "feed_id", null: false
-    t.string "feed_type"
-    t.string "key", null: false
+  create_table "feed_arguments", force: :cascade do |t|
+    t.integer "feed_id"
+    t.integer "feed_parameter_id"
     t.string "value", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "feed_parameters", primary_key: ["feed_type", "key"], force: :cascade do |t|
-    t.string "feed_type", null: false
-    t.string "key", null: false
+  create_table "feed_parameters", force: :cascade do |t|
+    t.string "feed_type"
+    t.string "key"
     t.string "value_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["feed_type", "key"], name: "feed_parameters_unique", unique: true
   end
 
   create_table "feed_types", primary_key: "name", id: :string, force: :cascade do |t|
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
     t.integer "tournament_id"
     t.integer "match_order"
     t.datetime "start_date", null: false
-    t.integer "game_time", default: 5400, null: false
-    t.string "status", default: "on_hold", null: false
+    t.integer "duration", default: 5400, null: false
+    t.string "finished", default: "f", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tournament_id", "match_order"], name: "index_matches_on_tournament_id_and_match_order", unique: true
@@ -205,7 +205,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "feed_arguments", "feed_parameters", column: "feed_type", primary_key: "feed_type", name: "fk_feed_arguments_type_key"
+  add_foreign_key "feed_arguments", "feed_parameters", on_delete: :cascade
   add_foreign_key "feed_arguments", "feeds", on_delete: :cascade
   add_foreign_key "feed_parameters", "feed_types", column: "feed_type", primary_key: "name", on_delete: :cascade
   add_foreign_key "feeds", "feed_types", column: "feed_type", primary_key: "name", on_delete: :cascade

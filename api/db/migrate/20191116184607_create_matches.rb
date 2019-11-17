@@ -4,8 +4,8 @@ class CreateMatches < ActiveRecord::Migration[6.0]
       t.integer :tournament_id
       t.integer :match_order
       t.timestamp :start_date, null: false
-      t.integer :game_time, null: false, default: 5400
-      t.string :status, null: false, default: 'on_hold'
+      t.integer :duration, null: false, default: 5400
+      t.string :finished, null: false, default: false
 
       t.timestamps
     end
