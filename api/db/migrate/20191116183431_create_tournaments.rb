@@ -35,6 +35,7 @@ class CreateTournaments < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_index :tournament_subscriptions, [:tournament_id, :team_initials], unique: true, name: 'tournament_subscriptions_unique'
     add_foreign_key :tournament_subscriptions, :tournaments, column: :tournament_id, primary_key: "id"
     add_foreign_key :tournament_subscriptions, :teams, column: :team_initials, primary_key: "initials"
 

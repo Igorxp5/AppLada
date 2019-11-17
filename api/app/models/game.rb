@@ -51,7 +51,7 @@ class Game < ApplicationRecord
 
     def start_date=(value)
         if value.instance_of? Date
-            super(Time.at(value.to_i))
+            super(Time.at(value.to_time.to_i))
         elsif value.instance_of? Integer
             super(Time.at(value))
         else
@@ -65,7 +65,7 @@ class Game < ApplicationRecord
 
     def end_date=(value)
         if value.instance_of? Date
-            super(Time.at(value.to_i))
+            super(Time.at(value.to_time.to_i))
         elsif value.instance_of? Integer
             super(Time.at(value))
         else

@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
     t.datetime "joined_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["tournament_id", "team_initials"], name: "tournament_subscriptions_unique", unique: true
   end
 
   create_table "tournaments", force: :cascade do |t|

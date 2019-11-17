@@ -23,7 +23,7 @@ class TournamentsController < ApplicationController
     end
   end
 
-  # GET /tournaments/:tournament_id
+  # GET /tournaments/:id
   def show
     render json: format_response(payload: @tournament), status: :ok
   end
@@ -56,7 +56,7 @@ class TournamentsController < ApplicationController
   end
 
 
-  # PATCH/PUT /tournaments/:tournament_id
+  # PATCH/PUT /tournaments/:id
   def update
     if current_user.login != @tournament.society.owner
       return forbidden_request
@@ -69,7 +69,7 @@ class TournamentsController < ApplicationController
     end
   end
 
-  # DELETE /tournaments/:tournament_id
+  # DELETE /tournaments/:id
   def destroy
     if current_user.login != @tournament.society.owner
       return forbidden_request
@@ -82,7 +82,7 @@ class TournamentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tournament
-      @tournament = Tournament.find_by!(id: params[:tournament_id])
+      @tournament = Tournament.find_by!(id: params[:id])
 
       rescue ActiveRecord::RecordNotFound
         return not_found_request

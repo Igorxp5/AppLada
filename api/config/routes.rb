@@ -42,13 +42,15 @@ Rails.application.routes.draw do
 
   get 'feeds', to: 'feeds#index'
 
-  resources :tournaments, param: :tournament_id do
-    post 'tickets', to: 'tournament_subscriptions#create'
-    delete 'tickets', to: 'tournament_subscriptions#destroy'
+  resources :tournaments do
+    get 'tickets/:team_initials', to: 'tournament_subscriptions#show'
+    post 'tickets/:team_initials', to: 'tournament_subscriptions#create'
+    delete 'tickets/:team_initials', to: 'tournament_subscriptions#destroy'
     
     get 'requests', to: 'tournament_subscriptions#index'
-    post 'requests', to: 'tournament_subscriptions#accept'
-    delete 'requests', to: 'tournament_subscriptions#refuse'
+    get 'requests/:team_initials', to: 'tournament_subscriptions#show'
+    post 'requests/:team_initials', to: 'tournament_subscriptions#accept'
+    delete 'requests/:team_initials', to: 'tournament_subscriptions#refuse'
     
     get 'teams', to: 'tournament_teams#index'
     delete 'teams', to: 'tournament_teams#destroy'

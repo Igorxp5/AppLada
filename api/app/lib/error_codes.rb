@@ -69,7 +69,14 @@ class ErrorCodes
 		"Teams limit can't be blank" => 66,
 		"Teams limit is not a number" => 67,
 		"Price is not a number" => 68,
-		"Society can have only tournament active" => 69
+		"Society can have only tournament active" => 69,
+		"Team need to be set" => 70,
+		"Team not found" => 71,
+		"This team has already sent a request" => 72,
+		"This team is not subscribed" => 73,
+		"Invalid status value" => 74,
+		"This team has already been accepted" => 75,
+		"This team has already been refused" => 76
 	}
 
 	@@errors_translation = {
