@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     get 'teams', to: 'tournament_teams#index'
     delete 'teams/:team_initials', to: 'tournament_teams#destroy'
 
-    resources :matches
+    resources :matches, param: :order
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

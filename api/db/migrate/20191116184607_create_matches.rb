@@ -5,7 +5,7 @@ class CreateMatches < ActiveRecord::Migration[6.0]
       t.integer :match_order
       t.timestamp :start_date, null: false
       t.integer :duration, null: false, default: 5400
-      t.string :finished, null: false, default: false
+      t.boolean :finished, null: false, default: false
 
       t.timestamps
     end
@@ -19,21 +19,21 @@ class CreateMatches < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     add_index :match_participants, [:match_id, :tournament_subscription_id], unique: true, name: 'match_participants_unique'
-    add_foreign_key :match_participants, :matches, column: :match_id, primary_key: "id"
-    add_foreign_key :match_participants, :tournament_subscriptions, column: :tournament_subscription_id, primary_key: "id"
+    add_foreign_key :match_participants, :matches, column: :match_id, primary_key: "id", on_delete: :cascade
+    add_foreign_key :match_participants, :tournament_subscriptions, column: :tournament_subscription_id, primary_key: "id", on_delete: :cascade
     
     create_table :match_results, primary_key: [:match_id] do |t|
       t.integer :match_id
       t.integer :winner_tournament_subscription
       t.integer :looser_tournament_subscription
-      t.integer :winner_score, null: false, default: 0
-      t.integer :looser_score, null: false, default: 0
+      t.integer :team_one_score, null: false, default: 0
+      t.integer :team_two_score, null: false, default: 0
       
       t.timestamps
     end
-    add_foreign_key :match_results, :matches, column: :match_id, primary_key: "id"
-    add_foreign_key :match_results, :tournament_subscriptions, column: :winner_tournament_subscription, primary_key: "id"
-    add_foreign_key :match_results, :tournament_subscriptions, column: :looser_tournament_subscription, primary_key: "id"
+    add_foreign_key :match_results, :matches, column: :match_id, primary_key: "id", on_delete: :cascade
+    add_foreign_key :match_results, :tournament_subscriptions, column: :winner_tournament_subscription, primary_key: "id", on_delete: :cascade
+    add_foreign_key :match_results, :tournament_subscriptions, column: :looser_tournament_subscription, primary_key: "id", on_delete: :cascade
 
   end
 end

@@ -76,7 +76,15 @@ class ErrorCodes
 		"This team is not subscribed" => 73,
 		"Invalid status value" => 74,
 		"This team has already been accepted" => 75,
-		"This team has already been refused" => 76
+		"This team has already been refused" => 76,
+		"Teams must have two team initials" => 77,
+		"Teams not found in tournament subscription" => 78,
+		"Scoreboard must be a 2-size integer list" => 79,
+		"Winner can't be equal looser" => 80,
+		"Winner not found in tournament subscription" => 81,
+		"Looser not found in tournament subscription" => 82,
+		"Winner and Looser can only be set if match has been finished" => 83,
+		"Winner and Looser must be set if match has been finished" => 84
 	}
 
 	@@errors_translation = {

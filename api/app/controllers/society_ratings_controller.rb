@@ -26,9 +26,9 @@ class SocietyRatingsController < ApplicationController
   # PATCH/PUT /societies/:id/ratings
   def update
     if @rating.update(rating_params)
-      render json: format_response(payload: @rating), status: :created
+      render json: format_response(payload: @rating), status: :ok
     else
-      render json: format_response(payload: @rating.errors.full_messages), status: :bad_request
+      render json: format_response(errors: @rating.errors.full_messages), status: :bad_request
     end
   end
 

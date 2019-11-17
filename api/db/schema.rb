@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   create_table "match_results", primary_key: "match_id", id: :integer, default: nil, force: :cascade do |t|
     t.integer "winner_tournament_subscription"
     t.integer "looser_tournament_subscription"
-    t.integer "winner_score", default: 0, null: false
-    t.integer "looser_score", default: 0, null: false
+    t.integer "team_one_score", default: 0, null: false
+    t.integer "team_two_score", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
     t.integer "match_order"
     t.datetime "start_date", null: false
     t.integer "duration", default: 5400, null: false
-    t.string "finished", default: "f", null: false
+    t.boolean "finished", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tournament_id", "match_order"], name: "index_matches_on_tournament_id_and_match_order", unique: true
@@ -213,11 +213,11 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   add_foreign_key "game_participants", "games", on_delete: :cascade
   add_foreign_key "game_participants", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "games", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
-  add_foreign_key "match_participants", "matches"
-  add_foreign_key "match_participants", "tournament_subscriptions"
-  add_foreign_key "match_results", "matches"
-  add_foreign_key "match_results", "tournament_subscriptions", column: "looser_tournament_subscription"
-  add_foreign_key "match_results", "tournament_subscriptions", column: "winner_tournament_subscription"
+  add_foreign_key "match_participants", "matches", on_delete: :cascade
+  add_foreign_key "match_participants", "tournament_subscriptions", on_delete: :cascade
+  add_foreign_key "match_results", "matches", on_delete: :cascade
+  add_foreign_key "match_results", "tournament_subscriptions", column: "looser_tournament_subscription", on_delete: :cascade
+  add_foreign_key "match_results", "tournament_subscriptions", column: "winner_tournament_subscription", on_delete: :cascade
   add_foreign_key "matches", "tournaments"
   add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "society_phones", "societies", on_delete: :cascade

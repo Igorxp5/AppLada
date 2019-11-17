@@ -5,7 +5,7 @@ class Tournament < ApplicationRecord
     validates :start_date, allow_blank: false, allow_nil: false, presence: true
     validates :end_date, allow_blank: false, allow_nil: false, presence: true
     validates :end_subscription_date, allow_blank: false, allow_nil: false, presence: true
-    validates :teams_limit, allow_blank: false, allow_nil: false, presence: true, numericality: { only_integer: true }
+    validates :teams_limit, allow_blank: false, allow_nil: false, presence: true, numericality: {only_integer: true}
     validates :price, presence: false, allow_blank: false, allow_nil: true, numericality: {only_float: true}
     
     validate :validate_society_id
