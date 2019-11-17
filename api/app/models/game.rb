@@ -14,11 +14,11 @@ class Game < ApplicationRecord
     after_create :create_owner_participant
 
     def validate_game_range
-        if start_date.present? and start_date < Date.today.to_time.to_i
+        if start_date.present? and start_date < Time.now.to_i
             errors.add(:start_date, "can't be in the past")
         end
 
-        if end_date.present? and end_date < Date.today.to_time.to_i
+        if end_date.present? and end_date < Time.now.to_i
             errors.add(:end_date, "can't be in the past")
         end
 

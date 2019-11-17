@@ -57,7 +57,7 @@ class TournamentSubscription < ApplicationRecord
         if self.accepted.nil? or not self.accepted
             self.joined_date = nil
         else
-            self.joined_date = Date.today
+            self.joined_date = Time.now.to_i
         end
     end
 end

@@ -18,11 +18,11 @@ class Tournament < ApplicationRecord
     end
 
     def validate_tournament_range
-        if start_date.present? and start_date < Date.today.to_time.to_i
+        if start_date.present? and start_date < Time.now.to_i
             errors.add(:start_date, "can't be in the past")
         end
 
-        if end_date.present? and end_date < Date.today.to_time.to_i
+        if end_date.present? and end_date < Time.now.to_i
             errors.add(:end_date, "can't be in the past")
         end
 
@@ -52,7 +52,7 @@ class Tournament < ApplicationRecord
     end
 
     def status
-        today = Date.today.to_time.to_i
+        today = Time.now.to_i
         return 'register_period' if today < end_subscription_date
         return 'on_hold' if today < start_date
         return 'in_progress' if today >= start_date and today < end_date
