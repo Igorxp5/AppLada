@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'followings', to: 'user_followers#followings'
     post 'followers', to: 'user_followers#create'
     delete 'followers', to: 'user_followers#destroy'
+    
     get 'statistics', to: 'users#statistics'
     get 'games', to: 'users#games'
     get 'feeds', to: 'users#feeds'
@@ -18,17 +19,21 @@ Rails.application.routes.draw do
     put 'ratings', to: 'society_ratings#update'
     patch 'ratings', to: 'society_ratings#update'
     delete 'ratings', to: 'society_ratings#destroy'
+    
     get 'tournaments', to: 'societies#get_tournaments'
   end
 
   resources :teams, param: :initials do
     get 'members', to: 'teams#get_members'
     delete 'members', to: 'teams#delete_members'
+    
     get 'roles', to: 'teams#get_roles'
     put 'roles', to: 'teams#update_roles'
     get 'requests', to: 'teams#get_requests'
     post 'requests', to: 'teams#create_requests'
     delete 'requests', to: 'teams#delete_requests'
+    
+    get 'statistics', to: 'teams#statistics'
   end
 
   get 'invites', to: 'teams#get_invites'

@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members, :get_roles, :update_roles, :accept_invite, :refuse_invite, :get_requests, :create_requests, :delete_requests]
+  before_action :set_team, only: [:show, :update, :destroy, :get_members, :delete_members, :get_roles, :update_roles, :accept_invite, :refuse_invite, :get_requests, :create_requests, :delete_requests, :statistics]
   before_action :authenticate_user!
   before_action :validate_limit, only: [:index]
 
@@ -217,6 +217,19 @@ class TeamsController < ApplicationController
       return not_found_request
     end
   end
+
+  # GET /teams/:initials/statistics
+  def statistics
+    payload = {
+			total_played_matches: @team.total_played_matches,
+			total_win_matches: @team.total_win_matches,
+			total_played_tournaments: @team.total_played_tournaments,
+			total_win_tournaments: @team.total_win_tournaments,
+			last_played_tournament: @team.last_played_tournament
+		}
+		render json: format_response(payload: payload), status: :ok
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team

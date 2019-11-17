@@ -35,8 +35,38 @@ class Team < ApplicationRecord
     end
 
     def owner_subscription
-        puts(self.initials)
         @subscription = TeamSubscription.new(team_initials: self.initials, user_login: self.owner, accepted: true, joined_date: Time.now)
         @subscription.save
+    end
+
+    def tournament_subscriptions
+        TournamentSubscription.where(team_initials: initials, accepted: true, banned: false)
+    end
+
+    def total_played_matches
+        subs_id = tournament_subscriptions.collect {|subs| subs.id}
+        MatchParticipant.where(tournament_subscription_id: subs_id).size
+    end
+
+    def total_win_matches
+        subs_id = tournament_subscriptions.collect {|subs| subs.id}
+        MatchResult.where(winner_tournament_subscription: subs_id).size
+    end
+
+    def total_played_tournaments
+        tournament_subscriptions.size
+    end
+
+    def total_win_tournaments
+        win_subscriptions = tournament_subscriptions.select do |subscription|
+            TournamentRanking.find_by(ranking_position: 1, tournament_subscription_id: subscription.id)
+        end
+        win_subscriptions.size
+    end
+
+    def last_played_tournament
+        subs_id = tournament_subscriptions.collect {|subs| subs.id}
+        ranking = TournamentRanking.where(tournament_subscription_id: subs_id).order(updated_at: :desc)
+        ranking.first.tournament_id if ranking.first
     end
 end

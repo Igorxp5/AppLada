@@ -81,8 +81,9 @@ class User < ApplicationRecord
     teams = TeamSubscription.where(user_login: login, accepted: true, banned: false).collect do |team|
       team.team_initials
     end
-    subs = TournamentSubscription.where(team_initials: teams, accepted: true).order(updated_at: :desc)
-    subs.first.tournament_id if subs.first
+    subs_id = TournamentSubscription.where(team_initials: teams, accepted: true).collect {|subs| subs.id}
+    ranking = TournamentRanking.where(tournament_subscription_id: subs_id).order(updated_at: :desc)
+    ranking.first.tournament_id if ranking.first
   end
 
   def games
