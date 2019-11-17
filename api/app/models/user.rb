@@ -68,8 +68,13 @@ class User < ApplicationRecord
   end
 
   def total_win_tournaments
-    # TODO
-    nil
+    teams = TeamSubscription.where(user_login: login, accepted: true, banned: false).collect do |team|
+      team.team_initials
+    end
+    subscriptions = TournamentSubscription.where(team_initials: teams, accepted: true).collect do |subscription|
+      subscription.id
+    end
+    TournamentRanking.where(tournament_subscription_id: subscriptions, ranking_position: 1).size
   end
 
   def last_played_tournament
