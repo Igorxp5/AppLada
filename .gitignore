@@ -1,4 +1,6 @@
+.vscode
 /tmp/*
+node_modules/
 /api/db/schema.db
 ./run-server.sh
 ./build-server.sh
