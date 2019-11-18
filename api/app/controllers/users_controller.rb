@@ -19,6 +19,30 @@ class UsersController < ApplicationController
         render json: format_response(payload: @feeds), status: :ok
 	end
 
+	# GET /users/:login/teams
+	def teams
+		render json: format_response(payload: @user.teams), status: :ok
+	end
+
+	# DELETE /users/:login/teams/:initials
+	def leave_team
+		if current_user.login != @user.login
+			return forbidden_request
+		end
+
+		teams_initials = @user.teams.collect do |team| team.initials end
+		unless teams_initials.include?(params[:initials].upcase!)
+			return render json: format_response(errors: 71), status: :bad_request
+		end
+
+		subscription = TeamSubscription.find_by!(team_initials: params[:initials], user_login: current_user.login)
+		subscription.destroy
+		Feed.new_feed(:leave_team, current_user.login, {team_initials: params[:initials])
+		render json: format_response(payload: subscription), status: :ok 
+
+		rescue ActiveRecord::RecordNotFound
+			render json: format_response(errors: 37), status: :bad_request
+	end
 	# GET /users/:login/societies
 	def societies
     	render json: format_response(payload: @user.societies), status: :ok

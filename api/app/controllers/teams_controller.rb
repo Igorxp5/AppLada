@@ -81,7 +81,7 @@ class TeamsController < ApplicationController
 
   # DELETE /teams/:initials/members
   def delete_members
-    if current_user.login == @team.owner or current_user.login == params[:login]
+    if current_user.login == @team.owner
         
       subscription = TeamSubscription.find_by!(team_initials: @team.initials, user_login: params[:login])
       Feed.new_feed(:leave_team, current_user.login, {team_initials: @team.initials})

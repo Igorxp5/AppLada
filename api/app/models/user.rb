@@ -92,6 +92,15 @@ class User < ApplicationRecord
     end
   end
 
+  def teams
+    teams = TeamSubscription.where(user_login: login, accepted: true, banned: false).collect do |team|
+      team.team_initials
+    end
+    teams = teams.collect! do |team|
+      Team.find_by(initials: team)
+    end
+  end
+
   def feeds(offset=0, limit=20)
     Feed.where(user_login: login).offset(offset).limit(limit).order(created_at: :desc)
   end

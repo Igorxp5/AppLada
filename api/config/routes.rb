@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get 'games', to: 'users#games'
     get 'feeds', to: 'users#feeds'
     get 'societies', to: 'users#societies'
+    get 'teams', to: 'users#teams'
+    delete 'teams/:initials', to: 'users#leave_team'
   end
 
   resources :societies, except: [:create] do
