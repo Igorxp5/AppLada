@@ -1,0 +1,2 @@
+class FeedParameter < ApplicationRecord
+end

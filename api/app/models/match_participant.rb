@@ -1,0 +1,2 @@
+class MatchParticipant < ApplicationRecord
+end

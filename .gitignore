@@ -1,3 +1,4 @@
+.vscode
 /tmp/*
 /api/db/schema.db
 ./run-server.sh
