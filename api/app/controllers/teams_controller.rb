@@ -84,10 +84,18 @@ class TeamsController < ApplicationController
     if current_user.login == @team.owner
         
       subscription = TeamSubscription.find_by!(team_initials: @team.initials, user_login: params[:login])
-      Feed.new_feed(:leave_team, current_user.login, {team_initials: @team.initials})
-      subscription.destroy
       
-      render json: format_response, status: :ok 
+      subscription.destroy
+      Feed.new_feed(:leave_team, current_user.login, {team_initials: @team.initials})
+      
+      # change team owner
+      current_team = Team.find_by(initials: @team.initials)
+      if params[:login] == @team.owner
+        subscriptions = TeamSubscription.where(team_initials: @team.initials, accepted: true, banned: false).order(joined_date: :desc)
+        current_team.update(owner: (subscriptions[0].user_login))
+      end
+  
+      render json: format_response, status: :ok
     else
       return forbidden_request
     end

@@ -31,15 +31,23 @@ class UsersController < ApplicationController
 		end
 
 		teams_initials = @user.teams.collect do |team| team.initials end
-		unless teams_initials.include?(params[:initials].upcase!)
+		params[:initials] = params[:initials].upcase
+		unless teams_initials.include?(params[:initials])
 			return render json: format_response(errors: 71), status: :bad_request
 		end
 
-		subscription = TeamSubscription.find_by!(team_initials: params[:initials], user_login: current_user.login)
+		subscription = TeamSubscription.find_by!(team_initials: params[:initials], user_login: current_user.login)									
 		subscription.destroy
 		Feed.new_feed(:leave_team, current_user.login, {team_initials: params[:initials])
-		render json: format_response(payload: subscription), status: :ok 
 
+		# change team owner
+		team = Team.find_by(initials: params[:initials])
+		if current_user.login == team.owner
+			subscriptions = TeamSubscription.where(team_initials: params[:initials], accepted: true, banned: false).order(joined_date: :desc)
+			team.update(owner: (subscriptions[0].user_login))
+		end
+
+		render json: format_response(payload: subscription), status: :ok 
 		rescue ActiveRecord::RecordNotFound
 			render json: format_response(errors: 37), status: :bad_request
 	end

@@ -93,7 +93,7 @@ class User < ApplicationRecord
   end
 
   def teams
-    teams = TeamSubscription.where(user_login: login, accepted: true, banned: false).collect do |team|
+    teams = TeamSubscription.where(user_login: login, accepted: true, banned: false).order(joined_date: :desc).collect do |team|
       team.team_initials
     end
     teams = teams.collect! do |team|
