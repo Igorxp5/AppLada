@@ -39,6 +39,7 @@ class ApplicationController < ActionController::API
 
 	def find_user
 		user_login = params[:login].present? ? params[:login] : params[:user_login]
+		user_login = user_login.downcase
 		@user = User.find_by_login!(user_login)
 		rescue ActiveRecord::RecordNotFound
 			render json: format_response(errors: 27), status: :not_found
