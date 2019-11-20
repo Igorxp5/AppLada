@@ -41,7 +41,8 @@ class Game < ApplicationRecord
             id: id, title: title, description: description, 
             latitude: latitude, longitude: longitude, 
             limit_participants: limit_participants, owner: owner,
-            start_date: start_date, end_date: end_date, created_date: created_date
+            start_date: start_date, end_date: end_date, 
+            status: status, created_date: created_date
         }
     end
 
@@ -73,12 +74,53 @@ class Game < ApplicationRecord
         end
     end
 
+    def status
+        today = Time.now.to_i
+        return 'on_hold' if today < start_date
+        return 'in_progress' if today >= start_date and today < end_date
+        return 'finished'
+    end
+
     def owner
         self.owner_user_login
     end
 
     def created_date
         self.created_at.to_time.to_i
+    end
+
+    def distance(from_latitude, from_longitude)
+        MAX_DISTANCE_AWAY_IN_KM = 100.0
+        RAD_PER_DEG             = 0.017453293
+        Rmiles  = 3956           # radius of the great circle in miles
+        Rkm     = 6371           # radius in kilometers, some algorithms use 6367
+        Rfeet   = Rmiles * 5282  # radius in feet
+        Rmeters = Rkm * 1000     # radius in meters
+        
+        lat1 = from_latitude.to_f
+        lon1 = from_longitude.to_f
+        lat2 = latitude.to_f
+        lon2 = longitude.to_f
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+
+        dlon_rad = dlon * RAD_PER_DEG
+        dlat_rad = dlat * RAD_PER_DEG
+
+        lat1_rad = lat1 * RAD_PER_DEG
+        lon1_rad = lon1 * RAD_PER_DEG
+
+        lat2_rad = lat2 * RAD_PER_DEG
+        lon2_rad = lon2 * RAD_PER_DEG
+
+        a = (Math.sin(dlat_rad/2))**2 + Math.cos(lat1_rad) *
+            Math.cos(lat2_rad) * (Math.sin(dlon_rad/2))**2
+        c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a))
+
+        dKm     = Rkm * c         # delta in kilometers
+
+        return dKm
     end
 
     def self.search_by_distance(center_latitude, center_longitude, radius=10)
