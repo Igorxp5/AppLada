@@ -19,7 +19,7 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando eu efetuar a requisição
-        Então recebo o erro: "User not founded"
+        Então recebo o erro: "User not found"
         
         
     # /users/:login/societies
@@ -28,15 +28,15 @@ Funcionalidade: Users
         sobre eles.
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário existente
-        Quando a rota "societies " for chamada
+        Quando a rota "societies" for chamada
         Então recebo um JSON contendo as informações dos societies daquele usuário
     
     Cenário: Visualizar os societies de um usuário não existe
         Após solicitar informações dos societies de um usuário que não existe deve receber um erro.
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
-        Quando a rota "societies " for chamada
-        Então recebo o erro: "User not founded"
+        Quando a rota "societies" for chamada
+        Então recebo o erro: "User not found"
     
     
     # /users/:login/statistics
@@ -52,7 +52,7 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando a rota "statistics" for chamada
-        Então recebo o erro: "User not founded"
+        Então recebo o erro: "User not found"
     
     
     # /users/:login/matches
@@ -71,5 +71,5 @@ Funcionalidade: Users
         
         Dado que uma chamada GET seja feita no endpoint "users/"login de um usuário inexistente
         Quando a rota "matches" for chamada com os parâmetros de busca no modo padrão
-        Então recebo o erro: "User not founded"
+        Então recebo o erro: "User not found"
     

@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
 		subscription = TeamSubscription.find_by!(team_initials: params[:initials], user_login: current_user.login)									
 		subscription.destroy
-		Feed.new_feed(:leave_team, current_user.login, {team_initials: params[:initials])
+		Feed.new_feed(:leave_team, current_user.login, {team_initials: params[:initials]})
 
 		# change team owner
 		team = Team.find_by(initials: params[:initials])
