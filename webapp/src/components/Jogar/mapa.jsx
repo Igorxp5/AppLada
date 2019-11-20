@@ -11,7 +11,7 @@ class Mapa extends React.Component {
                     <input type='text' id='jogar-mapa-input'></input>
                 </form> */}
                 <div id='google-map-container'>
-                    <MapContainer />
+                    <MapContainer saveCoord={this.props.saveCoord}/>
                 </div>
             </div>
         )

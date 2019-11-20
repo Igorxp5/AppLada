@@ -1,6 +1,7 @@
 import React from 'react'
 import './../../style/jogar/pelada.css'
 import PeladasProximas from './peladasProximas'
+import CriarPelada from './criarPelada'
 
 class Peladas extends React.Component {
 
@@ -47,7 +48,7 @@ class Peladas extends React.Component {
             case 'minhas-peladas':
                 return 'minhas peladas'
             default:
-                return(<PeladasProximas />)
+                return(<CriarPelada lat={this.props.lat} lng={this.props.lng}/>)
         }
     }
     
