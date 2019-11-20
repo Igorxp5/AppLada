@@ -1,0 +1,8 @@
+.search-input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid #FFF;
+    color: #FFF;
+    font-size: 1.6em;
+    padding: 10px 20px;
+}

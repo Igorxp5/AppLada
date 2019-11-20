@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Utils from '../components/utils';
 
 const userApi = axios.create({
     baseURL: 'http://dev.applada.com.br'
@@ -7,7 +8,24 @@ const userApi = axios.create({
     // }
 })
 
+function getHeaders() {
+    let token = localStorage.getItem('loginToken');
+    return {
+        headers: {
+            Authorization: 'Bearer ' + token //the token is a variable which holds the token
+        }
+    }
+}
+
 export default {
+    currentUserJwt: function() {
+        let token = localStorage.getItem('loginToken');
+        return Utils.parseJwt(token);
+    },
+    currentUser: function() {
+        let userJwt = this.currentUserJwt();
+        return userApi.get('/users/' + userJwt.login, getHeaders());
+    },
     auth: {
         userLogin(payload) {
             return userApi.post('/login', payload);
@@ -19,6 +37,14 @@ export default {
     signUp: {
         userSignUp(payload) {
             return userApi.post('/signup', payload);
+        }
+    },
+    user: {
+        show(login) {
+            return userApi.get('/users/' + login, getHeaders());
+        },
+        statistics(login) {
+            return userApi.get('/users/' + login + '/statistics', getHeaders());
         }
     }
 } 
