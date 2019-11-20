@@ -10,7 +10,9 @@ class GamesController < ApplicationController
                                                      params[:longitude],
                                                      params[:radius])
     unless errors.empty?
-      render json: format_response(errors: errors), status: :bad_request
+      @game = Game.all
+      render json: format_response(payload: @games), status: :ok
+      # render json: format_response(errors: errors), status: :bad_request
     else
       @games = Game.search_by_distance(params[:latitude], params[:longitude], params[:radius])
       render json: format_response(payload: @games), status: :ok
