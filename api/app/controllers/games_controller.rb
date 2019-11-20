@@ -10,7 +10,7 @@ class GamesController < ApplicationController
                                                      params[:longitude],
                                                      params[:radius])
     unless errors.empty?
-      @game = Game.all
+      @games = Game.all
       render json: format_response(payload: @games), status: :ok
       # render json: format_response(errors: errors), status: :bad_request
     else
