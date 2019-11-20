@@ -45,6 +45,7 @@
     justify-content: space-evenly;
     width: 100%;    
     font-size: 1.7em;
+    text-decoration: none;
 }
 
 #dashboard-navbar-menu ul li {
@@ -61,3 +62,24 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.link-navbar:hover {
+    color: white;
+}
+
+#jogar {
+    color: grey;
+}
+#perfil {
+    color: grey;
+}
+#feed {
+    color: grey;
+}
+#times {
+    color: grey;
+}
+#torneios {
+    color: grey;
+}
+
