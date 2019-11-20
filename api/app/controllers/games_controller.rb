@@ -67,7 +67,8 @@ class GamesController < ApplicationController
       user = User.find_by_login(participant.user_login)
       {
         login: user.login, name: user.name, 
-        avatar: user.avatar, joined_date: participant.joined_date
+        avatar: user.avatar, level: user.level, 
+        joined_date: participant.joined_date,
       }
     end
     render json: format_response(payload: participants), status: :ok
