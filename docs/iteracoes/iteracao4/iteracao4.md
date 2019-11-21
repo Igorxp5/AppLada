@@ -1,5 +1,4 @@
 [Home](/README.md) |  [Entregas](/docs/iteracoes.md) | 
-
 |----|----|
 
 # Iteração 4
@@ -26,7 +25,6 @@ Finalização da aplicação para a entrega funcional.
 ## Planejamento da Iteração 4
 
 | Ação | Responsável(eis) |
-
 |----------|----------|
 
 | Criação dos Models restantes | Sheldon/Igor |
