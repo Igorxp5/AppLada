@@ -72,7 +72,7 @@ Funcionalidade: Games
         
         Dado que uma chamada GET seja feita no endpoint "games/"id de uma partida inexistente
         Quando eu realizar o request GET
-        Então recebo uma mensagem de erro: "MatchID is invalid"
+        Então recebo uma mensagem de erro: "Resource not found"
     
     
     # DEL /games/:id
@@ -88,11 +88,11 @@ Funcionalidade: Games
         
         Dado que uma chamada DEL seja feita no endpoint "games/"id de uma partida inexistente
         Quando eu realizar o request DEL
-        Então recebo uma mensagem de erro: "MatchID is invalid"
+        Então recebo uma mensagem de erro: "Resource not found"
     
     Cenário: Deletar uma pelada que não é minha
         Caso eu tente excluir uma pelada que não me pertence devo receber uma mensagem de erro.
         
         Dado que uma chamada DEL seja feita no endpoint "games/"id de uma partida existente que não é minha
         Quando eu realizar o request DEL
-        Então recebo uma mensagem de erro: "Permission denied"
+        Então recebo uma mensagem de erro: "You don't have permission to do this action"
