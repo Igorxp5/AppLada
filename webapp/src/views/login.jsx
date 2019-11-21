@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import api from './../api/user'
+import Utils from './../components/utils'
 import getErrorMessage from './../api/errors'
 import { EntranceBlock, EntranceInput, EntranceButton } from '../components/EntranceBlock'
 import display from './../display'
@@ -40,20 +41,18 @@ class Login extends React.Component {
             password: this.state.password
         });
         api.auth.userLogin(loginPayload).then(response => {
-            let errors = response.data.errors;
+            let data = response.data.data;
+            let token = data.token;
+            localStorage.setItem('loginToken', token);
+            document.location = '/dashboard';
+        }).catch(err => {
+            let errors = err.response.data.errors;
             if (errors.length > 0) {
                 errors.map((error) => {
                     let message = getErrorMessage(error.code)
-                    return display.notification.error(message);
+                    display.notification.error(message);
                 });
-            } else {
-                document.location = '/dashboard';
             }
-            document.location = '/dashboard';
-        }).catch(err => {
-            let error = err.response.data.errors[0];
-            let message = getErrorMessage(error.code);
-            display.notification.error(message);
         });
     }
 

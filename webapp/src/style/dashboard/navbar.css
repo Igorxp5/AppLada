@@ -2,7 +2,7 @@
     position: absolute;
     left: 0; top: 0;
     width: 100%;
-    height: 18vh;
+    height: 20vh;
     background:rgba(0,0,0,0.3);
 }
 
@@ -16,6 +16,7 @@
 }
 
 #dashboard-navbar-perfil img {
+    border-radius: 50%;
     width: 28%;
     margin-right: 15px;
 }
@@ -45,6 +46,7 @@
     justify-content: space-evenly;
     width: 100%;    
     font-size: 1.7em;
+    text-decoration: none;
 }
 
 #dashboard-navbar-menu ul li {
@@ -61,3 +63,24 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.link-navbar:hover {
+    color: white;
+}
+
+#jogar {
+    color: grey;
+}
+#perfil {
+    color: grey;
+}
+#feed {
+    color: grey;
+}
+#times {
+    color: grey;
+}
+#torneios {
+    color: grey;
+}
+

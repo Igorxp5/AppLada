@@ -10,13 +10,13 @@ describe('AppladaSignup', ()=>{
 
     it('navigates to signup page', ()=>{
         cy.visit(base_url);
-        cy.get('.entrance-content').get('form').contains('Criar uma conta').click();
+        cy.get('.entrance-content').get('form').should('contain','Criar uma conta').click();
         cy.url().should('include', 'signup');
     })
 
     it('has title', ()=>{
         cy.visit(base_url+'/signup');
-        cy.contains('Registrar-se');
+        cy.should('contain','Registrar-se');
     })
 
     const test_name = 'Applada Test User';
@@ -33,8 +33,8 @@ describe('AppladaSignup', ()=>{
         cy.get('.entrance-content').get('form').get('.entrance-input').get('select').select('Outros');
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
         cy.get('.entrance-content').get('form').get('input[name=confirmPassword]').type(test_pass);
-        cy.get('.entrance-button').contains('Criar Conta').click();
-        cy.get('.app').contains('Usuário criado com sucesso');
+        cy.get('.entrance-button').should('contain','Criar Conta').click();
+        cy.get('.app').should('contain','Usuário criado com sucesso');
         cy.url().should('be', base_url);
     })
 
@@ -42,7 +42,7 @@ describe('AppladaSignup', ()=>{
         cy.visit(base_url);
         cy.get('.entrance-content').get('form').get('input[name=login]').type(test_username);
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
-        cy.get('.entrance-button').contains('Entrar').click();
+        cy.get('.entrance-button').should('contain','Entrar').click();
         cy.url().should('include', 'dashboard');
     })
 
@@ -50,14 +50,14 @@ describe('AppladaSignup', ()=>{
         cy.visit(base_url);
         cy.get('.entrance-content').get('form').get('input[name=login]').type(test_email);
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
-        cy.get('.entrance-button').contains('Entrar').click();
+        cy.get('.entrance-button').should('contain','Entrar').click();
         cy.url().should('include', 'dashboard');
     })
 
     it('does not let user create account with empty fields', ()=>{
         cy.visit(base_url+'/signup');
-        cy.get('.entrance-button').contains('Criar Conta').click();
-        cy.get('.app').contains('Please fill out this field.');
+        cy.get('.entrance-button').should('contain','Criar Conta').click();
+        cy.get('.app').should('contain','Please fill out this field.');
     })
 
     it('does not let user create account with email that does not contain @', ()=> {
@@ -69,8 +69,8 @@ describe('AppladaSignup', ()=>{
         cy.get('.entrance-content').get('form').get('.entrance-input').get('select').select('Outros');
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
         cy.get('.entrance-content').get('form').get('input[name=confirmPassword]').type(test_pass);
-        cy.get('.entrance-button').contains('Criar Conta').click();
-        cy.get('.app').contains("Please include an '@' in the email address");
+        cy.get('.entrance-button').should('contain','Criar Conta').click();
+        cy.get('.app').should('contain',"Please include an '@' in the email address");
         cy.url().should('be', base_url);
     })
 
@@ -83,8 +83,8 @@ describe('AppladaSignup', ()=>{
         cy.get('.entrance-content').get('form').get('.entrance-input').get('select').select('Outros');
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
         cy.get('.entrance-content').get('form').get('input[name=confirmPassword]').type(test_pass);
-        cy.get('.entrance-button').contains('Criar Conta').click();
-        cy.get('.app').contains("'.' is used at a wrong position in" );
+        cy.get('.entrance-button').should('contain','Criar Conta').click();
+        cy.get('.app').should('contain',"'.' is used at a wrong position in" );
         cy.url().should('be', base_url);
     })
 
@@ -97,8 +97,8 @@ describe('AppladaSignup', ()=>{
         cy.get('.entrance-content').get('form').get('.entrance-input').get('select').select('Outros');
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
         cy.get('.entrance-content').get('form').get('input[name=confirmPassword]').type(test_pass+'12345');
-        cy.get('.entrance-button').contains('Criar Conta').click();
-        cy.get('.app').contains("As senhas não coincidem" );
+        cy.get('.entrance-button').should('contain','Criar Conta').click();
+        cy.get('.app').should('contain',"As senhas não coincidem" );
         cy.url().should('be', base_url);
     })
 
@@ -111,9 +111,9 @@ describe('AppladaSignup', ()=>{
         cy.get('.entrance-content').get('form').get('.entrance-input').get('select').select('Outros');
         cy.get('.entrance-content').get('form').get('input[name=password]').type(test_pass);
         cy.get('.entrance-content').get('form').get('input[name=confirmPassword]').type(test_pass);
-        cy.get('.entrance-button').contains('Criar Conta').click();
-        cy.get('.app').contains('O Usuário já foi utilizado');
-        cy.get('.app').contains('O Email já foi utilizado');
+        cy.get('.entrance-button').should('contain','Criar Conta').click();
+        cy.get('.app').should('contain','O Usuário já foi utilizado');
+        cy.get('.app').should('contain','O Email já foi utilizado');
     })
 
 })

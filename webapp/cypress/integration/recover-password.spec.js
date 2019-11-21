@@ -12,35 +12,35 @@ describe('AppladaRecoverPassword', ()=>{
     })
 
     it('has title', ()=>{
-        cy.contains('Esqueci minha senha');
+        cy.should('contain','Esqueci minha senha');
     })
 
     it('lets user recover its password using nickname', ()=>{
         cy.visit(base_url+'/forgot-password');
         cy.get('form').get('input[name=login]').type('kayques');
         cy.get('.entrance-button').contains('Enviar').click();
-        cy.get('.app').contains('Link enviado para seu e-mail');
+        cy.get('.app').should('contain','Link enviado para seu e-mail');
     })
 
     it('lets user recover its password using email', ()=>{
         cy.visit(base_url+'/forgot-password');
         cy.get('form').get('input[name=login]').type('skayque.lss@gmail.com');
         cy.get('.entrance-button').contains('Enviar').click();
-        cy.get('.app').contains('Link enviado para seu e-mail');
+        cy.get('.app').should('contain','Link enviado para seu e-mail');
     })
 
 
     it('does not let user recover password with empty fields', ()=>{
         cy.visit(base_url+'/forgot-password');
         cy.get('.entrance-button').contains('Enviar').click();
-        cy.get('.app').contains('Please fill out this field.');
+        cy.get('.app').should('contain','Please fill out this field.');
     })
 
     it('does not let user recover password with invalid username or email', ()=>{
         cy.visit(base_url+'/forgot-password');
         cy.get('form').get('input[name=login]').type('abcdefg');
         cy.get('.entrance-button').contains('Enviar').click();
-        cy.get('.app').contains('Conta não existe');
+        cy.get('.app').should('contain','Conta não existe');
     })
 
 })

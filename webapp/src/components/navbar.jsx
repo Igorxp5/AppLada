@@ -1,5 +1,7 @@
 import React from 'react'
+import Utils from './utils'
 import './../style/dashboard/navbar.css'
+import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component {
 
@@ -51,11 +53,11 @@ class NavBar extends React.Component {
                 </div>
                 <div id='dashboard-navbar-menu'>
                     <ul>
-                        <li id='jogar' onClick={() => {this.setCurrentPage('jogar')}}>JOGAR</li>
-                        <li id='perfil' onClick={() => {this.setCurrentPage('perfil')}}>PERFIL</li>
-                        <li id='feed' onClick={() => {this.setCurrentPage('feed')}}>FEED</li>
-                        <li id='times' onClick={() => {this.setCurrentPage('times')}}>TIMES</li>
-                        <li id='torneios' onClick={() => {this.setCurrentPage('torneios')}}>TORNEIOS</li>
+                        <li onClick={() => {this.setCurrentPage('jogar')}}><Link id='jogar' to='/dashboard'>JOGAR</Link></li>
+                        <li onClick={() => {this.setCurrentPage('perfil')}}><Link id='perfil' to='/dashboard/perfil'>PERFIL</Link></li>
+                        <li onClick={() => {this.setCurrentPage('feed')}}><Link id='feed' to='/dashboard/feed'>FEED</Link></li>
+                        <li onClick={() => {this.setCurrentPage('times')}}><Link id='times' to='/dashboard/times'>TIMES</Link></li>
+                        <li onClick={() => {this.setCurrentPage('torneios')}}><Link id='torneios' to='/dashboard/torneios'>TORNEIOS</Link></li>
                     </ul>
                 </div>
                 <div id='dashboard-navbar-simbolos'>

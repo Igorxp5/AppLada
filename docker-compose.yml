@@ -46,7 +46,7 @@ services:
     image: applada
     build: 
       context: './api'
-    command: bash -c "rm -f tmp/pids/server.pid && (rake db:migrate || rake db:setup && rake db:migrate) && rails server --binding=0.0.0.0 --port=80 -e production"
+    command: bash -c "rm -f tmp/pids/server.pid && (rails db:migrate || rails db:setup && rails db:migrate) && rails server --binding=0.0.0.0 --port=80 -e production"
     environment:
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         RAILS_ENV: production
@@ -61,7 +61,7 @@ services:
     image: applada
     build: 
       context: './api'
-    command: bash -c "rm -f tmp/pids/server.pid && (rake db:migrate RAILS_ENV=development || rake db:setup && rake db:migrate RAILS_ENV=development) && rails server --binding=0.0.0.0 --port=80 -e development"
+    command: bash -c "rm -f tmp/pids/server.pid && (rails db:migrate RAILS_ENV=development || rails db:setup && rails db:migrate RAILS_ENV=development) && rails server --binding=0.0.0.0 --port=80 -e development"
     environment:
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         RAILS_ENV: development
@@ -78,7 +78,7 @@ services:
     image: applada
     build: 
       context: './api'
-    command: bash -c "rm -f tmp/pids/server.pid && (rake db:migrate || rake db:setup && rake db:migrate) && rails server --binding=0.0.0.0 --port=80 -e test"
+    command: bash -c "rm -f tmp/pids/server.pid && (rails db:migrate RAILS_ENV=test || rails db:setup && rails db:migrate RAILS_ENV=test) && rails server --binding=0.0.0.0 --port=80 -e test"
     environment:
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
         RAILS_ENV: test

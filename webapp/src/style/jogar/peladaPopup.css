@@ -1,0 +1,153 @@
+.pelada-popup-all {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: -20vh;
+    height: 100vh;
+    width: 100%;
+}
+
+.pelada-popup-all.show {
+    display: flex;
+}
+
+.pelada-popup-overlay {
+    background-color: rgba(0, 0, 0, 0.7); 
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+.pelada-popup-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 50%;
+    z-index: 15;
+}
+
+
+.pelada-popup-header {
+    border-radius: 10px 10px 0 0;
+    background-color: #20bb62;
+    color: #FFF;
+    padding: 40px;
+}
+
+.pelada-popup-content {
+    background-color: #FFF;
+    padding: 40px;
+}
+
+.pelada-popup-header-title h1 {
+    display: inline-block;
+    font-size: 1.6em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.pelada-popup-header-title > i {
+    font-size: 2em;
+    margin-right: 15px;
+    vertical-align: middle;   
+}
+
+.pelada-popup-header-description {
+    font-size: 1.1em; 
+    padding: 30px 0;
+    text-align: justify;
+}
+
+.pelada-popup-header-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.pelada-popup-header-info-date, .pelada-popup-header-info-owner {
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+.pelada-popup-header-info-date > i, .pelada-popup-header-info-owner > i {
+    margin-right: 10px;
+    font-size: 1.3em;
+    vertical-align: baseline;
+}
+
+.pelada-popup-content-title {
+    border-bottom: 3px solid #212121;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    padding: 0 100px 10px 0;
+    text-transform: uppercase;
+}
+
+.pelada-popup-content-participants {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: scroll;
+    width: 100%;
+}
+
+.pelada-popup-content-participant {
+    display: flex;
+    margin: 15px 15px;
+}
+
+.pelada-popup-content-participant-image {
+    background-color: #FFF;
+    border: 1px solid #f0f0f0;
+    border-radius: 50%;
+    height: 100px;
+    margin-right: 20px;
+    width: 100px;
+}
+
+.pelada-popup-content-participant-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.pelada-popup-content-participant-info span {
+    padding: 3px;
+}
+
+.pelada-popup-button {
+    background-color: transparent;
+    border: 0px;
+    border-radius: 3px;
+    color: #20bb62;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 30px auto 0 auto; 
+    padding: 10px 20px;
+    transition: background-color 0.2s ease-in-out;
+    display: block;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.pelada-popup-button:hover {
+    background-color: #f5f5f5;
+}
+
+.pelada-popup-header-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pelada-popup-header-top .close {
+    font-size: 2em;
+    cursor: pointer;
+}

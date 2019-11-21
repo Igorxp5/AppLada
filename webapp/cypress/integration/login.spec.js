@@ -10,7 +10,7 @@ describe('AppladaLogin', ()=>{
     })
 
     it('has title', ()=>{
-        cy.contains('Entrar');
+        cy.should('contain','Entrar');
     })
 
     it('lets user log in successfuly using nickname', ()=>{
@@ -31,31 +31,31 @@ describe('AppladaLogin', ()=>{
         cy.get('.entrance-content').get('form').get('input[name=login]').type('kaayques');
         cy.get('.entrance-content').get('form').get('input[name=password]').type('12345678');
         cy.get('.entrance-button').contains('Entrar').click();
-        cy.get('.app').contains('Usuário ou senha incorreta');
+        cy.get('.app').should('contain','Usuário ou senha incorreta');
     })
 
     it('does not let user log in with invalid user password', ()=>{
         cy.get('.entrance-content').get('form').get('input[name=login]').type('kayques');
         cy.get('.entrance-content').get('form').get('input[name=password]').type('eqgwah');
         cy.get('.entrance-button').contains('Entrar').click();
-        cy.get('.app').contains('Usuário ou senha incorreta');
+        cy.get('.app').should('contain','Usuário ou senha incorreta');
     })
 
     it('does not let user log in with empty username field', ()=>{
         cy.get('.entrance-content').get('form').get('input[name=password]').type('12345678');
-        cy.get('.entrance-button').contains('Entrar').click();
-        cy.get('.app').contains('Please fill out this field.');
+        cy.get('.entrance-button').should('contain','Entrar').click();
+        cy.get('.app').should('contain','Please fill out this field.');
     })
 
     it('does not let user log in with empty password field', ()=>{
         cy.get('.entrance-content').get('form').get('input[name=login]').type('kayques');
         cy.get('.entrance-button').contains('Entrar').click();
-        cy.get('.app').contains('Please fill out this field.');
+        cy.get('.app').should('contain','Please fill out this field.');
     })
 
     it('does not let user log in with empty username and password fields', ()=>{
         cy.get('.entrance-button').contains('Entrar').click();
-        cy.get('.app').contains('Please fill out this field.');
+        cy.get('.app').should('contain','Please fill out this field.');
     })
 
 })
