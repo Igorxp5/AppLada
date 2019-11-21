@@ -12,6 +12,7 @@ Cenário: Criar pelada com sucesso
     E eu preencho "Data" com "01/01/2030"
     E eu preencho "De" com "20:00"
     E eu preencho "Até" com "21:00"
+    E eu preencho "Descrição" com "Essa é uma pelada de teste."
     E eu clico em "Criar pelada"
     Então eu vejo na tela 
       """
