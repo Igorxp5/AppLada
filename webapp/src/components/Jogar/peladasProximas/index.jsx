@@ -1,25 +1,33 @@
 import React from 'react'
 import './../../../style/jogar/peladasProximas.css'
+import games from './../../../api/pelada'
 
 class PeladasProximas extends React.Component {
 
     state = {
         peladas: [
-            {
-                titulo: 'Pelada das 11h',
-                dataHora: 'em 5 dias',
-                distancia: '7 Km',
-                criador: 'Xeldu'
-            },
-            {
-                titulo: 'Pelada das 09h',
-                dataHora: 'em 7 dias',
-                distancia: '11 Km',
-                criador: 'Kayque'
-            }
         ]
     }    
 
+    componentDidMount() {
+        games.all().then(response => {
+            let peladas = []
+            let coord = []
+            console.log('>>>>>>>>>>>>>', response.data.data)
+            response.data.data.map(p => {
+                p.start_date = new Date(p.start_date);
+                p.start_date = p.start_date.getUTCDate() + '/' + p.start_date.getUTCMonth() + ' - ' + p.start_date.getUTCMinutes() + ':' + p.start_date.getUTCHours();
+                peladas.push({titulo: p.title, dataHora: p.start_date, criador:p.owner})
+                coord.push({latitude: p.latitude, longitude: p.longitude})
+            })
+            this.setState({
+                peladas: peladas
+            },() => {
+                console.log(this.state)
+            })
+        })
+    }
+    
     showPeladaProxima = () => {
         return this.state.peladas.map(pelada => {
             let detalhes = Object.values(pelada)
@@ -31,11 +39,9 @@ class PeladasProximas extends React.Component {
 
     render() {
         return(
-            <div id='peladas-proximas-container'>
-                
+            <div id='peladas-proximas-container'>                
                 <div className='peladas-proximas-menu'>TÍTULO</div>
                 <div className='peladas-proximas-menu'>DATA/HORA</div>
-                <div className='peladas-proximas-menu'>DISTÂNCIA</div>
                 <div className='peladas-proximas-menu'>CRIADA POR</div>
                     {this.showPeladaProxima()}
             </div>
