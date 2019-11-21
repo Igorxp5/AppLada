@@ -3,6 +3,7 @@ Funcionalidade: Encontrar peladas
 	Quero ver peladas próximas a mim, peladas nas quais me inscrevi e criar novas peladas
 	Para criar, gerenciar, e participar de peladas
 
+
 Cenário: Visualizar menu principal
 	Ao logar corretamente na plataforma, eu tenho acesso ao menu principal
 
