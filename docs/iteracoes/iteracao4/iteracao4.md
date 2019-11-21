@@ -26,7 +26,6 @@ Finalização da aplicação para a entrega funcional.
 
 | Ação | Responsável(eis) |
 |----------|----------|
-
 | Criação dos Models restantes | Sheldon/Igor |
 | Criar Testes de End Points | Marcos |
 | Criação dos Controllers restantes | Sheldon/Igor |
@@ -42,7 +41,6 @@ Finalização da aplicação para a entrega funcional.
 
 | Ação | Responsável(eis) |
 |----------|----------|
-
 | Criação dos Models restantes | Sheldon/Igor |
 | Criar Testes de End Points | Marcos |
 | Criação dos Controllers restantes | Sheldon/Igor |
