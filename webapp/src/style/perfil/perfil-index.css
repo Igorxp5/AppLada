@@ -1,4 +1,124 @@
 #perfil-container-maior {
     width: 100%;
     height: 100%;
+    padding: 0 45px;
+    display: flex;
+}
+
+.perifl-side-left {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.perifl-side-right {
+    width: 60%;
+}
+
+.perfil-user {
+    display: flex;
+    padding: 50px 0;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.perfil-user-figure {
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+    align-items: center;
+    width: 50%;
+}
+
+.perfil-user-top {
+    display: flex;
+    width: 100%;
+}
+
+.perfil-user-image {
+    background-color: #FFF;
+    border-radius: 50%;
+    height: 180px;
+    margin-bottom: 20px;
+    width: 180px;
+}
+
+.perfil-user-name {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.perfil-user-level {
+    font-size: 1.5em;
+}
+
+.perfil-user-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.perfil-user-followers-block {
+    color :#FFF;
+    display: flex;
+    font-size: 1.5em;
+    padding: 25px 0;
+    width: 100%;
+}
+
+.perfil-user-following, .perfil-user-followers {
+    width: 50%;
+    text-align: center;
+}
+
+.perfil-user-following span, .perfil-user-followers span {
+    display: block;
+    margin: 10px 0;
+}
+
+.perfil-follow-button {
+    background-color: #FFF;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    color: #000;
+    border: none;
+    border-radius: 7px;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    padding: 12px 80px;
+    margin: auto;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.perfil-follow-button:hover {
+    background-color: #202020;
+    color: #FFF;
+}
+
+.perfil-user-bottom {
+    display: flex;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.perfil-user-bottom-games, .perfil-user-bottom-tournaments {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 50%;
+}
+
+.perfil-user-bottom-games span, .perfil-user-bottom-tournaments span {
+    color: #FFF;
+    display: block;
+    font-size: 1.7em;
+    font-weight: 700;
+    margin: 0 20px;
+    text-transform: uppercase;
 }

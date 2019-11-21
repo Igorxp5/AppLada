@@ -1,4 +1,5 @@
 import React from 'react'
+import Utils from './utils'
 import './../style/dashboard/navbar.css'
 import { Link } from 'react-router-dom'
 
