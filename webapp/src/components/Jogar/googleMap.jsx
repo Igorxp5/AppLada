@@ -1,12 +1,36 @@
 import React from 'react'
 import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
+import games from './../../api/pelada'
 
 export class MapContainer extends React.Component {   
-    
+
     state = {
         lat: '',
-        lng: ''
+        lng: '',
+        peladas: []
     }
+
+    componentDidMount() {
+        games.all().then(response => {
+            let peladas = []
+            let coord = []
+            console.log('>>>>>>>>>>>>>', response.data.data)
+            response.data.data.map(p => {
+                peladas.push({latitude: p.latitude, longitude: p.longitude})                
+            })
+            this.setState({
+                peladas: peladas
+            },() => {
+                console.log(this.state)
+            })
+        })
+    }
+
+    renderPeladas = () => {
+        
+    }
+
+
     
     mapClicked = (t, map, coord) => {
         let lat = coord.latLng.lat()
@@ -40,6 +64,8 @@ export class MapContainer extends React.Component {
                 initialCenter={{ lat: -8.0475622, lng: -34.8769643}}
                 onClick={this.mapClicked}
             >
+                <Marker                
+                position={{lat: -8.0475622, lng: -34.8769643}} />
                 <Marker                
                 position={{lat: this.state.lat, lng: this.state.lng}} />
             </Map> 
