@@ -17,5 +17,8 @@ export default {
     
     create(payload) {
         return gamesApi.post('/', payload, getHeaders());    
-    }
+    },
+    all() {
+        return gamesApi.get('/', getHeaders());    
+    },
 } 
