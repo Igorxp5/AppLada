@@ -43,7 +43,7 @@ Finalização da aplicação para a entrega funcional.
 |----------|----------|
 | Criação dos Models restantes | Sheldon/Igor |
 | Criar Testes de End Points | Marcos |
-| Criação dos Controllers restantes | Sheldon/Igor |
+| Criação dos Controllers restantes da API | Sheldon/Igor |
 | Integração do BackEnd com o FrontEnd  | Equipe |
 | Desenvolver Teste para as HU's relacionadas a visualizar, gerenciar e criar peladas | Kayque Lucas |
 | Itegração com o Google Maps | Lucas |
