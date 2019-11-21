@@ -12,8 +12,9 @@ class Perfil extends React.Component {
         following: null,
         followers: null,
         games: null,
-        torunaments: null,
-        searchInput: null
+        tournaments: null,
+        searchInput: null,
+        perfilMenu: null
         
     }
 
@@ -55,14 +56,14 @@ class Perfil extends React.Component {
         });
     }
 
-    onSearch(event) {
+    onSearch = event => {
         if (this.state.searchInput != null) {
-            alert('Um nome foi enviado: ' + this.state.searchInput);
+            document.location = '/dashboard/perfil/' + this.state.searchInput
             event.preventDefault();
         }
     }
 
-    getSearchInput(event) {
+    getSearchInput = event => {
         this.setState({searchInput: event.target.value});
     }
 
@@ -111,7 +112,7 @@ class Perfil extends React.Component {
                     </div>
                 </div>
                 <div class="perifl-side-right">
-                    <PerfilMenu/>
+                    <PerfilMenu login={this.state.login}/>
                 </div>
             </div>
         )

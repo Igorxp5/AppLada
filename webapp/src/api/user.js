@@ -45,6 +45,14 @@ export default {
         },
         statistics(login) {
             return userApi.get('/users/' + login + '/statistics', getHeaders());
+        },
+        teams(login) {
+            return userApi.get('/users/' + login + '/teams', getHeaders());
+        }
+    },
+    team: {
+        statistics(initials) {
+            return userApi.get('/teams/' + initials + '/statistics', getHeaders());
         }
     }
 } 

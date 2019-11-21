@@ -13,7 +13,7 @@ class Dashboard extends React.Component {
     componentDidMount() {
         document.title = 'Dashboard - AppLada'
         if (!localStorage.getItem('loginToken')) {
-            document.location = '/login'
+            document.location = '/'
         }
     }
     

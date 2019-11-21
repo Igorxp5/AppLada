@@ -2,26 +2,33 @@ import React from 'react'
 import './../../style/perfil/perfil-menu.css'
 import TimesLista from './perfil-times-lista'
 
+import api from './../../api/user'
+
 class PerfilMenu extends React.Component {
-    state = {
-        current: 'perfil-times',
-        allPages: ['perfil-times', 'perfil-peladas']
-    }
+
+    constructor({exProp}){
+        super()
+        let state = {
+            current: 'perfil-times',
+            allPages: ['perfil-times', 'perfil-peladas'],
+            teams: []
+        }
+        this.state = {...state, exProp}
+      }
 
     changePage = page => {
-        console.log(page)
         this.setState({
             current: page
         })
     }
 
-    componentDidMount() {
-        let page = document.getElementById(this.state.current)
+    async componentDidMount() {
+        let page = document.getElementById(this.state.current);
         page.style.color = 'white'
-        page.style.borderBottom = '3px solid white'
+        page.style.borderBottom = '3px solid white';
     }
 
-    componentDidUpdate() {
+    async componentDidUpdate() {
         let page = document.getElementById(this.state.current)
         page.style.color = 'white'
         page.style.borderBottom = '3px solid white'
@@ -32,7 +39,23 @@ class PerfilMenu extends React.Component {
                 notCurrent.style.borderBottom = 'none'
             }
             return null
-        })
+        });
+
+        api.user.teams(this.props.login).then(response => {
+            let teams = response.data.data;
+            teams.map(team => {
+                api.team.statistics(team.initials).then(responseStatistics => {
+                    let win_tournaments = responseStatistics.data.data.total_win_tournaments;
+                    team['win_tournaments'] = win_tournaments;
+                    this.setState({teams: teams});
+                });
+            });
+            
+        });
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({ ...this.state, ...props });
     }
 
     teste = () => {
@@ -42,7 +65,10 @@ class PerfilMenu extends React.Component {
     showComponent = () => {
         switch(this.state.current) {
             case 'perfil-times':
-                return(<TimesLista nome='Nautico' vitorias={4} membros={12}/>)
+                let teams = this.state.teams.map(function(team){
+                    return <TimesLista key={team.initials} nome={team.name} vitorias={team.win_tournaments} membros={team.total_members}/>;
+                });
+                return (teams);
             case 'perfil-peladas':
                 return 'perfil peladas'
             default:
@@ -61,7 +87,7 @@ class PerfilMenu extends React.Component {
                     </ul>
                 </div>
                 <div id='show-content'>
-                    {this.showComponent()}                                
+                    {this.showComponent()}                            
                 </div>
             </div>
         )
