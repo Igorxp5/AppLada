@@ -15,6 +15,8 @@ class PeladasProximas extends React.Component {
             let coord = []
             console.log('>>>>>>>>>>>>>', response.data.data)
             response.data.data.map(p => {
+                p.start_date = new Date(p.start_date);
+                p.start_date = p.start_date.getUTCDate() + '/' + p.start_date.getUTCMonth() + ' - ' + p.start_date.getUTCMinutes() + ':' + p.start_date.getUTCHours();
                 peladas.push({titulo: p.title, dataHora: p.start_date, criador:p.owner})
                 coord.push({latitude: p.latitude, longitude: p.longitude})
             })

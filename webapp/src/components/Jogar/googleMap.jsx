@@ -1,33 +1,49 @@
 import React from 'react'
-import {Map, GoogleApiWrapper, Marker} from 'google-maps-react';
+import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react';
 import games from './../../api/pelada'
 
 export class MapContainer extends React.Component {   
 
     state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {},
         lat: '',
         lng: '',
         peladas: []
     }
 
+    onMarkerClick = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+    console.log('$$$$$$$$$$$$$', props)
+    }
+
     componentDidMount() {
         games.all().then(response => {
             let peladas = []
-            let coord = []
-            console.log('>>>>>>>>>>>>>', response.data.data)
             response.data.data.map(p => {
-                peladas.push({latitude: p.latitude, longitude: p.longitude})                
+                peladas.push({latitude: p.latitude, longitude: p.longitude, title: p.title, owner: p.owner})                
             })
             this.setState({
                 peladas: peladas
             },() => {
-                console.log(this.state)
             })
         })
     }
 
     renderPeladas = () => {
-        
+        return this.state.peladas.map(p => {
+            console.log('########', p)
+            return(                
+                <Marker                
+                position={{lat: p.latitude, lng: p.longitude}} name={p.title} owner={p.owner}
+                onClick={this.onMarkerClick}/>
+            )
+        })
     }
 
 
@@ -64,6 +80,20 @@ export class MapContainer extends React.Component {
                 initialCenter={{ lat: -8.0475622, lng: -34.8769643}}
                 onClick={this.mapClicked}
             >
+                {this.renderPeladas()}
+
+                <InfoWindow
+                marker={this.state.activeMarker}
+                visible={this.state.showingInfoWindow}>
+                    <div style={{Height: '500px'}}>
+                    <h1>{this.state.selectedPlace.name}</h1>
+                    <p>
+                        {
+                            this.state.selectedPlace.owner
+                        } <br></br>                        
+                    </p>
+                    </div>
+                </InfoWindow>
                 <Marker                
                 position={{lat: -8.0475622, lng: -34.8769643}} />
                 <Marker                

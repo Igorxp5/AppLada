@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const gamesApi = axios.create({
-    baseURL: 'http://dev.applada.com.br/games'
+    baseURL: 'http://dev.applada.com.br'
 })
 
 function getHeaders() {
@@ -16,9 +16,12 @@ function getHeaders() {
 export default {
     
     create(payload) {
-        return gamesApi.post('/', payload, getHeaders());    
+        return gamesApi.post('/games/', payload, getHeaders());    
     },
     all() {
-        return gamesApi.get('/', getHeaders());    
+        return gamesApi.get('/games', getHeaders());    
     },
+    user(payload) {
+        return gamesApi.get(`/users/${payload}/games`, getHeaders());    
+    }
 } 
