@@ -17,20 +17,24 @@ Dado("que uma chamada POST seja feita no endpoint de signup") do
 end
 
 Quando("o campo login estiver preenchido com {string} e o campo password com {string} e o campo name com {string} e o campo email com {string} e o campo birthday com {string} e o campo gender com {string}") do |string, string2, string3, string4, string5, string6|
-    body = {login: string, password: string2, name: string3, email: string4, birthday: string5, gender: string6}.to_json
-    header 'Content-Type', 'application/json'
-    post @url_signup, body
-    @response_contend = JSON.parse(last_response.body)
+    begin
+        body = {login: string, password: string2, name: string3, email: string4, birthday: string5, gender: string6}.to_json
+        header 'Content-Type', 'application/json'
+        post @url_signup, body
+        @response_contend = JSON.parse(last_response.body)
+    rescue
+        @flag = true
+    end
 end
 
-Então("recebo como resposta o meu login: {string} e minha senha: {string}") do |string, string2|
-    response_login = @response_contend['data']['login']
-    response_password = @response_contend['data']['password']
-    expect(response_login).to  eq(string)
-    expect(response_password).to  eq(string2)
+Então("não recebo erros") do
+    expect(@response_contend['errors']).to  eq([])
 end
 
 Então("recebo um erro: {string}") do |string|
-    #puts @response_contend['errors']
-    expect(@response_contend['errors'][0]['message']).to  eq(string)
+    begin
+        expect(@response_contend['errors'][0]['message']).to  eq(string)
+    rescue
+        expect(@flag).to  eq(true)
+    end
 end
