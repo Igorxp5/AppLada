@@ -18,7 +18,7 @@ class MinhasPeladas extends React.Component {
 
     renderPeladas = () => {
         return this.state.peladas.map(p => {
-            console.log(p)
+            //console.log(p)
             return(
                 <div style={{color:'white', marginTop: '10px'}}>
                     <h2>{p.title}</h2>
@@ -30,7 +30,7 @@ class MinhasPeladas extends React.Component {
 
     render() {
         return(
-        <div style={{width: '100%', height: '100%'}}>
+        <div style={{width: '100%', height: '100%', overflow: 'auto'}}>
             {
                 this.renderPeladas()
             }

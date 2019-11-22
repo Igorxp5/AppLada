@@ -10,4 +10,9 @@
     display: grid;
     grid-template-columns: 33% 33% 33%;
     grid-auto-rows: 7%;
+    overflow: auto
+}
+
+.peladaItem:hover {
+    cursor: pointer
 }

@@ -1,61 +1,93 @@
 import React from 'react'
 import './../../style/jogar/peladaPopup.css'
+import games from './../../api/pelada'
+import display from './../../display'
 
 class PeladaPopup extends React.Component {
 
     state = {
         game: {
-            title: 'Pelada das 11h',
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, repellat. Nam, nulla voluptatum exercitationem quo, vero deleniti aperiam sit similique ratione quibusdam tempora architecto totam provident optio temporibus impedit consequatur.',
-            startDate: 1574226000000,
-            owner: 'lucas123',
+            title: this.props.title,
+            description: this.props.description,
+            startDate: this.props.start_date,
+            owner: this.props.owner,
+            id: this.props.id,
             participants: [
-                {
-                    login: 'igorxp5',
-                    level: 50
-                }
             ]
-        }
+        },
+        participants: [
+        ]
+    }
+
+    componentDidMount() {
+        this.setState({
+            startDate: this.props.start_date,
+            id: this.props.id
+        }, () => {
+            games.getParticipants(this.state.id).then(response => {
+                console.log('>>>>>>', response.data.data)
+                let participants = response.data.data 
+                this.setState({
+                    participants: participants
+                })
+            })
+        })
+
+
+        // console.log('>>>>>>>>>>>>>', this.props.start_date)
+        // console.log('!!!!!!!!!!!!1', this.props.id)
+    }
+
+    participate = () => {
+        games.participate(this.state.id).then(response => {
+            console.log(response.data)
+            display.notification.success('Presença marcada com sucesso!')
+        }).catch(err => {
+            display.notification.error('Ocorreu um erro, verifique as informações')
+            console.log(err.response.data)
+        })
     }
 
     render() {
         return (
-            <div class="pelada-popup-all">
-                <div class="pelada-popup-overlay"></div>
-                <div class="pelada-popup-main">
-                    <header class="pelada-popup-header">
-                        <div class="pelada-popup-header-top">
-                            <div class="pelada-popup-header-title">
-                                <i class="fas fa-futbol"></i>
+            <div className="pelada-popup-all" style={{left: '0', zIndex: '1000'}}>
+                <div className="pelada-popup-overlay"></div>
+                <div className="pelada-popup-main">
+                    <header className="pelada-popup-header">
+                        <div className="pelada-popup-header-top">
+                            <div className="pelada-popup-header-title">
+                                <i className="fas fa-futbol"></i>
                                 <h1>{this.state.game.title}</h1>
                             </div>
-                            <i class="fas fa-times close"></i>
+                            <i className="fas fa-times close" onClick={this.props.closePopup}></i>
                         </div>
-                        <p class="pelada-popup-header-description">
+                        <p className="pelada-popup-header-description">
                             {this.state.game.description}
                         </p>
-                        <div class="pelada-popup-header-info">
-                            <div class="pelada-popup-header-info-date">
-                                <i class="far fa-calendar-minus"></i>
-                                <span>{new Date(this.state.game.startDate).getUTCDate() + '/' + (new Date(this.state.game.startDate).getUTCMonth() + 1)}</span>
+                        <div className="pelada-popup-header-info">
+                            <div className="pelada-popup-header-info-date">
+                                <i className="far fa-calendar-minus"></i>
+                                {/* <span>{new Date(this.state.game.startDate).getUTCDate() + '/' + (new Date(this.state.game.startDate).getUTCMonth() + 1)}</span> */}
+                                <span>{this.state.startDate}</span>
                             </div>
-                            <div class="pelada-popup-header-info-owner">
-                                <i class="fas fa-user"></i>
+                            <div className="pelada-popup-header-info-owner">
+                                <i className="fas fa-user"></i>
                                 <span>{this.state.game.owner}</span>
                             </div>
                         </div>
                     </header>
-                    <div class="pelada-popup-content">
-                        <h2 class="pelada-popup-content-title">Participantes</h2>
-                        <div class="pelada-popup-content-participants">
-                            {this.state.game.participants.map(function(participant){
+                    <div className="pelada-popup-content">
+                        <h2 className="pelada-popup-content-title">Participantes</h2>
+                        <div className="pelada-popup-content-participants">
+                            {this.state.participants.map(function(participant){
+                                console.log(participant)
                                 return (
-                                    <div class="pelada-popup-content-participant">
-                                        <img class="pelada-popup-content-participant-image" src="./../../images/user_Avatar.png"/>
-                                        <div class="pelada-popup-content-participant-info">
-                                            <span class="pelada-popup-content-participant-name">{participant.login}</span>
-                                            <span class="pelada-popup-content-participant-level">
-                                                <i class="fas fa-star" style={{color: '#fff630', marginRight: 3}} aria-hidden="true"></i>
+                                    <div className="pelada-popup-content-participant">
+                                        <img className="pelada-popup-content-participant-image" src="./../../images/user_Avatar.png"/>
+                                        <div className="pelada-popup-content-participant-info">
+                                            <span className="pelada-popup-content-participant-name">{participant.login}</span>
+                                            <span className="pelada-popup-content-participant-level">
+                                                <i className="fas fa-star" style={{color: '#fff630', marginRight: 3}} aria-hidden="true"></i>
                                                 {participant.level}
                                             </span>
                                         </div>
@@ -65,7 +97,7 @@ class PeladaPopup extends React.Component {
 
                         </div>
 
-                        <button class="pelada-popup-button">Marcar Presença</button>
+                        <button class="pelada-popup-button" onClick={this.participate}>Marcar Presença</button>
                     </div>
                 </div>
             </div>

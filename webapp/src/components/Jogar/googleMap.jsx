@@ -19,7 +19,7 @@ export class MapContainer extends React.Component {
       activeMarker: marker,
       showingInfoWindow: true
     });
-    console.log('$$$$$$$$$$$$$', props)
+    //console.log('$$$$$$$$$$$$$', props)
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ export class MapContainer extends React.Component {
 
     renderPeladas = () => {
         return this.state.peladas.map(p => {
-            console.log('########', p)
+            //console.log('########', p)
             return(                
                 <Marker                
                 position={{lat: p.latitude, lng: p.longitude}} name={p.title} owner={p.owner}
@@ -57,9 +57,9 @@ export class MapContainer extends React.Component {
     }
 
     onMarkerClick(props, marker, e) {
-        console.log(props)
-        console.log(marker)
-        console.log(e)
+        //console.log(props)
+        //console.log(marker)
+        //console.log(e)
     }
     
     render() {

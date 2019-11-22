@@ -23,5 +23,11 @@ export default {
     },
     user(payload) {
         return gamesApi.get(`/users/${payload}/games`, getHeaders());    
+    },
+    getParticipants(id) {
+        return gamesApi.get(`/games/${id}/participants`, getHeaders())
+    },
+    participate(id) {
+        return gamesApi.post(`/games/${id}/participants`, getHeaders())
     }
 } 

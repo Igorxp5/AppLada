@@ -1,5 +1,6 @@
 import React from 'react'
 import games from './../../api/pelada'
+import display from './../../display'
 
 class CriarPelada extends React.Component {
 
@@ -21,7 +22,7 @@ class CriarPelada extends React.Component {
     }
     
     getDate = event => {
-        console.log('aaaaaaaaaaaaaa')
+        //console.log('aaaaaaaaaaaaaa')
         let date = event.target.value
         this.setState({
             date: date
@@ -37,11 +38,11 @@ class CriarPelada extends React.Component {
         start_timestamp.setUTCHours(hour)
         start_timestamp.setUTCMinutes(minute)
         let timestamp = new Date(start_timestamp).getTime()
-        console.log(timestamp)
+        //console.log(timestamp)
         this.setState({
             start_date: timestamp
         }, () => {
-            console.log(this.state.start_date)
+            //console.log(this.state.start_date)
         })
     }
 
@@ -54,11 +55,11 @@ class CriarPelada extends React.Component {
         end_timestamp.setUTCHours(hour)
         end_timestamp.setUTCMinutes(minute)
         let timestamp = new Date(end_timestamp).getTime()
-        console.log(timestamp)
+        //console.log(timestamp)
         this.setState({
             end_date: timestamp
         }, () => {
-            console.log(this.state.end_date)
+            //console.log(this.state.end_date)
         })
     }
 
@@ -75,7 +76,9 @@ class CriarPelada extends React.Component {
             longitude: localStorage.getItem('lng')
         }, () => {
             games.create(this.state).then(response => {
-                console.log(response.data)
+                display.notification.success('Pelada criada com sucesso')
+            }).catch(err => {
+                display.notification.error('Ocorreu um erro, verifique as informações')
             })
         })        
     }

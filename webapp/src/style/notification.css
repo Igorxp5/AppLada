@@ -3,7 +3,7 @@
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.2);   
   border-radius: 5px;
   color: white;
-  z-index: 100;
+  z-index: 1001;
   position: absolute;
   top: 50px;
   right: 50px;
