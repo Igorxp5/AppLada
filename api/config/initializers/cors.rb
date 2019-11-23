@@ -11,6 +11,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
     resource '*',
       headers: :any,
+      expose: ['Allow'],
       methods: [:get, :post, :put, :delete, :options, :head]
   end
 end
