@@ -78,7 +78,7 @@ class CriarPelada extends React.Component {
             games.create(this.state).then(response => {
                 display.notification.success('Pelada criada com sucesso')
             }).catch(err => {
-                display.notification.error('Ocorreu um erro, verifique as informações')
+                display.notification.errors(err.response.data.errors);
             })
         })        
     }

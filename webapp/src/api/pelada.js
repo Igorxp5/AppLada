@@ -28,6 +28,12 @@ export default {
         return gamesApi.get(`/games/${id}/participants`, getHeaders())
     },
     participate(id) {
-        return gamesApi.post(`/games/${id}/participants`, getHeaders())
+        return gamesApi.post(`/games/${id}/participants`, {}, getHeaders())
+    },
+    leavePelada(id) {
+        return gamesApi.delete(`/games/${id}/participants`, getHeaders())
+    },
+    deletePelada(id) {
+        return gamesApi.delete(`/games/${id}`, getHeaders())
     }
 } 
