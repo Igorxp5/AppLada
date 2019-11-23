@@ -48,6 +48,15 @@ export default {
         },
         teams(login) {
             return userApi.get('/users/' + login + '/teams', getHeaders());
+        },
+        checkIfIsFollower(login) {
+            return userApi.options('/users/' + login + '/followers', getHeaders());
+        },
+        follow(login) {
+            return userApi.post('/users/' + login + '/followers', {}, getHeaders());
+        },
+        unfollow(login) {
+            return userApi.delete('/users/' + login + '/followers', getHeaders());
         }
     },
     team: {

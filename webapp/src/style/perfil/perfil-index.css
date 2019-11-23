@@ -46,13 +46,22 @@
 }
 
 .perfil-user-name {
-    font-size: 2.2em;
+    font-size: 2.1em;
     margin-bottom: 15px;
     text-transform: capitalize;
 }
 
 .perfil-user-level {
-    font-size: 1.5em;
+    font-size: 1.4em;
+}
+
+.perfil-user-level > * {
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+.perfil-user-level i.fas {
+    vertical-align: unset;
 }
 
 .perfil-user-details {
@@ -64,8 +73,8 @@
 .perfil-user-followers-block {
     color :#FFF;
     display: flex;
-    font-size: 1.5em;
-    padding: 25px 0;
+    font-size: 1.4em;
+    padding: 25px 0 15px 0;
     width: 100%;
 }
 
@@ -86,10 +95,10 @@
     border: none;
     border-radius: 7px;
     display: block;
-    font-size: 20px;
+    font-size: 1.1em;
     font-weight: bold;
     outline: none;
-    padding: 12px 80px;
+    padding: 10px 70px;
     margin: auto;
     text-transform: uppercase;
     cursor: pointer;
@@ -103,7 +112,7 @@
 
 .perfil-user-bottom {
     display: flex;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     width: 100%;
 }
 
@@ -117,7 +126,7 @@
 .perfil-user-bottom-games span, .perfil-user-bottom-tournaments span {
     color: #FFF;
     display: block;
-    font-size: 1.7em;
+    font-size: 1.6em;
     font-weight: 700;
     margin: 0 20px;
     text-transform: uppercase;

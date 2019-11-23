@@ -67,7 +67,7 @@ class NavBar extends React.Component {
                     <img src='./../../images/user_Avatar.png' alt='user' />
                     <span>
                         <label>{this.state.user.name}<br></br>
-                        <i className="fas fa-star" style={{color: 'yellow', marginTop: '10px'}}></i> {this.state.user.level}
+                        <i className="fas fa-star" style={{color: '#fff630', marginTop: '10px'}}></i> {this.state.user.level}
                         </label>
                     </span>
                 </div>
