@@ -9,8 +9,8 @@ class PerfilMenu extends React.Component {
     constructor({exProp}){
         super()
         let state = {
-            current: 'perfil-times',
-            allPages: ['perfil-times', 'perfil-peladas'],
+            current: 'perfil-peladas',
+            allPages: ['perfil-peladas', 'perfil-times'],
             teams: []
         }
         this.state = {...state, exProp}
@@ -82,8 +82,8 @@ class PerfilMenu extends React.Component {
             <div id='perfil-container'>
                 <div id='perfil-container-menu'>
                     <ul>
-                        <li id='perfil-times' onClick={() => {this.changePage('perfil-times')}}>TIMES</li>
                         <li id='perfil-peladas' onClick={() => {this.changePage('perfil-peladas')}}>PELADAS</li>                        
+                        <li id='perfil-times' onClick={() => {this.changePage('perfil-times')}}>TIMES</li>
                     </ul>
                 </div>
                 <div id='show-content'>
