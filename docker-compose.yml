@@ -27,6 +27,7 @@ services:
     image: applada_webapp
     build:
       context: './webapp'
+    command: npm start
     expose:
       - 3000
   dev-webapp:
