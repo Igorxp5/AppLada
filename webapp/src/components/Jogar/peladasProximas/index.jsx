@@ -24,11 +24,21 @@ class PeladasProximas extends React.Component {
             let filteredData = response.data.data.filter(v =>{
                 return v.status != 'finished';
             });
+            const statusText = {
+                'on_hold': 'Aguardando Início',
+                'in_progress': 'Em Andamento',
+                'finished': 'Finalizado'
+            }
             filteredData.map(p => {
-                p.start_date = new Date(p.start_date);
-                p.start_date = dateFormat(p.start_date, 'dd mmm HH:MM');
-                peladas.push({titulo: p.title, dataHora: p.start_date, criador:p.owner, description: p.description, id: p.id})
-                coord.push({latitude: p.latitude, longitude: p.longitude});
+                if (p.staus != 'finished') {
+                    p.start_date = new Date(p.start_date);
+                    p.start_date = dateFormat(p.start_date, 'dd mmm HH:MM');
+                    p.status = statusText[p.status];
+                    peladas.push({
+                        titulo: p.title, dataHora: p.start_date, criador:p.owner, 
+                        description: p.description, estado: p.status, id: p.id, limitParticipants: p.limit_participants})
+                    coord.push({latitude: p.latitude, longitude: p.longitude});
+                }
             });
             this.setState({
                 peladas: peladas
@@ -38,29 +48,23 @@ class PeladasProximas extends React.Component {
         });
     }
 
-    openDetails = (title, description, id, owner, start_time) => {
+    openDetails = (title, description, id, owner, start_time, limit_participants) => {
         this.setState({showComponent: true, current:{
             title: title,
             description: description,
             id: id,
             owner: owner,
-            start_time: start_time
+            start_time: start_time,
+            limit_participants: limit_participants
         }})
     }
     
     showPeladaProxima = () => {
+        const infos = ['titulo', 'dataHora', 'estado'];
         return this.state.peladas.map(pelada => {
-            let detalhes = Object.values(pelada)
-            let i = 0
-            return detalhes.map(det => {
-                if (i<3){
-                    i++
-                    //console.log(pelada.titulo, pelada.description)
-                    return <div key={det} onClick={() => {this.openDetails(pelada.titulo, pelada.description, pelada.id, pelada.criador, pelada.dataHora)}}style={{textAlign:'center', color:'white', zIndex:'999'}} className='peladaItem'>{det}</div>
-                } else {
-                    return null
-                }
-                
+            return infos.map(info => {
+                let det = pelada[info];
+                return <div key={det} onClick={() => {this.openDetails(pelada.titulo, pelada.description, pelada.id, pelada.criador, pelada.dataHora, pelada.limitParticipants)}}style={{textAlign:'center', color:'white', zIndex:'999'}} className='peladaItem'>{det}</div>
             }, this)
             // for(var i=0; i<detalhes.length; i++) {
             //     let det = detalhes[i]
@@ -82,7 +86,8 @@ class PeladasProximas extends React.Component {
             return <PeladaPopup closePopup={this.closePopup} title={this.state.current.title} description={this.state.current.description}
             id= {this.state.current.id}
             owner= {this.state.current.owner}
-            start_date= {this.state.current.start_time}
+            start_date={this.state.current.start_time}
+            limit_participants={this.state.current.limit_participants}
             />
         }
     }
@@ -95,7 +100,7 @@ class PeladasProximas extends React.Component {
             }              
                 <div className='peladas-proximas-menu'>TÍTULO</div>
                 <div className='peladas-proximas-menu'>DATA/HORA</div>
-                <div className='peladas-proximas-menu'>CRIADA POR</div>
+                <div className='peladas-proximas-menu'>SITUAÇÃO</div>
                     {this.showPeladaProxima()}
             </div>
             

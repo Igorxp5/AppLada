@@ -23,7 +23,7 @@ const errorCodes = {
 	21: "Token expirou",
 	22: "Longitude inválida",
 	23: "Latitude inválida",
-	24: "Longitude não pode ser vazia",
+	24: "Um lugar deve ser definido",
 	25: "ID da partida inválida",
 	26: "Permissão negada",
 	27: "Usuário não encontrado",
@@ -41,7 +41,7 @@ const errorCodes = {
 	39: "Data de fim é obrigatório",
 	40: "Latitude é inválida",
 	41: "Longitude é inválida",
-	42: "Latitude é obrigatória",
+	42: "Um local deve ser definido",
 	43: "Data de início não pode ser no passado",
 	44: "Data de fim não pode ser no passado",
 	45: "Data de início não pode ser antes da data de início",
@@ -86,7 +86,10 @@ const errorCodes = {
 	84: "Vencedor e perdedor só podem ser definidos se a partida tiver finalizado",
 	85: "Ranking deve ser uma lista com as inicias dos times",
 	86: "Ranking deve ter somente times inscritos",
-	87: "A data de início da partida deve ser durante o torneio"
+	87: "A data de início da partida deve ser durante o torneio",
+	88: "Limite de participantes atingido",
+	89: "Limite de particiapntes deve ser maior que 2",
+	90: "Limite de paritipantes deve ser maior que o total de participantes atual"
 }
 
 export default function getError(errorCode) {

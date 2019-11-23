@@ -69,13 +69,15 @@
 }
 
 
-.pelada-popup-header-info-date, .pelada-popup-header-info-owner {
+.pelada-popup-header-info-date, .pelada-popup-header-info-limit,
+.pelada-popup-header-info-owner {
     font-size: 1.1em;
     text-transform: capitalize;
     vertical-align: middle;
 }
 
-.pelada-popup-header-info-date > i, .pelada-popup-header-info-owner > i {
+.pelada-popup-header-info-date > i, .pelada-popup-header-info-limit > i, 
+.pelada-popup-header-info-owner > i {
     margin-right: 10px;
     font-size: 1.3em;
     vertical-align: baseline;

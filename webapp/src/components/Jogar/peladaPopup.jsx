@@ -12,26 +12,27 @@ class PeladaPopup extends React.Component {
             description: this.props.description,
             startDate: this.props.start_date,
             owner: this.props.owner,
+            limit_participants: this.props.limit_participants,
             id: this.props.id
         },
         participants: [],
+        totalParticipantsText: null,
         isParticipating: false,
         isOwner: false
     }
 
     componentDidMount() {
-        this.setState({
-            startDate: this.props.start_date,
-            id: this.props.id
-        }, () => {
-            games.getParticipants(this.state.id).then(response => {
-                let participants = response.data.data;
-                this.setState({
-                    participants: participants
-                });
-                this.updatePartipatingAndOwner();
-            })
-        })
+        games.getParticipants(this.state.game.id).then(response => {
+            let participants = response.data.data;
+            let limitParticipantsText = (this.state.game.limit_participants == null) ? '∞' : this.state.game.limit_participants
+            let totalParticipantsText = participants.length + ' / ' + limitParticipantsText;
+            this.setState({
+                participants: participants,
+                totalParticipantsText: totalParticipantsText
+            });
+
+            this.updatePartipatingAndOwner();
+        });
     }
 
     updatePartipatingAndOwner = () => {
@@ -45,7 +46,7 @@ class PeladaPopup extends React.Component {
     }
 
     participate = () => {
-        games.participate(this.state.id).then(response => {
+        games.participate(this.state.game.id).then(response => {
             display.notification.success('Presença marcada com sucesso!');
             this.setState({participants: response.data.data});
             this.updatePartipatingAndOwner();
@@ -55,7 +56,7 @@ class PeladaPopup extends React.Component {
     }
 
     leavePelada = () => {
-        games.leavePelada(this.state.id).then(response => {
+        games.leavePelada(this.state.game.id).then(response => {
             display.notification.success('Você saiu da pelada');
             this.setState({participants: response.data.data});
             this.updatePartipatingAndOwner();
@@ -67,7 +68,7 @@ class PeladaPopup extends React.Component {
     deletePelada = () => {
         let confirm = window.confirm('Você tem certeza que quer desfazer a pelada?')
         if (confirm) {
-            games.deletePelada(this.state.id).then(response => {
+            games.deletePelada(this.state.game.id).then(response => {
                 display.notification.success('Pelada desfeita');
                 this.setState({participants: []});
                 this.updatePartipatingAndOwner();
@@ -108,7 +109,11 @@ class PeladaPopup extends React.Component {
                         <div className="pelada-popup-header-info">
                             <div className="pelada-popup-header-info-date">
                                 <i className="far fa-calendar-minus"></i>
-                                <span>{this.state.startDate}</span>
+                                <span>{this.state.game.startDate}</span>
+                            </div>
+                            <div className="pelada-popup-header-info-limit">
+                                <i class="fas fa-users"></i>
+                                <span>{this.state.totalParticipantsText}</span>
                             </div>
                             <div className="pelada-popup-header-info-owner">
                                 <i className="fas fa-user"></i>
