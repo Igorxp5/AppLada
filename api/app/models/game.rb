@@ -10,6 +10,7 @@ class Game < ApplicationRecord
     
     validate :validate_game_range
     validate :validate_location
+    validate :validate_limit_participants
 
     after_create :create_owner_participant
 
@@ -24,6 +25,12 @@ class Game < ApplicationRecord
 
         if start_date.present? and end_date.present? and end_date - start_date < 1.hours
             errors.add(:end_date, "must be at least one hour longer than start date")
+        end
+    end
+
+    def validate_limit_participants
+        if limit_participants.present? and limit_participants.to_i < 2
+            errors.add(:limit_participants, "must be greater than 2")
         end
     end
 
@@ -87,6 +94,10 @@ class Game < ApplicationRecord
 
     def created_date
         self.created_at.to_time.to_i
+    end
+
+    def total_participants
+        GameParticipant.where(game_id: id, will_go: true).size
     end
 
     def distance(from_latitude, from_longitude)
