@@ -32,6 +32,9 @@ export default {
         },
         userPassword(payload) {
             return  userApi.post('/')
+        },
+        logout() {
+            return userApi.delete('/logout', getHeaders());  
         }
     },
     signUp: {

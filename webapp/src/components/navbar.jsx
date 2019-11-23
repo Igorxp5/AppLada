@@ -60,6 +60,13 @@ class NavBar extends React.Component {
         })
     }
 
+    logout = () => {
+        api.auth.logout().then(response => {
+            localStorage.removeItem('loginToken');
+            document.location = '/'
+        });
+    }
+
     render() {
         return (
             <nav id='dashboard-navbar'>
@@ -82,7 +89,7 @@ class NavBar extends React.Component {
                 </div>
                 <div id='dashboard-navbar-simbolos'>
                     <i className="fas fa-cog"></i>
-                    <i className="fas fa-sign-out-alt"></i>                    
+                    <i className="fas fa-sign-out-alt" style={{cursor: 'pointer'}} onClick={this.logout}></i>                    
                 </div>
             </nav>
         )
