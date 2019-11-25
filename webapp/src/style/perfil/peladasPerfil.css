@@ -1,0 +1,14 @@
+.peladas-perfil-menu {    
+    font-size: 1.1em;
+    color: white;
+    text-align: center;
+}
+
+#peladas-perfil-container {
+    width: 100%; 
+    height: 100%; 
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-auto-rows: 7%;
+    overflow: auto
+}

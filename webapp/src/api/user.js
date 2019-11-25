@@ -60,6 +60,9 @@ export default {
         },
         unfollow(login) {
             return userApi.delete('/users/' + login + '/followers', getHeaders());
+        },
+        peladas(login) {
+            return userApi.get('/users/' + login + '/matches?offset=0&limit=20', getHeaders());
         }
     },
     team: {

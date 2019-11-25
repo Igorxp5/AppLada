@@ -1,6 +1,7 @@
 import React from 'react'
 import './../../style/perfil/perfil-menu.css'
 import TimesLista from './perfil-times-lista'
+import PerfilPelada from './perfil-peladas'
 
 import api from './../../api/user'
 
@@ -56,6 +57,7 @@ class PerfilMenu extends React.Component {
 
     componentWillReceiveProps(props) {
         this.setState({ ...this.state, ...props });
+        console.log('????????', this.state.otherLogin)
     }
 
     teste = () => {
@@ -70,7 +72,7 @@ class PerfilMenu extends React.Component {
                 });
                 return (teams);
             case 'perfil-peladas':
-                return 'perfil peladas'
+                return <PerfilPelada otherLogin={this.state.otherLogin}/>
             default:
                 return('bbbbbbbbb')
         }

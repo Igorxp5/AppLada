@@ -16,7 +16,8 @@ class Perfil extends React.Component {
         tournaments: null,
         searchInput: null,
         perfilMenu: null,
-        isFollower: null
+        isFollower: null,
+        otherLogin: ''
         
     }
 
@@ -39,9 +40,12 @@ class Perfil extends React.Component {
         } else {
             login = urlLogin;
         }
+        this.setState({
+            otherLogin: login
+        })
         
         api.user.show(login).then(response => {
-            let data = response.data.data;
+            let data = response.data.data;           
             this.setState({
                 login: data.login,
                 level: data.level,
@@ -154,7 +158,7 @@ class Perfil extends React.Component {
                     </div>
                 </div>
                 <div class="perifl-side-right">
-                    <PerfilMenu login={this.state.login}/>
+                    <PerfilMenu login={this.state.login} otherLogin={this.state.otherLogin}/>
                 </div>
             </div>
         )
