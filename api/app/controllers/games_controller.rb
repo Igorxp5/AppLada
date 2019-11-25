@@ -42,6 +42,10 @@ class GamesController < ApplicationController
     if current_user.login != @game.owner
       return forbidden_request
     end
+
+    if game_params[:limit_participants].present? and not game_params[:limit_participants].nil? and game_params[:limit_participants] < @game.total_participants
+      return render json: format_response(errors: 90), status: :bad_request
+    end
     
     if @game.update(game_params)
       render json: format_response(payload: @game), status: :ok
@@ -79,7 +83,9 @@ class GamesController < ApplicationController
     if current_user.login == @game.owner
       return render json: format_response(errors: 49), status: :bad_request
     end
-    
+    if not @game.limit_participants.nil? and @game.total_participants == @game.limit_participants
+      return render json: format_response(errors: 88), status: :bad_request
+    end
     participant = GameParticipant.new(game_id: @game.id, user_login: current_user.login, will_go: true)
     participant.save!
     Feed.new_feed(:join_game, current_user.login, {game_id: @game.id})

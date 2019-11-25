@@ -87,7 +87,10 @@ class ErrorCodes
 		"Winner and Looser must be set if match has been finished" => 84,
 		"Ranking must be a team initials list" => 85,
 		"Ranking must contain all and only tournament teams" => 86,
-		"Start date match must be during tournament" => 87
+		"Start date match must be during tournament" => 87,
+		"Game participants limit reached" => 88,
+		"Limit participants must be greater than 2" => 89,
+		"Participants limit must be greter than current total game participants" => 90
 	}
 
 	@@errors_translation = {

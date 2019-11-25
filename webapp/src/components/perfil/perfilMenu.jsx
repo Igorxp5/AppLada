@@ -1,6 +1,7 @@
 import React from 'react'
 import './../../style/perfil/perfil-menu.css'
 import TimesLista from './perfil-times-lista'
+import PerfilPelada from './perfil-peladas'
 
 import api from './../../api/user'
 
@@ -9,8 +10,8 @@ class PerfilMenu extends React.Component {
     constructor({exProp}){
         super()
         let state = {
-            current: 'perfil-times',
-            allPages: ['perfil-times', 'perfil-peladas'],
+            current: 'perfil-peladas',
+            allPages: ['perfil-peladas', 'perfil-times'],
             teams: []
         }
         this.state = {...state, exProp}
@@ -56,10 +57,11 @@ class PerfilMenu extends React.Component {
 
     componentWillReceiveProps(props) {
         this.setState({ ...this.state, ...props });
+        console.log('????????', this.state.otherLogin)
     }
 
     teste = () => {
-        console.log('TESTE')
+        //console.log('TESTE')
     }
 
     showComponent = () => {
@@ -70,7 +72,7 @@ class PerfilMenu extends React.Component {
                 });
                 return (teams);
             case 'perfil-peladas':
-                return 'perfil peladas'
+                return <PerfilPelada otherLogin={this.state.otherLogin}/>
             default:
                 return('bbbbbbbbb')
         }
@@ -82,8 +84,8 @@ class PerfilMenu extends React.Component {
             <div id='perfil-container'>
                 <div id='perfil-container-menu'>
                     <ul>
-                        <li id='perfil-times' onClick={() => {this.changePage('perfil-times')}}>TIMES</li>
                         <li id='perfil-peladas' onClick={() => {this.changePage('perfil-peladas')}}>PELADAS</li>                        
+                        <li id='perfil-times' onClick={() => {this.changePage('perfil-times')}}>TIMES</li>
                     </ul>
                 </div>
                 <div id='show-content'>

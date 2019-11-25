@@ -14,12 +14,11 @@ export class MapContainer extends React.Component {
     }
 
     onMarkerClick = (props, marker, e) => {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-    console.log('$$$$$$$$$$$$$', props)
+        this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
+        });
     }
 
     componentDidMount() {
@@ -37,7 +36,7 @@ export class MapContainer extends React.Component {
 
     renderPeladas = () => {
         return this.state.peladas.map(p => {
-            console.log('########', p)
+            //console.log('########', p)
             return(                
                 <Marker                
                 position={{lat: p.latitude, lng: p.longitude}} name={p.title} owner={p.owner}
@@ -57,9 +56,9 @@ export class MapContainer extends React.Component {
     }
 
     onMarkerClick(props, marker, e) {
-        console.log(props)
-        console.log(marker)
-        console.log(e)
+        //console.log(props)
+        //console.log(marker)
+        //console.log(e)
     }
     
     render() {
@@ -75,9 +74,9 @@ export class MapContainer extends React.Component {
         return (
             <Map
                 google={this.props.google}
-                zoom={8}
+                zoom={13}
                 style={mapStyles}
-                initialCenter={{ lat: -8.0475622, lng: -34.8769643}}
+                initialCenter={{ lat: -8.0556681, lng: -34.9537667}}
                 onClick={this.mapClicked}
             >
                 {this.renderPeladas()}
@@ -104,5 +103,5 @@ export class MapContainer extends React.Component {
   }
 
   export default GoogleApiWrapper({
-    apiKey: 'AIzaSyDXWWICHgOv5fYE771f5Bc-Ggrn0lP5Xjs'
+    apiKey: 'AIzaSyDuwXA2WhFs4ipLxfvcWtM-lp98P-u6yBs'
   })(MapContainer);

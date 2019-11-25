@@ -12,7 +12,7 @@ class Peladas extends React.Component {
     }
 
     changePage = page => {
-        console.log(page)
+        //console.log(page)
         this.setState({
             current: page
         })
@@ -39,7 +39,7 @@ class Peladas extends React.Component {
     }
 
     teste = () => {
-        console.log('TESTE')
+        //console.log('TESTE')
     }
 
     showComponent = () => {

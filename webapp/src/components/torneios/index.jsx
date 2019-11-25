@@ -4,7 +4,7 @@ import './../../style/torneios/index-torneios.css'
 class Torneios extends React.Component {
     render() {
         return(
-            <div id='torneios-container'>TORNEIOS!!!!!!!!</div>
+            <div style={{color: '#FFF'}}>Em breve</div>
         )
     }
 }

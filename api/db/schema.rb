@@ -15,21 +15,21 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "feed_arguments", primary_key: ["feed_id", "key"], force: :cascade do |t|
-    t.integer "feed_id", null: false
-    t.string "feed_type"
-    t.string "key", null: false
+  create_table "feed_arguments", force: :cascade do |t|
+    t.integer "feed_id"
+    t.integer "feed_parameter_id"
     t.string "value", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "feed_parameters", primary_key: ["feed_type", "key"], force: :cascade do |t|
-    t.string "feed_type", null: false
-    t.string "key", null: false
+  create_table "feed_parameters", force: :cascade do |t|
+    t.string "feed_type"
+    t.string "key"
     t.string "value_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["feed_type", "key"], name: "feed_parameters_unique", unique: true
   end
 
   create_table "feed_types", primary_key: "name", id: :string, force: :cascade do |t|
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   create_table "society_ratings", primary_key: ["society_id", "user_login"], force: :cascade do |t|
     t.integer "society_id", null: false
     t.string "user_login", null: false
+    t.float "rating", null: false
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -147,7 +148,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   create_table "tournament_rankings", primary_key: ["tournament_id", "ranking_position"], force: :cascade do |t|
     t.integer "tournament_id", null: false
     t.integer "ranking_position", null: false
-    t.string "team_initials", null: false
+    t.integer "tournament_subscription_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -201,7 +202,10 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
     t.integer "level", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["jti"], name: "index_users_on_jti", unique: true
-   add_foreign_key "feed_arguments", "feed_parameters", column: "feed_type", primary_key: "feed_type",   add_foreign_key "feed_arguments", "feed_parameters", column: "feed_type", primary_key: "feed_type", name: "fk_feed_arguments_type_key"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "feed_arguments", "feed_parameters", on_delete: :cascade
   add_foreign_key "feed_arguments", "feeds", on_delete: :cascade
   add_foreign_key "feed_parameters", "feed_types", column: "feed_type", primary_key: "name", on_delete: :cascade
   add_foreign_key "feeds", "feed_types", column: "feed_type", primary_key: "name", on_delete: :cascade
@@ -218,10 +222,11 @@ ActiveRecord::Schema.define(version: 2019_11_16_184607) do
   add_foreign_key "societies", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "society_phones", "societies", on_delete: :cascade
   add_foreign_key "society_ratings", "societies", on_delete: :cascade
+  add_foreign_key "society_ratings", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "team_subscriptions", "teams", column: "team_initials", primary_key: "initials", on_delete: :cascade
   add_foreign_key "team_subscriptions", "users", column: "user_login", primary_key: "login", on_delete: :cascade
   add_foreign_key "teams", "users", column: "owner_user_login", primary_key: "login", on_delete: :cascade
-  add_foreign_key "tournament_rankings", "teams", column: "team_initials", primary_key: "initials"
+  add_foreign_key "tournament_rankings", "tournament_subscriptions", on_delete: :cascade
   add_foreign_key "tournament_rankings", "tournaments", on_delete: :cascade
   add_foreign_key "tournament_subscriptions", "teams", column: "team_initials", primary_key: "initials"
   add_foreign_key "tournament_subscriptions", "tournaments"

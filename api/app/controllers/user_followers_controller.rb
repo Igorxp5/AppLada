@@ -13,6 +13,23 @@ class UserFollowersController < ApplicationController
     render json: format_response(payload: users), status: :ok
   end
 
+  # OPTIONS /users/:login/followers
+  # Check if current user is already following the user
+  def options
+    if current_user.login == params[:user_login]
+      response.set_header('Allow', 'OPTIONS, GET')
+    else
+      @user_follower = UserFollower.find_by(user_login: params[:user_login],
+                                          follower_user_login: current_user.login)
+      if @user_follower.nil?
+        response.set_header('Allow', 'OPTIONS, GET, POST')
+      else
+        response.set_header('Allow', 'OPTIONS, GET, DELETE')
+      end
+    end
+    render nothing: true, status: :ok
+  end
+
   # GET /users/:login/following
   def followings
     @followings = UserFollower.where(follower_user_login: params[:user_login])

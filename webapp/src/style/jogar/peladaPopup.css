@@ -40,6 +40,7 @@
 
 .pelada-popup-content {
     background-color: #FFF;
+    border-radius: 0 0 10px 10px;
     padding: 40px;
 }
 
@@ -68,12 +69,15 @@
 }
 
 
-.pelada-popup-header-info-date, .pelada-popup-header-info-owner {
+.pelada-popup-header-info-date, .pelada-popup-header-info-limit,
+.pelada-popup-header-info-owner {
     font-size: 1.1em;
+    text-transform: capitalize;
     vertical-align: middle;
 }
 
-.pelada-popup-header-info-date > i, .pelada-popup-header-info-owner > i {
+.pelada-popup-header-info-date > i, .pelada-popup-header-info-limit > i, 
+.pelada-popup-header-info-owner > i {
     margin-right: 10px;
     font-size: 1.3em;
     vertical-align: baseline;
@@ -93,7 +97,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
 }
 
@@ -121,6 +125,7 @@
 
 .pelada-popup-content-participant-info span {
     padding: 3px;
+    text-transform: capitalize;
 }
 
 .pelada-popup-button {
@@ -129,6 +134,7 @@
     border-radius: 3px;
     color: #20bb62;
     cursor: pointer;
+    font-size: 1.1em;
     font-weight: bold;
     margin: 30px auto 0 auto; 
     padding: 10px 20px;
@@ -136,6 +142,10 @@
     display: block;
     text-transform: uppercase;
     outline: none;
+}
+
+.pelada-popup-button.red {
+    color: #E42C2C;
 }
 
 .pelada-popup-button:hover {

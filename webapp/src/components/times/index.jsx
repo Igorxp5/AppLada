@@ -4,7 +4,7 @@ import './../../style/times/times-index.css'
 class Times extends React.Component {
     render() {
         return(
-            <div id='times-container'>TIMES!!!!!!!!</div>
+            <div style={{color: '#FFF'}}>Em breve</div>
         )
     }
 }

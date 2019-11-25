@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'followings', to: 'user_followers#followings'
     post 'followers', to: 'user_followers#create'
     delete 'followers', to: 'user_followers#destroy'
+    match 'followers', :controller => 'user_followers', :action => 'options', :constraints => {:method => 'OPTIONS'}, :via => :options
     
     get 'statistics', to: 'users#statistics'
     get 'games', to: 'users#games'

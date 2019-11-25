@@ -1,6 +1,7 @@
 import React from 'react'
 import './../../style/perfil/perfil-index.css'
 import api from './../../api/user'
+import display from './../../display'
 import PerfilMenu from './perfilMenu'
 import SearchInput from '../search_input'
 
@@ -14,7 +15,9 @@ class Perfil extends React.Component {
         games: null,
         tournaments: null,
         searchInput: null,
-        perfilMenu: null
+        perfilMenu: null,
+        isFollower: null,
+        otherLogin: ''
         
     }
 
@@ -37,15 +40,19 @@ class Perfil extends React.Component {
         } else {
             login = urlLogin;
         }
+        this.setState({
+            otherLogin: login
+        })
         
         api.user.show(login).then(response => {
-            let data = response.data.data;
+            let data = response.data.data;           
             this.setState({
                 login: data.login,
                 level: data.level,
                 following: data.following,
                 followers: data.followers
             });
+            this.checkIfIsFollower();
         });
         api.user.statistics(login).then(response => {
             let data = response.data.data;
@@ -67,6 +74,42 @@ class Perfil extends React.Component {
         this.setState({searchInput: event.target.value});
     }
 
+    follow = event => {
+        api.user.follow(this.state.login).then(response => {
+            display.notification.success('Agora você está seguindo <b>' + this.state.login + '</b>')
+            this.setState({followers: this.state.followers + 1, isFollower: true});
+        }).catch(err => {
+            display.notification.errors(err.response.data.errors);
+        });
+    }
+
+    unfollow = event => {
+        api.user.unfollow(this.state.login).then(response => {
+            display.notification.success('Agora você não está mais seguindo <b>' + this.state.login + '</b>')
+            this.setState({followers: this.state.followers - 1, isFollower: false});
+        }).catch(err => {
+            display.notification.errors(err.response.data.errors);
+        });
+    }
+
+    checkIfIsFollower = () => {
+        api.user.checkIfIsFollower(this.state.login).then(response => {
+            let isFollower = response.headers['allow'].indexOf('DELETE') != -1
+            this.setState({isFollower: isFollower});
+        }).catch(err => {
+            display.notification.errors(err.response.data.errors);
+        });
+    }
+
+    renderFollowButton = () => {
+        if (api.currentUserJwt().login != this.state.login && this.state.isFollower === false) {
+            return (<button class="perfil-follow-button" onClick={this.follow}>Seguir</button>);
+        } else if (this.state.isFollower === true) {
+            return (<button class="perfil-follow-button" onClick={this.unfollow}>Deixar de Seguir</button>);
+        }
+        
+    }
+
     render() {
         return(
             <div id='perfil-container-maior'>
@@ -79,7 +122,10 @@ class Perfil extends React.Component {
                             <div className="perfil-user-figure">
                                 <img className="perfil-user-image" src="./../../images/user_Avatar.png"/>
                                 <div className="perfil-user-name">{this.state.login}</div>
-                                <div className="perfil-user-level">{this.state.level}</div>
+                                <div className="perfil-user-level">
+                                    <i className="fas fa-star" style={{color: '#fff630', marginTop: '10px'}}></i>
+                                    {this.state.level}
+                                </div>
                             </div>
                             <div class="perfil-user-details">
                                 <div class="perfil-user-followers-block">
@@ -93,7 +139,7 @@ class Perfil extends React.Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="perfil-follow-button">Seguir</button>
+                                { this.renderFollowButton() }
                                 </div>
                             </div>
                         </div>
@@ -112,7 +158,7 @@ class Perfil extends React.Component {
                     </div>
                 </div>
                 <div class="perifl-side-right">
-                    <PerfilMenu login={this.state.login}/>
+                    <PerfilMenu login={this.state.login} otherLogin={this.state.otherLogin}/>
                 </div>
             </div>
         )

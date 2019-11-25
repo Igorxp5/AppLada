@@ -1,6 +1,8 @@
 // import Notification from './components/notification'
 // import React from 'react'
 
+import getError from './api/errors'
+
 function styleNotification(color, message) {
     let popup = document.getElementById('notification-component');            
     let popupText = document.getElementById('notification-text');
@@ -30,8 +32,14 @@ export default {
         error(message) {
             styleNotification('#E42C2C', message)
         },
+        errors(errors) {
+            errors.map(error => {
+                let message = getError(error.code) || error.message;
+                this.error(message);
+            });
+        },
         success(message) {
-            styleNotification('green', message)
+            styleNotification('#20bb6d', message)
         }
     }
 }

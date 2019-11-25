@@ -1,5 +1,6 @@
 import React from 'react'
 import games from './../../api/pelada'
+import display from './../../display'
 
 class CriarPelada extends React.Component {
 
@@ -8,7 +9,7 @@ class CriarPelada extends React.Component {
 	    latitude: "",
 	    longitude: "",
 	    description: "",
-	    limit_players: null,
+	    limit_participants: null,
 	    start_date: null,
         end_date: "",
         date: ""
@@ -21,11 +22,20 @@ class CriarPelada extends React.Component {
     }
     
     getDate = event => {
-        console.log('aaaaaaaaaaaaaa')
-        let date = event.target.value
+        let date = event.target.value;
         this.setState({
             date: date
         })
+    }
+
+    getLimitParticipants = event => {
+        let limitParticipants = event.target.value;
+        if (limitParticipants && limitParticipants > 1) {
+            this.setState({
+                limit_participants: limitParticipants
+            });
+        }
+        
     }
 
     getStartDate = event => {
@@ -33,15 +43,14 @@ class CriarPelada extends React.Component {
         startDate.split(':')
         let hour = parseInt(startDate[0])
         let minute = parseInt(startDate[1])
-        let start_timestamp = new Date(this.state.date)
-        start_timestamp.setUTCHours(hour)
-        start_timestamp.setUTCMinutes(minute)
-        let timestamp = new Date(start_timestamp).getTime()
-        console.log(timestamp)
+        let start_timestamp = new Date(this.state.date);
+        start_timestamp.setUTCHours(hour);
+        start_timestamp.setUTCMinutes(minute);
+        let timestamp = new Date(start_timestamp).getTime();
         this.setState({
             start_date: timestamp
         }, () => {
-            console.log(this.state.start_date)
+            //console.log(this.state.start_date)
         })
     }
 
@@ -54,11 +63,11 @@ class CriarPelada extends React.Component {
         end_timestamp.setUTCHours(hour)
         end_timestamp.setUTCMinutes(minute)
         let timestamp = new Date(end_timestamp).getTime()
-        console.log(timestamp)
+        //console.log(timestamp)
         this.setState({
             end_date: timestamp
         }, () => {
-            console.log(this.state.end_date)
+            //console.log(this.state.end_date)
         })
     }
 
@@ -75,7 +84,9 @@ class CriarPelada extends React.Component {
             longitude: localStorage.getItem('lng')
         }, () => {
             games.create(this.state).then(response => {
-                console.log(response.data)
+                display.notification.success('Pelada criada com sucesso')
+            }).catch(err => {
+                display.notification.errors(err.response.data.errors);
             })
         })        
     }
@@ -98,56 +109,49 @@ class CriarPelada extends React.Component {
         const inputStyle = {
             fontSize: '1.3em', 
             background: 'rgba(0,0,0,0)', 
-            border: '1px 0px 0px 0px solid white',
-            borderTop: '0px',
-            borderLeft: '0px',
-            borderRight: '0px',
+            border: 'none',
+            borderBottom: '3px solid #FFF',
+            padding: '3px',
             zIndex: '999',
-            marginTop: '2%',
-            color: 'white'
+            marginTop: '1%',
+            color: 'white',
+            outline: 'none'
         }
 
         const gridStyle = {
             display: 'grid',
-            gridTemplateColumns: '30% 30% 30%',
-            marginTop: '2%',
+            gridTemplateColumns: '23% 30% 30% 17%',
+            marginTop: '1%',
             zIndex: '999'
         }
 
         const inputStyleGrid = {
             fontSize: '1.3em', 
             background: 'rgba(0,0,0,0)', 
-            border: '1px 0px 0px 0px solid white',
-            borderTop: '0px',
-            borderLeft: '0px',
-            borderRight: '0px',
+            border: 'none',
+            borderBottom: '3px solid #FFF',
+            padding: '3px',
             zIndex: '999',
-            marginTop: '2%',
+            marginTop: '1%',
             color: 'white',
-            marginLeft: '7%'
+            marginLeft: '7%',
+            outline: 'none',
+            width: '100px'
         }
 
         const inputStyleArea = {
             fontSize: '1.3em', 
             background: 'rgba(0,0,0,0)', 
-            border: '0.5px solid white',
-            zIndex: '999',
-            marginTop: '2%',
-            color: 'white',
-            height: '30vh'
-        }
-
-        const submitStyle = {
-            width: '30%',
-            padding: '2%',
-            margin: 'auto',
-            marginTop: '2%',
             border: 'none',
-            fontSize: '1.2em',
-            background: 'white',
-            color: 'black',
-            borderRadius: '15px',
-            zIndex: '999'
+            borderBottom: '3px solid #FFF',
+            padding: '3px',
+            zIndex: '999',
+            marginTop: '1%',
+            minHeight: 180,
+            maxHeight: 180,
+            color: 'white',
+            height: '30vh',
+            outline: 'none'
         }
 
         return(
@@ -163,13 +167,15 @@ class CriarPelada extends React.Component {
                         <label style={{fontSize: '1.3em'}}>DATA</label>
                         <label style={{fontSize: '1.3em', marginLeft: '10px'}}>DE</label>
                         <label style={{fontSize: '1.3em', marginLeft: '10px'}}>ATÉ</label>
+                        <label style={{fontSize: '1.3em', marginLeft: '10px'}}>LIMITE</label>
                         <input type='date' style={inputStyle} onChange={this.getDate}/>
                         <input type='time' style={inputStyleGrid} onChange={this.getStartDate}/>
                         <input type='time' style={inputStyleGrid} onChange={this.getEndDate}/>
+                        <input type='number' style={inputStyleGrid} min="2" onChange={this.getLimitParticipants}/>
                     </div>
-                    <label style={{fontSize: '1.3em', marginTop: '2%'}}>DESCRIÇÃO</label>
+                    <label style={{fontSize: '1.3em', marginTop: '15px'}}>DESCRIÇÃO</label>
                     <textarea style={inputStyleArea} onChange={this.getDescricao}/>
-                    <input type='submit' value='CRIAR PELADA' style={submitStyle}/>
+                    <input type='submit' value='CRIAR PELADA' className='create-pelada-button' style={{marginTop: '25px'}}/>
                 </form>
             </div>
         )

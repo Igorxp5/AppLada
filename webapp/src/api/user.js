@@ -32,6 +32,9 @@ export default {
         },
         userPassword(payload) {
             return  userApi.post('/')
+        },
+        logout() {
+            return userApi.delete('/logout', getHeaders());  
         }
     },
     signUp: {
@@ -48,6 +51,18 @@ export default {
         },
         teams(login) {
             return userApi.get('/users/' + login + '/teams', getHeaders());
+        },
+        checkIfIsFollower(login) {
+            return userApi.options('/users/' + login + '/followers', getHeaders());
+        },
+        follow(login) {
+            return userApi.post('/users/' + login + '/followers', {}, getHeaders());
+        },
+        unfollow(login) {
+            return userApi.delete('/users/' + login + '/followers', getHeaders());
+        },
+        peladas(login) {
+            return userApi.get('/users/' + login + '/matches?offset=0&limit=20', getHeaders());
         }
     },
     team: {

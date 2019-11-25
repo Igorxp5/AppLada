@@ -4,7 +4,7 @@ import './../../style/feed/feed-index.css'
 class Feed extends React.Component {
     render() {
         return(
-            <div id='feed-container'>FEED!!!!!!!!</div>
+            <div style={{color: '#FFF'}}>Em breve</div>
         )
     }
 }
